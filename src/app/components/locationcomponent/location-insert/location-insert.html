@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>recycling</mat-icon>
+      <h2>Registrar Ubicaciones</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Dirección</mat-label>
+          <input matInput formControlName="address" placeholder="Ej: Av. Javier Prado 123">
+          <mat-icon matSuffix>location_on</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Latitud</mat-label>
+          <input matInput formControlName="latitude" placeholder="Ej: -12.0464">
+          <mat-icon matSuffix>explore</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Longitud</mat-label>
+          <input matInput formControlName="longitude" placeholder="Ej: -77.0428">
+          <mat-icon matSuffix>explore</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Distrito</mat-label>
+          <input matInput formControlName="distric" placeholder="Ej: Miraflores">
+          <mat-icon matSuffix>location_city</mat-icon>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="card-actions">
+      <button mat-button class="btn-cancelar" routerLink="/ubicaciones/listar">
+        Cancelar
+      </button>
+      <button mat-raised-button class="btn-guardar" (click)="aceptar()">
+        <mat-icon>save</mat-icon>
+        Registrar
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<mat-toolbar style="background-color: #28993b; color: white">
+  <mat-icon>recycling</mat-icon>
+  <span style="margin-left: 8px; font-weight: 600; cursor: pointer" routerLink="/homes"
+    >ReVive</span
+  >
+  <span style="flex: 1"></span>
+  <button mat-button style="color: white" [matMenuTriggerFor]="menuUbicaciones">
+    <mat-icon>location_on</mat-icon>
+    Ubicaciones
+  </button>
+  <mat-menu #menuUbicaciones="matMenu">
+    <button mat-menu-item routerLink="/ubicaciones/insertar">
+      <mat-icon>add</mat-icon>
+      Registrar
+    </button>
+    <button mat-menu-item routerLink="/ubicaciones/listar">
+      <mat-icon>list</mat-icon>
+      Lista
+    </button>
+  </mat-menu>
+</mat-toolbar>

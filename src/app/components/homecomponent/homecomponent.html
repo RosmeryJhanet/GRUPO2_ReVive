@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="hero">
+    <mat-icon class="hero-icon">recycling</mat-icon>
+    <h1>ReVive</h1>
+    <p>Plataforma de gestión de puntos de reciclaje</p>
+  </div>
+
+  <h2 class="team-title">Nuestro Equipo</h2>
+
+  <div class="team-grid">
+    <div class="member-card" *ngFor="let m of members">
+      <div class="avatar">{{ m.initials }}</div>
+      <h3>{{ m.name }}</h3>
+    </div>
+  </div>
+</div>
