@@ -1,0 +1,72 @@
+.container {
+  padding: 40px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero {
+  margin-bottom: 48px;
+}
+
+.hero-icon {
+  font-size: 4rem;
+  width: 4rem;
+  height: 4rem;
+  color: #2e7d32;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  color: #2e7d32;
+  margin: 8px 0;
+}
+
+.hero p {
+  color: #757575;
+  font-size: 1.1rem;
+}
+
+.team-title {
+  color: #2e7d32;
+  margin-bottom: 32px;
+  font-size: 1.5rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+}
+
+.member-card {
+  background: white;
+  border-radius: 16px;
+  padding: 28px 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.member-card:hover {
+  transform: translateY(-4px);
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2e7d32, #66bb6a);
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+h3 {
+  color: #333;
+  font-size: 0.95rem;
+  margin: 0;
+}
