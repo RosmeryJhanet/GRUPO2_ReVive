@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
-
-import { LocationList } from './components/locationcomponent/location-list/location-list';
-import { Locationcomponent } from './components/locationcomponent/locationcomponent';
 import { Homecomponent } from './components/homecomponent/homecomponent';
+import { Materialcomponent } from './components/materialcomponent/materialcomponent';
+import { MaterialList } from './components/materialcomponent/material-list/material-list';
+import { MaterialInsert } from './components/materialcomponent/material-insert/material-insert';
+import { Locationcomponent } from './components/locationcomponent/locationcomponent';
+import { LocationList } from './components/locationcomponent/location-list/location-list';
 import { LocationInsert } from './components/locationcomponent/location-insert/location-insert';
 import { LocationUpdate } from './components/locationcomponent/location-update/location-update';
 import { LocationSearch } from './components/locationcomponent/location-search/location-search';

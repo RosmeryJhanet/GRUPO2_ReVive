@@ -3,10 +3,9 @@ import { RouterOutlet } from '@angular/router';
 import { Menucomponent } from './components/menucomponent/menucomponent';
 
 
-
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,Menucomponent],
+  imports: [RouterOutlet, Menucomponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
