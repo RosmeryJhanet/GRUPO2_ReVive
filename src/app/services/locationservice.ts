@@ -12,7 +12,7 @@ export class Locationservice {
   constructor(private http: HttpClient) {}
 
   list() {
-    return this.http.get<Location[]>(`${this.url}/listar/ubicaciones`);
+    return this.http.get<LocationModel[]>(`${this.url}/listar/ubicaciones`);
   }
   insert(l: LocationModel) {
     return this.http.post(`${this.url}/registrar/ubicaciones`, l, { responseType: 'text' });

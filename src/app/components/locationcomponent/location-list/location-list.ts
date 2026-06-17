@@ -3,6 +3,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
 import { Locationservice } from '../../../services/locationservice';
 import { MatIconModule } from '@angular/material/icon';
+import { Location as LocationModel } from '../../../models/location';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './location-list.css',
 })
 export class LocationList implements OnInit {
-  dataSource:MatTableDataSource<Location> = new MatTableDataSource();
+  dataSource:MatTableDataSource<LocationModel> = new MatTableDataSource<LocationModel>();
   displayedColumns: string[]=['c1', 'c2', 'c3', 'c4','c5', 'c6'];
 
   constructor (private lS: Locationservice){}
