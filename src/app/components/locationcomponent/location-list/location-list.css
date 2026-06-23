@@ -14,6 +14,22 @@ h2 {
   font-size: 1.5rem;
 }
 
+.paginator-footer {
+  padding: 0;
+  max-width: none;
+  margin: 8px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.total-registros {
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.9rem;
+}
+
 table {
   width: 100%;
   border-radius: 12px;

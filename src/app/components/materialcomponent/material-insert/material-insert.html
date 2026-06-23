@@ -4,17 +4,23 @@
     <form [formGroup]="form" (submit)="aceptar()">
       <mat-form-field class="example-full-width">
         <mat-label>Nombre de material</mat-label>
-        <input matInput placeholder="Nombre del material" formControlName="name"/>
+        <input matInput placeholder="Nombre del material" formControlName="name" maxlength="100"/>
+        <mat-error *ngIf="form.get('name')?.hasError('required')">El nombre es obligatorio.</mat-error>
+        <mat-error *ngIf="form.get('name')?.hasError('maxlength')">Máximo 100 caracteres.</mat-error>
       </mat-form-field>
       <br />
       <mat-form-field>
         <mat-label>Descripción del material</mat-label>
-        <textarea matInput formControlName="description"></textarea>
+        <textarea matInput formControlName="description" maxlength="250"></textarea>
+        <mat-error *ngIf="form.get('description')?.hasError('required')">La descripción es obligatoria.</mat-error>
+        <mat-error *ngIf="form.get('description')?.hasError('maxlength')">Máximo 250 caracteres.</mat-error>
       </mat-form-field>
       <br />
       <mat-form-field>
         <mat-label>Tipo de material</mat-label>
-        <input matInput placeholder="Ej: Plástico, Metal, Madera" formControlName="type"/>
+        <input matInput placeholder="Ej: Plástico, Metal, Madera" formControlName="type" maxlength="100"/>
+        <mat-error *ngIf="form.get('type')?.hasError('required')">El tipo es obligatorio.</mat-error>
+        <mat-error *ngIf="form.get('type')?.hasError('maxlength')">Máximo 100 caracteres.</mat-error>
       </mat-form-field>
 
       <div>

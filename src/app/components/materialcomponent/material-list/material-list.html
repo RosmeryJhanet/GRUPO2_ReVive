@@ -1,5 +1,6 @@
 <div class="container">
     <h2>Lista de materiales</h2>
+    <p class="total-registros">Total de materiales: {{ dataSource.data.length }}</p>
     <div>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -66,12 +67,29 @@
                 </td>
             </ng-container>
 
+            <!-- Actualizar -->
+            <ng-container matColumnDef="c6">
+                <th mat-header-cell *matHeaderCellDef> Actualizar </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button class="btn-editar" [routerLink]="['/materiales/edits', element.idMaterial]">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
         </table>
+
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25]"
+          [pageSize]="5"
+          showFirstLastButtons
+          aria-label="Seleccionar página de materiales"
+        ></mat-paginator>
     </div>
 </div>
 

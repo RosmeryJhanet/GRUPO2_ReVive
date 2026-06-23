@@ -63,4 +63,14 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+  <div class="paginator-footer">
+    <span class="total-registros">Total de ubicaciones: {{ dataSource.data.length }}</span>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25]"
+      [pageSize]="5"
+      showFirstLastButtons
+      aria-label="Seleccionar página de ubicaciones"
+    ></mat-paginator>
+  </div>
 </div>

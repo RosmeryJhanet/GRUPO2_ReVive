@@ -9,27 +9,10 @@
 
 .card {
   width: 100%;
-  max-width: 900px;
+  max-width: 480px;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   overflow: hidden;
-}
-
-.form-layout {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.form-fields {
-  flex: 1 1 320px;
-  min-width: 280px;
-}
-
-.form-map {
-  flex: 1 1 380px;
-  min-width: 320px;
-  min-height: 400px;
 }
 
 .card-header {
@@ -65,7 +48,7 @@
 }
 
 .card-actions {
-  padding: 16px 0 0;
+  padding: 16px 24px 24px;
   display: flex;
   justify-content: flex-end;
   gap: 12px;

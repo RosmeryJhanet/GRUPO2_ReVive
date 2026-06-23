@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>recycling</mat-icon>
+      <h2>Actualizar Material</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>ID</mat-label>
+          <input matInput [value]="id" disabled />
+          <mat-icon matSuffix>tag</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Nombre del material</mat-label>
+          <input matInput formControlName="name" placeholder="Ej: Plástico" maxlength="100" />
+          <mat-icon matSuffix>category</mat-icon>
+          <mat-error *ngIf="form.get('name')?.hasError('required')">El nombre es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('name')?.hasError('maxlength')">Máximo 100 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="description" maxlength="250"></textarea>
+          <mat-error *ngIf="form.get('description')?.hasError('required')">La descripción es obligatoria.</mat-error>
+          <mat-error *ngIf="form.get('description')?.hasError('maxlength')">Máximo 250 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Tipo de material</mat-label>
+          <input matInput formControlName="type" placeholder="Ej: Plástico, Metal, Madera" maxlength="100" />
+          <mat-icon matSuffix>label</mat-icon>
+          <mat-error *ngIf="form.get('type')?.hasError('required')">El tipo es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('type')?.hasError('maxlength')">Máximo 100 caracteres.</mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="card-actions">
+      <button mat-button class="btn-cancelar" routerLink="/materiales/listar">Cancelar</button>
+      <button mat-raised-button class="btn-guardar" (click)="actualizar()">
+        <mat-icon>update</mat-icon>
+        Actualizar
+      </button>
+    </div>
+  </div>
+</div>

@@ -6,7 +6,7 @@
 
 .card {
   width: 100%;
-  max-width: 800px;
+  max-width: 500px;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   overflow: hidden;
@@ -64,17 +64,6 @@
   margin-bottom: 12px;
 }
 
-.resultado-layout {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.resultado-table {
-  flex: 1 1 260px;
-  min-width: 240px;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -104,10 +93,4 @@ td {
   font-size: 3rem;
   width: 3rem;
   height: 3rem;
-}
-
-.resultado-map {
-  flex: 1 1 280px;
-  min-width: 260px;
-  height: 340px;
 }

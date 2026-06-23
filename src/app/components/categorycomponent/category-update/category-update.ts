@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,7 +13,7 @@ import { Category } from '../../../models/category';
 import { CategoryService } from '../../../services/categoryservice';
 
 @Component({
-  selector: 'app-category-insert',
+  selector: 'app-category-update',
   imports: [
     ReactiveFormsModule,
     MatInputModule,
@@ -23,20 +22,21 @@ import { CategoryService } from '../../../services/categoryservice';
     MatCardModule,
     MatSelectModule,
     RouterLink,
-    CommonModule
+    CommonModule,
   ],
-  templateUrl: './category-insert.html',
-  providers: [provideNativeDateAdapter()],
-  styleUrl: './category-insert.css',
+  templateUrl: './category-update.html',
+  styleUrl: './category-update.css',
 })
-export class CategoryInsert implements OnInit {
+export class CategoryUpdate implements OnInit {
   form: FormGroup = new FormGroup({});
   ca: Category = new Category();
+  id: number = 0;
 
   constructor(
     private cS: CategoryService,
     private router: Router,
     private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private snackBar: MatSnackBar,
   ) {}
 
@@ -46,20 +46,33 @@ export class CategoryInsert implements OnInit {
       description: ['', [Validators.required, Validators.maxLength(200)]],
       state: [true, Validators.required],
     });
+
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.cS.listId(this.id).subscribe({
+      next: (data) => {
+        this.form.patchValue({
+          name: data.nameCategory,
+          description: data.descriptionCategory,
+          state: data.stateCategory,
+        });
+      },
+    });
   }
 
-  aceptar(): void {
+  actualizar(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
+    this.ca.idCategory = this.id;
     this.ca.nameCategory = this.form.value.name;
     this.ca.descriptionCategory = this.form.value.description;
     this.ca.stateCategory = this.form.value.state;
 
-    this.cS.insert(this.ca).subscribe({
+    this.cS.update(this.ca).subscribe({
       next: () => {
-        this.snackBar.open('Categoría registrada correctamente', 'Cerrar', { duration: 3000 });
+        this.snackBar.open('Categoría actualizada correctamente', 'Cerrar', { duration: 3000 });
         this.router.navigate(['/categorias/listar']);
       },
     });

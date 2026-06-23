@@ -45,6 +45,10 @@
       <mat-icon>list</mat-icon>
       Lista
     </button>
+    <button mat-menu-item routerLink="/materiales/buscar-tipo">
+      <mat-icon>search</mat-icon>
+      Buscar por Tipo
+    </button>
   </mat-menu>
 <!-- Menú Categorías -->
 <button mat-button style="color: white" [matMenuTriggerFor]="menuCategoria">
@@ -60,6 +64,10 @@
   <button mat-menu-item routerLink="/categorias/listar">
     <mat-icon>list</mat-icon>
     Lista
+  </button>
+  <button mat-menu-item routerLink="/categorias/buscar-id">
+    <mat-icon>search</mat-icon>
+    Buscar por ID
   </button>
 </mat-menu>
 </mat-toolbar>
