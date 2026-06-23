@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Materialservice } from '../../../services/materialservice';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -6,12 +6,13 @@ import { Material } from '../../../models/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-material-update',
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule, RouterLink, CommonModule],
+  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule, MatSelectModule, RouterLink, CommonModule],
   templateUrl: './material-update.html',
   styleUrl: './material-update.css',
 })
@@ -19,6 +20,7 @@ export class MaterialUpdate implements OnInit {
   form: FormGroup = new FormGroup({});
   mat: Material = new Material();
   id: number = 0;
+  tiposMaterial: string[] = ['Plástico', 'Vidrio', 'Papel', 'Metal', 'Cartón'];
 
   constructor(
     private mS: Materialservice,
@@ -26,6 +28,7 @@ export class MaterialUpdate implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -37,13 +40,23 @@ export class MaterialUpdate implements OnInit {
 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.mS.listId(this.id).subscribe({
+    this.mS.list().subscribe({
       next: (data) => {
-        this.form.patchValue({
-          name: data.materialName,
-          description: data.materialDescription,
-          type: data.materialType,
-        });
+        const material = data.find((m) => m.idMaterial === this.id);
+        if (material) {
+          this.form.patchValue({
+            name: material.materialName,
+            description: material.materialDescription,
+            type: material.materialType,
+          });
+        } else {
+          this.snackBar.open('No se encontró el material a editar', 'Cerrar', { duration: 4000 });
+        }
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        this.snackBar.open('No se pudo cargar el material a editar', 'Cerrar', { duration: 4000 });
+        console.error('Error al cargar materiales', err);
       },
     });
   }

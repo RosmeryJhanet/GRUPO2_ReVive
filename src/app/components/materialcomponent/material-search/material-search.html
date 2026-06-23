@@ -9,7 +9,9 @@
       <form [formGroup]="form">
         <mat-form-field appearance="outline" class="campo">
           <mat-label>Tipo de material</mat-label>
-          <input matInput formControlName="type" placeholder="Ej: Plástico" />
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let tipo of tiposMaterial" [value]="tipo">{{ tipo }}</mat-option>
+          </mat-select>
           <mat-icon matSuffix>label</mat-icon>
         </mat-form-field>
         <button mat-raised-button class="btn-buscar" type="button" (click)="buscar()">

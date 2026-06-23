@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { ChatWidget } from './chat-widget/chat-widget';
 
 @Component({
   selector: 'app-homecomponent',
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, ChatWidget],
   templateUrl: './homecomponent.html',
   styleUrl: './homecomponent.css',
 })

@@ -2,32 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Material } from '../../../models/material';
 import { Materialservice } from '../../../services/materialservice';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
   selector: 'app-material-insert',
-  imports: [ MatInputModule,
-    MatDatepickerModule,
-    MatRadioModule,
+  imports: [MatInputModule,
     MatButtonModule,
-    ReactiveFormsModule, MatIconModule, CommonModule],
+    MatSelectModule,
+    ReactiveFormsModule, MatIconModule, CommonModule, RouterLink],
   templateUrl: './material-insert.html',
-  providers: [provideNativeDateAdapter()],
   styleUrl: './material-insert.css',
 })
 export class MaterialInsert implements OnInit {
 
  form: FormGroup = new FormGroup({});
   pro: Material = new Material();
+  tiposMaterial: string[] = ['Plástico', 'Vidrio', 'Papel', 'Metal', 'Cartón'];
 
   constructor(
     private mS: Materialservice,

@@ -29,10 +29,11 @@
 
         <mat-form-field appearance="outline" class="campo">
           <mat-label>Tipo de material</mat-label>
-          <input matInput formControlName="type" placeholder="Ej: Plástico, Metal, Madera" maxlength="100" />
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let tipo of tiposMaterial" [value]="tipo">{{ tipo }}</mat-option>
+          </mat-select>
           <mat-icon matSuffix>label</mat-icon>
           <mat-error *ngIf="form.get('type')?.hasError('required')">El tipo es obligatorio.</mat-error>
-          <mat-error *ngIf="form.get('type')?.hasError('maxlength')">Máximo 100 caracteres.</mat-error>
         </mat-form-field>
       </form>
     </div>

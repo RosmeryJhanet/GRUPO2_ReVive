@@ -5,12 +5,13 @@ import { Materialservice } from '../../../services/materialservice';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-material-search',
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule, MatTableModule, CommonModule],
+  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule, MatSelectModule, MatTableModule, CommonModule],
   templateUrl: './material-search.html',
   styleUrl: './material-search.css',
 })
@@ -19,6 +20,7 @@ export class MaterialSearch {
   dataSource: MatTableDataSource<QueryNativeMaterialTypeDTO> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3'];
   noEncontrado: boolean = false;
+  tiposMaterial: string[] = ['Plástico', 'Vidrio', 'Papel', 'Metal', 'Cartón'];
 
   constructor(
     private mS: Materialservice,
