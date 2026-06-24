@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>near_me</mat-icon>
+      <h2>Punto de recolección más cercano</h2>
+    </div>
+
+    <div class="card-body">
+      <div class="estado" *ngIf="cargando">
+        <mat-icon>autorenew</mat-icon>
+        Buscando tu ubicación y calculando la ruta...
+      </div>
+
+      <div class="estado error" *ngIf="error">
+        <mat-icon>error_outline</mat-icon>
+        {{ error }}
+      </div>
+
+      <div class="resultado" *ngIf="!cargando && !error && destino">
+        <p class="destino-info">
+          <strong>{{ destino.addressLocation }}</strong> — {{ destino.districtLocation }}
+        </p>
+        <p class="distancia-info">
+          <mat-icon>straighten</mat-icon> {{ distanciaKm?.toFixed(1) }} km
+          <mat-icon>schedule</mat-icon> {{ duracionMin?.toFixed(0) }} min en auto
+        </p>
+      </div>
+
+      <div #mapContainer class="map-container"></div>
+    </div>
+  </div>
+</div>

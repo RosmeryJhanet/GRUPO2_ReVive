@@ -1,34 +1,104 @@
 .container {
-  padding: 40px 24px;
+  padding: 0 24px 40px;
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
 }
 
 .hero {
-  margin-bottom: 48px;
+  background: linear-gradient(135deg, #4cae4f, #a4d5a6);
+  padding: 40px 0 64px;
+  margin-bottom: -40px;
 }
 
-.hero-icon {
-  font-size: 4rem;
-  width: 4rem;
-  height: 4rem;
-  color: #2e7d32;
+.hero-logo {
+  width: 96px;
+  height: 96px;
+  border-radius: 24px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.hero-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px;
 }
 
 .hero h1 {
   font-size: 2.5rem;
-  color: #2e7d32;
+  color: white;
   margin: 8px 0;
 }
 
-.hero p {
-  color: #757575;
-  font-size: 1.1rem;
+.hero .tagline {
+  color: white;
+  font-size: 1.15rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.acciones-card {
+  background: #f0f8e8;
+  border-radius: 20px;
+  padding: 32px 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.acciones-card h2 {
+  color: #4cae4f;
+  font-size: 1.4rem;
+  margin: 0 0 24px;
+}
+
+.acciones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.accion-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: #4cae4f;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.accion-btn:hover {
+  background: #80c684;
+  transform: translateY(-2px);
+}
+
+.accion-titulo {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.accion-desc {
+  font-size: 0.75rem;
+  color: #ddeec9;
+  font-weight: 400;
+  text-align: center;
 }
 
 .team-title {
-  color: #2e7d32;
+  color: #4cae4f;
   margin-bottom: 32px;
   font-size: 1.5rem;
 }
@@ -40,10 +110,10 @@
 }
 
 .member-card {
-  background: white;
+  background: #ddeec9;
   border-radius: 16px;
   padding: 28px 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease;
 }
 
@@ -55,7 +125,7 @@
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #2e7d32, #66bb6a);
+  background: linear-gradient(135deg, #4cae4f, #80c684);
   color: white;
   font-size: 1.4rem;
   font-weight: 700;

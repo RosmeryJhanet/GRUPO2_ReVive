@@ -20,28 +20,38 @@
 
       <div class="resultado" *ngIf="resultado">
         <h3>Resultado</h3>
-        <table>
-          <tr>
-            <td class="label">ID</td>
-            <td>{{ resultado.idLocation }}</td>
-          </tr>
-          <tr>
-            <td class="label">Dirección</td>
-            <td>{{ resultado.addressLocation }}</td>
-          </tr>
-          <tr>
-            <td class="label">Distrito</td>
-            <td>{{ resultado.districtLocation }}</td>
-          </tr>
-          <tr>
-            <td class="label">Latitud</td>
-            <td>{{ resultado.latitudeLocation }}</td>
-          </tr>
-          <tr>
-            <td class="label">Longitud</td>
-            <td>{{ resultado.longitudeLocation }}</td>
-          </tr>
-        </table>
+        <div class="resultado-layout">
+          <table class="resultado-table">
+            <tr>
+              <td class="label">ID</td>
+              <td>{{ resultado.idLocation }}</td>
+            </tr>
+            <tr>
+              <td class="label">Dirección</td>
+              <td>{{ resultado.addressLocation }}</td>
+            </tr>
+            <tr>
+              <td class="label">Distrito</td>
+              <td>{{ resultado.districtLocation }}</td>
+            </tr>
+            <tr>
+              <td class="label">Latitud</td>
+              <td>{{ resultado.latitudeLocation }}</td>
+            </tr>
+            <tr>
+              <td class="label">Longitud</td>
+              <td>{{ resultado.longitudeLocation }}</td>
+            </tr>
+          </table>
+
+          <div class="resultado-map">
+            <app-mapscomponent
+              [lat]="+resultado.latitudeLocation"
+              [lng]="+resultado.longitudeLocation"
+              [interactive]="false"
+            ></app-mapscomponent>
+          </div>
+        </div>
       </div>
 
       <div class="no-encontrado" *ngIf="noEncontrado">

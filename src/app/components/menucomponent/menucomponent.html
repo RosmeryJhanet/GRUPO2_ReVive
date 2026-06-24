@@ -1,7 +1,7 @@
-<mat-toolbar style="background-color: #28993b; color: white">
-  <mat-icon>recycling</mat-icon>
+<mat-toolbar style="background-color: #ffffff; color: #4cae4f">
+  <img src="logo_rev.png" alt="ReVive" style="height: 32px; cursor: pointer" routerLink="/homes" />
   <span
-    style="margin-left: 8px; font-weight: 600; cursor: pointer"
+    style="margin-left: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer"
     routerLink="/homes"
   >
     ReVive
@@ -9,8 +9,14 @@
 
   <span style="flex: 1"></span>
 
+  <!-- Ruta más cercana -->
+  <button mat-button style="color: #4cae4f" routerLink="/ruta-cercana">
+    <mat-icon>near_me</mat-icon>
+    Ruta más cercana
+  </button>
+
   <!-- Menú Ubicaciones -->
-  <button mat-button style="color: white" [matMenuTriggerFor]="menuUbicaciones">
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuUbicaciones">
     <mat-icon>location_on</mat-icon>
     Ubicaciones
   </button>
@@ -31,7 +37,7 @@
   </mat-menu>
 
   <!-- Menú Material -->
-  <button mat-button style="color: white" [matMenuTriggerFor]="menuMaterial">
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuMaterial">
     <mat-icon>casino</mat-icon>
     Material
   </button>
@@ -45,9 +51,13 @@
       <mat-icon>list</mat-icon>
       Lista
     </button>
+    <button mat-menu-item routerLink="/materiales/buscar-tipo">
+      <mat-icon>search</mat-icon>
+      Buscar por Tipo
+    </button>
   </mat-menu>
 <!-- Menú Categorías -->
-<button mat-button style="color: white" [matMenuTriggerFor]="menuCategoria">
+<button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuCategoria">
   <mat-icon>category</mat-icon>
   Categorías
 </button>
@@ -60,6 +70,10 @@
   <button mat-menu-item routerLink="/categorias/listar">
     <mat-icon>list</mat-icon>
     Lista
+  </button>
+  <button mat-menu-item routerLink="/categorias/buscar-id">
+    <mat-icon>search</mat-icon>
+    Buscar por ID
   </button>
 </mat-menu>
 </mat-toolbar>

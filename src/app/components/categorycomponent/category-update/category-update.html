@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>category</mat-icon>
+      <h2>Actualizar Categoría</h2>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>ID</mat-label>
+          <input matInput [value]="id" disabled />
+          <mat-icon matSuffix>tag</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Nombre de categoría</mat-label>
+          <input matInput formControlName="name" placeholder="Ej: Reciclaje" maxlength="100">
+          <mat-icon matSuffix>label</mat-icon>
+          <mat-error *ngIf="form.get('name')?.hasError('required')">El nombre es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('name')?.hasError('maxlength')">Máximo 100 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="description" placeholder="Ej: Materiales reciclables" maxlength="200"></textarea>
+          <mat-icon matSuffix>description</mat-icon>
+          <mat-error *ngIf="form.get('description')?.hasError('required')">La descripción es obligatoria.</mat-error>
+          <mat-error *ngIf="form.get('description')?.hasError('maxlength')">Máximo 200 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="state">
+            <mat-option [value]="true">Activo</mat-option>
+            <mat-option [value]="false">Inactivo</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>toggle_on</mat-icon>
+        </mat-form-field>
+      </form>
+    </div>
+
+    <div class="card-actions">
+      <button mat-button class="btn-cancelar" routerLink="/categorias/listar">
+        Cancelar
+      </button>
+      <button mat-raised-button class="btn-guardar" (click)="actualizar()">
+        <mat-icon>update</mat-icon>
+        Actualizar
+      </button>
+    </div>
+  </div>
+</div>

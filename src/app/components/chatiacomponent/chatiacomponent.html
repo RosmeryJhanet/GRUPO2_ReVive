@@ -1,0 +1,40 @@
+<div class="chat-fab" (click)="toggle()" *ngIf="!abierto">
+  <mat-icon>chat</mat-icon>
+</div>
+
+<div class="chat-panel" *ngIf="abierto">
+  <div class="chat-header">
+    <mat-icon>recycling</mat-icon>
+    <span>Asistente ReVive</span>
+    <button mat-icon-button (click)="toggle()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="chat-body">
+    <div class="chat-empty" *ngIf="historial.length === 0">
+      ¡Hola! Pregúntame sobre reciclaje, materiales o cómo usar ReVive.
+    </div>
+    <div
+      class="chat-msg"
+      *ngFor="let m of historial"
+      [class.user]="m.role === 'user'"
+      [class.model]="m.role === 'model'"
+    >
+      <span [innerHTML]="formatear(m.text)"></span>
+    </div>
+    <div class="chat-msg model typing" *ngIf="enviando">Escribiendo...</div>
+  </div>
+
+  <div class="chat-input">
+    <input
+      [(ngModel)]="mensaje"
+      placeholder="Escribe tu pregunta..."
+      (keyup.enter)="enviar()"
+      [disabled]="enviando"
+    />
+    <button mat-icon-button (click)="enviar()" [disabled]="enviando">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+</div>

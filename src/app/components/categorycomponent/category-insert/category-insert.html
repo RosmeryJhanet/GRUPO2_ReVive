@@ -9,14 +9,18 @@
       <form [formGroup]="form">
         <mat-form-field appearance="outline" class="campo">
           <mat-label>Nombre de categoría</mat-label>
-          <input matInput formControlName="name" placeholder="Ej: Reciclaje">
+          <input matInput formControlName="name" placeholder="Ej: Reciclaje" maxlength="100">
           <mat-icon matSuffix>label</mat-icon>
+          <mat-error *ngIf="form.get('name')?.hasError('required')">El nombre es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('name')?.hasError('maxlength')">Máximo 100 caracteres.</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="campo">
           <mat-label>Descripción</mat-label>
-          <textarea matInput formControlName="description" placeholder="Ej: Materiales reciclables"></textarea>
+          <textarea matInput formControlName="description" placeholder="Ej: Materiales reciclables" maxlength="200"></textarea>
           <mat-icon matSuffix>description</mat-icon>
+          <mat-error *ngIf="form.get('description')?.hasError('required')">La descripción es obligatoria.</mat-error>
+          <mat-error *ngIf="form.get('description')?.hasError('maxlength')">Máximo 200 caracteres.</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="campo">

@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Category } from '../../../models/category';
 import { CategoryService } from '../../../services/categoryservice';
@@ -20,7 +22,8 @@ import { CategoryService } from '../../../services/categoryservice';
     MatIconModule,
     MatCardModule,
     MatSelectModule,
-    RouterLink
+    RouterLink,
+    CommonModule
   ],
   templateUrl: './category-insert.html',
   providers: [provideNativeDateAdapter()],
@@ -33,28 +36,32 @@ export class CategoryInsert implements OnInit {
   constructor(
     private cS: CategoryService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(100)]],
+      description: ['', [Validators.required, Validators.maxLength(200)]],
       state: [true, Validators.required],
     });
   }
 
   aceptar(): void {
-    if (this.form.valid) {
-      this.ca.nameCategory = this.form.value.name;
-      this.ca.descriptionCategory = this.form.value.description;
-      this.ca.stateCategory = this.form.value.state;
-
-      this.cS.insert(this.ca).subscribe({
-        next: () => {
-          this.router.navigate(['/categorias/listar']);
-        },
-      });
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
     }
+    this.ca.nameCategory = this.form.value.name;
+    this.ca.descriptionCategory = this.form.value.description;
+    this.ca.stateCategory = this.form.value.state;
+
+    this.cS.insert(this.ca).subscribe({
+      next: () => {
+        this.snackBar.open('Categoría registrada correctamente', 'Cerrar', { duration: 3000 });
+        this.router.navigate(['/categorias/listar']);
+      },
+    });
   }
 }

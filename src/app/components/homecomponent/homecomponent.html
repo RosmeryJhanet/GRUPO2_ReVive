@@ -1,7 +1,34 @@
+<div class="hero">
+  <div class="container">
+    <div class="hero-logo">
+      <img src="logo_rev.png" alt="ReVive" class="hero-logo-img" />
+    </div>
+    <h1>¡Hola!</h1>
+    <p class="tagline">¡Dona, intercambia y <strong>revive</strong> objetos con propósito!</p>
+  </div>
+</div>
+
 <div class="container">
-  <div class="hero">
-    <mat-icon class="hero-icon">recycling</mat-icon>
-    <h1>ReVive</h1>
+  <div class="acciones-card">
+    <h2>¿Qué deseas hacer hoy?</h2>
+    <div class="acciones-grid">
+      <button class="accion-btn" (click)="proximamente()">
+        <span class="accion-titulo">Servicios</span>
+        <span class="accion-desc">Donaciones, trueques, intercambios</span>
+      </button>
+      <button class="accion-btn" (click)="proximamente()">
+        <span class="accion-titulo">Publicar objeto</span>
+        <span class="accion-desc">Sube una donación o algo para trueque</span>
+      </button>
+      <button class="accion-btn" (click)="proximamente()">
+        <span class="accion-titulo">Ver eventos</span>
+        <span class="accion-desc">Participa en eventos comunitarios</span>
+      </button>
+      <button class="accion-btn" (click)="abrirChat()">
+        <span class="accion-titulo">Chat</span>
+        <span class="accion-desc">¿Necesitas ayuda? Abre nuestro chat con IA</span>
+      </button>
+    </div>
   </div>
 
   <h2 class="team-title">Nuestro Equipo</h2>
@@ -13,3 +40,5 @@
     </div>
   </div>
 </div>
+
+<app-chatiacomponent></app-chatiacomponent>
