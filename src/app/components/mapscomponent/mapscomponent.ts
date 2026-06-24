@@ -13,12 +13,12 @@ import {
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-map-picker',
+  selector: 'app-mapscomponent',
   imports: [CommonModule],
-  templateUrl: './map-picker.html',
-  styleUrl: './map-picker.css',
+  templateUrl: './mapscomponent.html',
+  styleUrl: './mapscomponent.css',
 })
-export class MapPicker implements OnChanges, OnDestroy {
+export class Mapscomponent implements OnChanges, OnDestroy {
   @Input() lat: number | null = null;
   @Input() lng: number | null = null;
   @Input() interactive: boolean = true;

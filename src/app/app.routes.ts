@@ -15,6 +15,7 @@ import { CategoryList } from './components/categorycomponent/category-list/categ
 import { CategoryInsert } from './components/categorycomponent/category-insert/category-insert';
 import { CategoryUpdate } from './components/categorycomponent/category-update/category-update';
 import { CategorySearch } from './components/categorycomponent/category-search/category-search';
+import { Rutascomponent } from './components/rutascomponent/rutascomponent';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
   {
     path: 'homes',
     component: Homecomponent,
+  },
+  {
+    path: 'ruta-cercana',
+    component: Rutascomponent,
   },
   {
     path: 'ubicaciones',

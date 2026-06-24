@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MapPicker } from '../../shared/map-picker/map-picker';
+import { Mapscomponent } from '../../mapscomponent/mapscomponent';
 
 @Component({
   selector: 'app-location-insert',
@@ -23,7 +23,7 @@ import { MapPicker } from '../../shared/map-picker/map-picker';
   MatCardModule,
   RouterLink,
   CommonModule,
-  MapPicker],
+  Mapscomponent],
   templateUrl: './location-insert.html',
   providers: [provideNativeDateAdapter()],
   styleUrl: './location-insert.css',

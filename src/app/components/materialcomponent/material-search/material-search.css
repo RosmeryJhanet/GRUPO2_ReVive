@@ -13,7 +13,7 @@
 }
 
 .card-header {
-  background: linear-gradient(135deg, #2e7d32, #66bb6a);
+  background: linear-gradient(135deg, #4cae4f, #80c684);
   padding: 24px;
   display: flex;
   align-items: center;
@@ -46,7 +46,7 @@
 
 .btn-buscar {
   width: 100%;
-  background: linear-gradient(135deg, #2e7d32, #66bb6a);
+  background: linear-gradient(135deg, #4cae4f, #80c684);
   color: white;
   border-radius: 8px;
   padding: 0 24px;
@@ -60,7 +60,7 @@
 }
 
 .resultado h3 {
-  color: #2e7d32;
+  color: #4cae4f;
   margin-bottom: 12px;
 }
 

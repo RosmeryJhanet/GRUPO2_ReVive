@@ -58,12 +58,12 @@
           </div>
 
           <div class="form-map">
-            <app-map-picker
+            <app-mapscomponent
               [lat]="form.value.latitude ? +form.value.latitude : null"
               [lng]="form.value.longitude ? +form.value.longitude : null"
               (coordsSelected)="onCoordsSelected($event)"
               (districtFound)="onDistrictFound($event)"
-            ></app-map-picker>
+            ></app-mapscomponent>
           </div>
         </div>
       </form>

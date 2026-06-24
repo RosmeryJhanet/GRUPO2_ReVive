@@ -9,12 +9,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MapPicker } from '../../shared/map-picker/map-picker';
+import { Mapscomponent } from '../../mapscomponent/mapscomponent';
 
 @Component({
   selector: 'app-location-update',
   providers: [provideNativeDateAdapter()],
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule, RouterLink, CommonModule, MapPicker],
+  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule, RouterLink, CommonModule, Mapscomponent],
   templateUrl: './location-update.html',
   styleUrl: './location-update.css',
 })

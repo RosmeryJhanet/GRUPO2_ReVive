@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Chatservice } from '../../../services/chatservice';
-import { ChatMessage } from '../../../models/chat-message';
+import { Chatservice } from '../../services/chatservice';
+import { ChatMessage } from '../../models/chat-message';
 
 @Component({
-  selector: 'app-chat-widget',
+  selector: 'app-chatiacomponent',
   imports: [CommonModule, FormsModule, MatIconModule, MatButtonModule],
-  templateUrl: './chat-widget.html',
-  styleUrl: './chat-widget.css',
+  templateUrl: './chatiacomponent.html',
+  styleUrl: './chatiacomponent.css',
 })
-export class ChatWidget {
+export class Chatiacomponent {
   abierto = false;
   mensaje = '';
   enviando = false;
@@ -25,6 +25,10 @@ export class ChatWidget {
 
   toggle() {
     this.abierto = !this.abierto;
+  }
+
+  abrir() {
+    this.abierto = true;
   }
 
   formatear(texto: string): string {

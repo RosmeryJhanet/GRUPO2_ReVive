@@ -8,12 +8,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
-import { MapPicker } from '../../shared/map-picker/map-picker';
+import { Mapscomponent } from '../../mapscomponent/mapscomponent';
 
 @Component({
   selector: 'app-location-search',
   imports: [ReactiveFormsModule,
-    MatInputModule, MatButtonModule, MatIconModule, MatCardModule, CommonModule, MapPicker],
+    MatInputModule, MatButtonModule, MatIconModule, MatCardModule, CommonModule, Mapscomponent],
   templateUrl: './location-search.html',
   styleUrl: './location-search.css',
 })
