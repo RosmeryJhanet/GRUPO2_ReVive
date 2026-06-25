@@ -16,6 +16,11 @@ import { CategoryInsert } from './components/categorycomponent/category-insert/c
 import { CategoryUpdate } from './components/categorycomponent/category-update/category-update';
 import { CategorySearch } from './components/categorycomponent/category-search/category-search';
 import { Rutascomponent } from './components/rutascomponent/rutascomponent';
+import { Collectionpointcomponent } from './components/collectionpointcomponent/collectionpointcomponent';
+import { CollectionpointList } from './components/collectionpointcomponent/collectionpoint-list/collectionpoint-list';
+import { CollectionpointInsert } from './components/collectionpointcomponent/collectionpoint-insert/collectionpoint-insert';
+import { CollectionpointUpdate } from './components/collectionpointcomponent/collectionpoint-update/collectionpoint-update';
+import { CollectionpointSearch } from './components/collectionpointcomponent/collectionpoint-search/collectionpoint-search';
 
 export const routes: Routes = [
   {
@@ -94,6 +99,28 @@ export const routes: Routes = [
       {
         path: 'buscar-id',
         component: CategorySearch,
+      },
+    ],
+  },
+  {
+    path: 'puntos-acopio',
+    component: Collectionpointcomponent,
+    children: [
+      {
+        path: 'listar',
+        component: CollectionpointList,
+      },
+      {
+        path: 'insertar',
+        component: CollectionpointInsert,
+      },
+      {
+        path: 'edits/:id',
+        component: CollectionpointUpdate,
+      },
+      {
+        path: 'buscar-id',
+        component: CollectionpointSearch,
       },
     ],
   },

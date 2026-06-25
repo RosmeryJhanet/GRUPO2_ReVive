@@ -49,4 +49,6 @@ notes.md
 CLAUDE.md
 .claude/
 
+# API keys (never commit real keys)
 src/environments/gemini-key.ts
+
