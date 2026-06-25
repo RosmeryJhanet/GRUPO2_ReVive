@@ -1,25 +1,44 @@
 <div class="container">
-  <div style="text-align: center;margin: 3%;"><h2>Registrar Materiales</h2></div>
-  <div style="text-align: center;margin: 3%;">
-    <form [formGroup]="form" (submit)="aceptar()">
-      <mat-form-field class="example-full-width">
-        <mat-label>Nombre de material</mat-label>
-        <input matInput placeholder="Nombre del material" formControlName="name"/>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Descripción del material</mat-label>
-        <textarea matInput formControlName="description"></textarea>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Tipo de material</mat-label>
-        <input matInput placeholder="Ej: Plástico, Metal, Madera" formControlName="type"/>
-      </mat-form-field>
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>recycling</mat-icon>
+      <h2>Registrar Materiales</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Nombre del material</mat-label>
+          <input matInput formControlName="name" placeholder="Ej: Plástico" maxlength="100" />
+          <mat-icon matSuffix>category</mat-icon>
+          <mat-error *ngIf="form.get('name')?.hasError('required')">El nombre es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('name')?.hasError('maxlength')">Máximo 100 caracteres.</mat-error>
+        </mat-form-field>
 
-      <div>
-            <button matButton="elevated">Registrar</button>
-      </div>
-    </form>
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="description" placeholder="Ej: Botellas y envases plásticos" maxlength="250"></textarea>
+          <mat-error *ngIf="form.get('description')?.hasError('required')">La descripción es obligatoria.</mat-error>
+          <mat-error *ngIf="form.get('description')?.hasError('maxlength')">Máximo 250 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Tipo de material</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let tipo of tiposMaterial" [value]="tipo">{{ tipo }}</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>label</mat-icon>
+          <mat-error *ngIf="form.get('type')?.hasError('required')">El tipo es obligatorio.</mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="card-actions">
+      <button mat-button class="btn-cancelar" routerLink="/materiales/listar">
+        Cancelar
+      </button>
+      <button mat-raised-button class="btn-guardar" (click)="aceptar()">
+        <mat-icon>save</mat-icon>
+        Registrar
+      </button>
+    </div>
   </div>
 </div>

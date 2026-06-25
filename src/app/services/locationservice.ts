@@ -18,6 +18,14 @@ export class Locationservice {
     return this.http.post(`${this.url}/registrar/ubicaciones`, l, { responseType: 'text' });
   }
   delete(id: number) {
-   return this.http.delete(`${this.url}/eliminar/${id}`,{ responseType: 'text' });
+    return this.http.delete(`${this.url}/eliminar/${id}`, { responseType: 'text' });
   }
+
+  listId(id:number){
+   return this.http.get<LocationModel>(`${this.url}/buscar/${id}`);
+  }
+  update(l: LocationModel) {
+    return this.http.put(`${this.url}/ubicaciones/actualiza`, l, { responseType: 'text' });
+  }
+
 }
