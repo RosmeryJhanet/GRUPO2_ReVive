@@ -26,6 +26,11 @@ import { ItemList } from './components/itemcomponent/item-list/item-list';
 import { ItemInsert } from './components/itemcomponent/item-insert/item-insert';
 import { ItemUpdate } from './components/itemcomponent/item-update/item-update';
 import { ItemSearch } from './components/itemcomponent/item-search/item-search';
+import { Recyclingcomponent } from './components/recyclingcomponent/recyclingcomponent';
+import { RecyclingList } from './components/recyclingcomponent/recycling-list/recycling-list';
+import { RecyclingInsert } from './components/recyclingcomponent/recycling-insert/recycling-insert';
+import { RecyclingUpdate } from './components/recyclingcomponent/recycling-update/recycling-update';
+import { RecyclingSearch } from './components/recyclingcomponent/recycling-search/recycling-search';
 
 export const routes: Routes = [
   {
@@ -148,6 +153,28 @@ export const routes: Routes = [
     {
       path: 'buscar-id',
       component: ItemSearch,
+    },
+  ],
+},
+{
+  path: 'reciclajes',
+  component: Recyclingcomponent,
+  children: [
+    {
+      path: 'listar',
+      component: RecyclingList,
+    },
+    {
+      path: 'insertar',
+      component: RecyclingInsert,
+    },
+    {
+      path: 'edits/:id',
+      component: RecyclingUpdate,
+    },
+    {
+      path: 'buscar-id',
+      component: RecyclingSearch,
     },
   ],
 },

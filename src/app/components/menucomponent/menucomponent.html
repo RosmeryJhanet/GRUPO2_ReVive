@@ -97,4 +97,27 @@
     Buscar por ID
   </button>
 </mat-menu>
+
+<!-- Menú Artículos -->
+<button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuItem">
+  <mat-icon>inventory_2</mat-icon>
+  Artículos
+</button>
+
+<mat-menu #menuItem="matMenu">
+  <button mat-menu-item routerLink="/items/insertar">
+    <mat-icon>add</mat-icon>
+    Registrar
+  </button>
+
+  <button mat-menu-item routerLink="/items/listar">
+    <mat-icon>list</mat-icon>
+    Lista
+  </button>
+
+  <button mat-menu-item routerLink="/items/buscar-id">
+    <mat-icon>search</mat-icon>
+    Buscar por ID
+  </button>
+</mat-menu>
 </mat-toolbar>

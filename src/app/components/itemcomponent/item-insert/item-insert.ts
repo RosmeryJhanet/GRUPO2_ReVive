@@ -14,6 +14,7 @@ import { ItemDTO } from '../../../models/itemDTO';
 import { Category } from '../../../models/category';
 import { ItemService } from '../../../services/itemservice';
 import { CategoryService } from '../../../services/categoryservice';
+import { AfterViewInit, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-item-insert',
@@ -31,7 +32,7 @@ import { CategoryService } from '../../../services/categoryservice';
   providers: [provideNativeDateAdapter()],
   styleUrl: './item-insert.css',
 })
-export class ItemInsert implements OnInit {
+export class ItemInsert implements OnInit, AfterViewInit {
   form: FormGroup = new FormGroup({});
   item: ItemDTO = new ItemDTO();
   listaCategorias: Category[] = [];
@@ -42,20 +43,24 @@ export class ItemInsert implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.cS.list().subscribe((data) => {
-      this.listaCategorias = data;
-    });
+  this.form = this.formBuilder.group({
+    name: ['', [Validators.required, Validators.maxLength(50)]],
+    description: ['', [Validators.required, Validators.maxLength(100)]],
+    condition: ['', [Validators.required, Validators.maxLength(50)]],
+    category: ['', Validators.required],
+  });
+}
 
-    this.form = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(50)]],
-      description: ['', [Validators.required, Validators.maxLength(100)]],
-      condition: ['', [Validators.required, Validators.maxLength(50)]],
-      category: ['', Validators.required],
-    });
-  }
+ngAfterViewInit(): void {
+  this.cS.list().subscribe((data) => {
+    this.listaCategorias = data;
+    this.cdr.detectChanges();
+  });
+}
 
   aceptar(): void {
     if (this.form.invalid) {
