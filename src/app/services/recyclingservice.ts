@@ -15,7 +15,7 @@ private url = `${base_url}/api/Recycling`;
 constructor(private http: HttpClient) {}
 
 list() {
-return this.http.get<RecyclingDTO[]>(`${this.url}/listar/recycling`);
+return this.http.get<RecyclingDTO[]>(`${this.url}/listar/reciclajes`);
 }
 
 insert(r: RecyclingDTO) {
@@ -35,6 +35,6 @@ responseType: 'text'
 }
 
 listId(id: number) {
-return this.http.get<RecyclingDTO>(`${this.url}/${id}`);
+return this.http.get<RecyclingDTO>(`${this.url}/buscar/${id}`);
 }
 }
