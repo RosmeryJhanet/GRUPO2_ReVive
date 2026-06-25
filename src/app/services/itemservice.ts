@@ -15,7 +15,7 @@ private url = `${base_url}/api/Articulo`;
 constructor(private http: HttpClient) {}
 
 list() {
-return this.http.get<ItemDTO[]>(`${this.url}/listar/items`);
+return this.http.get<ItemDTO[]>(`${this.url}/listar/Articulo`);
 }
 
 insert(i: ItemDTO) {
