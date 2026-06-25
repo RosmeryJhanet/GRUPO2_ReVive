@@ -51,3 +51,4 @@ CLAUDE.md
 
 # API keys (never commit real keys)
 src/environments/gemini-key.ts
+
