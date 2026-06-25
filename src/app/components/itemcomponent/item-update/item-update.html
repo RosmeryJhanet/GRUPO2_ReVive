@@ -1,1 +1,56 @@
-<p>item-update works!</p>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>inventory_2</mat-icon>
+      <h2>Actualizar Artículo</h2>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>ID</mat-label>
+          <input matInput [value]="id" disabled />
+          <mat-icon matSuffix>tag</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Nombre del artículo</mat-label>
+          <input matInput formControlName="name" placeholder="Ej: Casaca" maxlength="50">
+          <mat-icon matSuffix>label</mat-icon>
+          <mat-error *ngIf="form.get('name')?.hasError('required')">El nombre es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('name')?.hasError('maxlength')">Máximo 50 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="description" placeholder="Ej: Casaca en buen estado" maxlength="100"></textarea>
+          <mat-icon matSuffix>description</mat-icon>
+          <mat-error *ngIf="form.get('description')?.hasError('required')">La descripción es obligatoria.</mat-error>
+          <mat-error *ngIf="form.get('description')?.hasError('maxlength')">Máximo 100 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Condición</mat-label>
+          <mat-select formControlName="condition">
+            <mat-option value="Nuevo">Nuevo</mat-option>
+            <mat-option value="Bueno">Bueno</mat-option>
+            <mat-option value="Regular">Regular</mat-option>
+            <mat-option value="Usado">Usado</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>verified</mat-icon>
+          <mat-error *ngIf="form.get('condition')?.hasError('required')">La condición es obligatoria.</mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+
+    <div class="card-actions">
+      <button mat-button class="btn-cancelar" routerLink="/items/listar">
+        Cancelar
+      </button>
+      <button mat-raised-button class="btn-guardar" (click)="actualizar()">
+        <mat-icon>update</mat-icon>
+        Actualizar
+      </button>
+    </div>
+  </div>
+</div>

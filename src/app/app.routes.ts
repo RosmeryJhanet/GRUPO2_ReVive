@@ -21,6 +21,11 @@ import { CollectionpointList } from './components/collectionpointcomponent/colle
 import { CollectionpointInsert } from './components/collectionpointcomponent/collectionpoint-insert/collectionpoint-insert';
 import { CollectionpointUpdate } from './components/collectionpointcomponent/collectionpoint-update/collectionpoint-update';
 import { CollectionpointSearch } from './components/collectionpointcomponent/collectionpoint-search/collectionpoint-search';
+import { Itemcomponent } from './components/itemcomponent/itemcomponent';
+import { ItemList } from './components/itemcomponent/item-list/item-list';
+import { ItemInsert } from './components/itemcomponent/item-insert/item-insert';
+import { ItemUpdate } from './components/itemcomponent/item-update/item-update';
+import { ItemSearch } from './components/itemcomponent/item-search/item-search';
 
 export const routes: Routes = [
   {
@@ -124,4 +129,26 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+  path: 'items',
+  component: Itemcomponent,
+  children: [
+    {
+      path: 'listar',
+      component: ItemList,
+    },
+    {
+      path: 'insertar',
+      component: ItemInsert,
+    },
+    {
+      path: 'edits/:id',
+      component: ItemUpdate,
+    },
+    {
+      path: 'buscar-id',
+      component: ItemSearch,
+    },
+  ],
+},
 ];

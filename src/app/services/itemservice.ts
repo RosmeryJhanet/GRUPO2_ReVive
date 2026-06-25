@@ -10,7 +10,7 @@ providedIn: 'root'
 })
 export class ItemService {
 
-private url = `${base_url}/api/Item`;
+private url = `${base_url}/api/Articulo`;
 
 constructor(private http: HttpClient) {}
 

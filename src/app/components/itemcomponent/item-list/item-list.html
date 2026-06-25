@@ -1,1 +1,66 @@
-<p>item-list works!</p>
+<div style="padding: 24px">
+  <h2>
+    <mat-icon>inventory_2</mat-icon>
+    Lista de Artículos
+  </h2>
+
+  <table mat-table [dataSource]="dataSource" style="width: 100%">
+    <ng-container matColumnDef="c1">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.itemId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="c2">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let element">{{ element.itemName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="c3">
+      <th mat-header-cell *matHeaderCellDef>Descripción</th>
+      <td mat-cell *matCellDef="let element">{{ element.itemDescription }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="c4">
+      <th mat-header-cell *matHeaderCellDef>Condición</th>
+      <td mat-cell *matCellDef="let element">{{ element.itemCondition }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="c5">
+      <th mat-header-cell *matHeaderCellDef>Categoría</th>
+      <td mat-cell *matCellDef="let element">
+        {{ getCategoria(element.idCategory) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="c6">
+      <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="eliminar(element.itemId)" class="btn-eliminar">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="c7">
+      <th mat-header-cell *matHeaderCellDef>Actualizar</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button class="btn-editar" [routerLink]="['/items/edits', element.itemId]">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <div class="paginator-footer">
+    <span class="total-registros">Total de artículos: {{ dataSource.data.length }}</span>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25]"
+      [pageSize]="5"
+      showFirstLastButtons
+      aria-label="Seleccionar página de artículos"
+    ></mat-paginator>
+  </div>
+</div>
