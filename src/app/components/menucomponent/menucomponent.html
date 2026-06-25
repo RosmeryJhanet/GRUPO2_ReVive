@@ -76,4 +76,25 @@
     Buscar por ID
   </button>
 </mat-menu>
+
+<!-- Menú Puntos de Acopio -->
+<button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuPuntoAcopio">
+  <mat-icon>warehouse</mat-icon>
+  Puntos de Acopio
+</button>
+
+<mat-menu #menuPuntoAcopio="matMenu">
+  <button mat-menu-item routerLink="/puntos-acopio/insertar">
+    <mat-icon>add</mat-icon>
+    Registrar
+  </button>
+  <button mat-menu-item routerLink="/puntos-acopio/listar">
+    <mat-icon>list</mat-icon>
+    Lista
+  </button>
+  <button mat-menu-item routerLink="/puntos-acopio/buscar-id">
+    <mat-icon>search</mat-icon>
+    Buscar por ID
+  </button>
+</mat-menu>
 </mat-toolbar>
