@@ -20,7 +20,7 @@ export class Materialservice {
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.url}/eliminar/${id}`, { responseType: 'text' });
   }
 
   listId(id: number) {
