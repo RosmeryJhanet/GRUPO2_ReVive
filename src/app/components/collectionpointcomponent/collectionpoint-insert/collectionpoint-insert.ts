@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Collectionpointservice } from '../../../services/collectionpointservice';
 import { Router, RouterLink } from '@angular/router';
 import { CollectionPoint } from '../../../models/collectionpoint';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,6 +16,7 @@ import { Mapscomponent } from '../../mapscomponent/mapscomponent';
   selector: 'app-collectionpoint-insert',
   imports: [
     ReactiveFormsModule,
+    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,

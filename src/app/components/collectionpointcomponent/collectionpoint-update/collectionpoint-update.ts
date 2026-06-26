@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Collectionpointservice } from '../../../services/collectionpointservice';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CollectionPoint } from '../../../models/collectionpoint';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,7 +13,16 @@ import { Mapscomponent } from '../../mapscomponent/mapscomponent';
 
 @Component({
   selector: 'app-collectionpoint-update',
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule, RouterLink, CommonModule, Mapscomponent],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterLink,
+    CommonModule,
+    Mapscomponent,
+  ],
   templateUrl: './collectionpoint-update.html',
   styleUrl: './collectionpoint-update.css',
 })

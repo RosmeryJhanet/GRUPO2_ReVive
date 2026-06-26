@@ -1,0 +1,141 @@
+.registro-fondo {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f8e8;
+  padding: 40px 16px;
+}
+
+.registro-card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  background: #80c684;
+  border-radius: 32px;
+  padding: 56px 28px 32px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-cerrar {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.registro-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -48px;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.registro-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px;
+}
+
+.registro-brand {
+  color: white;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-size: 1.6rem;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.registro-tagline {
+  color: #f0f8e8;
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 6px 0 20px;
+}
+
+.registro-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo-label {
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.campo-input {
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.55);
+  color: #1a3d1b;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.campo-input::placeholder {
+  color: #2e5c2f;
+}
+
+.campo-input:focus {
+  outline: 2px solid white;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.campo-error {
+  color: #ffe9e9;
+  background: rgba(150, 20, 20, 0.35);
+  border-radius: 8px;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  margin-top: 4px;
+}
+
+.campo-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-size: 0.75rem;
+  margin-top: 16px;
+}
+
+.btn-registrarse {
+  margin-top: 24px;
+  width: 100%;
+  background: white;
+  color: #4cae4f;
+  border: none;
+  border-radius: 24px;
+  padding: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.btn-registrarse:hover {
+  background: #ddeec9;
+}

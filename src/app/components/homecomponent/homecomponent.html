@@ -1,44 +1,182 @@
-<div class="hero">
-  <div class="container">
-    <div class="hero-logo">
-      <img src="logo_rev.png" alt="ReVive" class="hero-logo-img" />
-    </div>
-    <h1>¡Hola!</h1>
-    <p class="tagline">¡Dona, intercambia y <strong>revive</strong> objetos con propósito!</p>
+<!-- Navbar de marketing (solo en Home) -->
+<header class="landing-navbar">
+  <div class="nav-left">
+    <img src="logo_rev.png" alt="ReVive" class="nav-logo" />
+    <span class="nav-brand">REVIVE</span>
   </div>
-</div>
+  <nav class="nav-links">
+    <a routerLink="/homes">Inicio</a>
+    <a (click)="irASeccion('servicios')">Servicios</a>
+    <a (click)="irASeccion('contacto')">Contacto</a>
+    <a (click)="abrirChat()">Ayuda</a>
+  </nav>
+  <div class="nav-right">
+    <input type="text" placeholder="Buscar" class="nav-search" />
+    <button class="btn-login" (click)="proximamente()">Iniciar sesión</button>
+    <button class="btn-empieza" routerLink="/registro">Empieza ya</button>
+  </div>
+</header>
 
-<div class="container">
-  <div class="acciones-card">
-    <h2>¿Qué deseas hacer hoy?</h2>
-    <div class="acciones-grid">
-      <button class="accion-btn" (click)="proximamente()">
-        <span class="accion-titulo">Servicios</span>
-        <span class="accion-desc">Donaciones, trueques, intercambios</span>
-      </button>
-      <button class="accion-btn" (click)="proximamente()">
-        <span class="accion-titulo">Publicar objeto</span>
-        <span class="accion-desc">Sube una donación o algo para trueque</span>
-      </button>
-      <button class="accion-btn" (click)="proximamente()">
-        <span class="accion-titulo">Ver eventos</span>
-        <span class="accion-desc">Participa en eventos comunitarios</span>
-      </button>
-      <button class="accion-btn" (click)="abrirChat()">
-        <span class="accion-titulo">Chat</span>
-        <span class="accion-desc">¿Necesitas ayuda? Abre nuestro chat con IA</span>
-      </button>
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>¡Dona, intercambia y<br />recicla artículos que<br />ya no usas!</h1>
+    <p>Transforma tus objetos en nuevas oportunidades.</p>
+    <button class="btn-empieza-grande" routerLink="/registro">Empieza YA</button>
+  </div>
+  <div class="hero-image">
+    <mat-icon>eco</mat-icon>
+  </div>
+</section>
+
+<!-- Reutiliza, crea, revive -->
+<section class="intro-section">
+  <div class="intro-logo">
+    <img src="logo_rev.png" alt="ReVive" />
+    <span>ReVive</span>
+  </div>
+  <div class="intro-text">
+    <h2>Reutiliza, crea, revive</h2>
+    <p>
+      ReVive es una aplicación móvil que se especializa en promover la reutilización de objetos en desuso a través de
+      trueques, donaciones y la promoción de zonas de reciclaje. Con nuestra plataforma, buscamos fomentar un estilo
+      de vida sostenible y consciente con el medio ambiente. ¡Únete a la comunidad ReVive y ayuda a darle una segunda
+      vida a objetos olvidados!
+    </p>
+    <button class="btn-saber-mas" (click)="proximamente()">Saber más</button>
+  </div>
+</section>
+
+<!-- Nuestros aliados -->
+<section class="aliados-section">
+  <h2>Nuestros aliados</h2>
+  <div class="aliados-grid">
+    <div class="aliado-card" *ngFor="let a of aliados">{{ a }}</div>
+  </div>
+</section>
+
+<!-- Nuestros servicios -->
+<section class="servicios-section" id="servicios">
+  <h2>Nuestros servicios</h2>
+  <div class="servicios-grid">
+    <div class="servicio-card" *ngFor="let s of servicios" (click)="proximamente()">
+      <div class="servicio-img">
+        <mat-icon>{{ s.icon }}</mat-icon>
+      </div>
+      <span>{{ s.nombre }}</span>
     </div>
   </div>
+</section>
 
+<!-- Categorías principales -->
+<section class="categorias-section">
+  <h2>Categorías principales</h2>
+  <div class="categorias-grid">
+    <div class="categoria-card" *ngFor="let c of categorias">
+      <div class="categoria-img">
+        <mat-icon>{{ c.icon }}</mat-icon>
+      </div>
+      <span>{{ c.nombre }}</span>
+    </div>
+  </div>
+</section>
+
+<!-- Reseñas de usuarios -->
+<section class="resenas-section">
+  <h2>Reseñas de nuestros usuarios</h2>
+  <p class="resenas-subtitulo">¡Escucha a personas como tú!</p>
+  <div class="resenas-grid">
+    <div class="resena-card" *ngFor="let r of resenas">
+      <strong>{{ r.nombre }}</strong>
+      <p>{{ r.texto }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- Solicita información -->
+<section class="info-section" id="contacto">
+  <div class="info-card">
+    <h2>Solicita Información</h2>
+    <p class="info-subtitulo">¿Qué esperas para unirte a la comunidad ReVive?</p>
+    <form (ngSubmit)="enviarInfo()">
+      <div class="info-row">
+        <input type="text" placeholder="Nombre" [(ngModel)]="infoForm.nombre" name="nombre" required />
+        <input type="text" placeholder="Apellidos" [(ngModel)]="infoForm.apellidos" name="apellidos" required />
+      </div>
+      <div class="info-row">
+        <input type="email" placeholder="E-mail" [(ngModel)]="infoForm.email" name="email" required />
+        <input type="tel" placeholder="Teléfono" [(ngModel)]="infoForm.telefono" name="telefono" />
+      </div>
+      <div class="info-row">
+        <select [(ngModel)]="infoForm.ocupacion" name="ocupacion">
+          <option value="" disabled selected>Seleccione su ocupación</option>
+          <option value="estudiante">Estudiante</option>
+          <option value="empleado">Empleado</option>
+          <option value="independiente">Independiente</option>
+          <option value="otro">Otro</option>
+        </select>
+        <select [(ngModel)]="infoForm.edad" name="edad">
+          <option value="" disabled selected>Seleccione su edad</option>
+          <option value="menor18">Menos de 18</option>
+          <option value="18-25">18 - 25</option>
+          <option value="26-40">26 - 40</option>
+          <option value="mayor40">Más de 40</option>
+        </select>
+      </div>
+      <label class="info-checkbox">
+        <input type="checkbox" [(ngModel)]="infoForm.aceptaPrivacidad" name="aceptaPrivacidad" />
+        He leído y acepto la política de privacidad
+      </label>
+      <label class="info-checkbox">
+        <input type="checkbox" [(ngModel)]="infoForm.aceptaPublicidad" name="aceptaPublicidad" />
+        Consiento el uso de mis datos personales para recibir publicidad de su entidad
+      </label>
+      <button type="submit" class="btn-enviar">Enviar</button>
+    </form>
+  </div>
+</section>
+
+<!-- Nuestro Equipo -->
+<section class="team-section">
   <h2 class="team-title">Nuestro Equipo</h2>
-
   <div class="team-grid">
     <div class="member-card" *ngFor="let m of members">
       <div class="avatar">{{ m.initials }}</div>
       <h3>{{ m.name }}</h3>
     </div>
   </div>
-</div>
+</section>
+
+<!-- Footer -->
+<footer class="landing-footer">
+  <div class="footer-brand">
+    <img src="logo_rev.png" alt="ReVive" />
+    <p>Reutiliza. Crea. Revive.<br />Inspirando un futuro sostenible.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Compañía</h4>
+    <a (click)="proximamente()">Sobre nosotros</a>
+    <a (click)="proximamente()">Socios</a>
+    <a (click)="proximamente()">Inversores</a>
+    <a (click)="proximamente()">Sostenibilidad</a>
+  </div>
+  <div class="footer-col">
+    <h4>Servicios</h4>
+    <a (click)="proximamente()">Donaciones</a>
+    <a (click)="proximamente()">Trueque</a>
+    <a (click)="proximamente()">Reciclaje</a>
+  </div>
+  <div class="footer-col">
+    <h4>Soporte</h4>
+    <a (click)="proximamente()">Ayuda</a>
+    <a (click)="proximamente()">Contacto</a>
+    <a (click)="proximamente()">Comunidad</a>
+  </div>
+  <div class="footer-col">
+    <h4>Descargar</h4>
+    <span class="footer-store">App Store</span>
+    <span class="footer-store">Google Play</span>
+  </div>
+</footer>
 
 <app-chatiacomponent></app-chatiacomponent>
