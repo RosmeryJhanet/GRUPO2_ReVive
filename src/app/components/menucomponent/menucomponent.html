@@ -120,4 +120,21 @@
     Buscar por ID
   </button>
 </mat-menu>
+
+<!-- Menú Usuarios -->
+<button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuUsuario">
+  <mat-icon>group</mat-icon>
+  Usuarios
+</button>
+
+<mat-menu #menuUsuario="matMenu">
+  <button mat-menu-item routerLink="/usuarios/listar">
+    <mat-icon>list</mat-icon>
+    Lista
+  </button>
+  <button mat-menu-item routerLink="/usuarios/buscar-id">
+    <mat-icon>search</mat-icon>
+    Buscar por ID
+  </button>
+</mat-menu>
 </mat-toolbar>

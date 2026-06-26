@@ -1,0 +1,81 @@
+<div class="registro-fondo">
+  <div class="registro-card">
+    <button class="btn-cerrar" routerLink="/homes" aria-label="Cerrar">✕</button>
+
+    <div class="registro-logo">
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="#4cae4f">
+        <path
+          d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"
+        />
+      </svg>
+    </div>
+    <h1 class="registro-brand">REVIVE</h1>
+    <p class="registro-tagline">Transforma lo que ya no usas en oportunidades para otros.</p>
+
+    <form [formGroup]="form" class="registro-form">
+      <label class="campo-label">NOMBRES</label>
+      <input class="campo-input" formControlName="name" maxlength="200" />
+      <span class="campo-error" *ngIf="form.get('name')?.touched && form.get('name')?.hasError('required')"
+        >El nombre es obligatorio.</span
+      >
+
+      <label class="campo-label">APELLIDOS</label>
+      <input class="campo-input" formControlName="lastName" maxlength="200" />
+      <span class="campo-error" *ngIf="form.get('lastName')?.touched && form.get('lastName')?.hasError('required')"
+        >El apellido es obligatorio.</span
+      >
+
+      <label class="campo-label">DNI</label>
+      <input class="campo-input" formControlName="document" maxlength="8" />
+      <span class="campo-error" *ngIf="form.get('document')?.touched && form.get('document')?.hasError('required')"
+        >El DNI es obligatorio.</span
+      >
+      <span class="campo-error" *ngIf="form.get('document')?.touched && form.get('document')?.hasError('pattern')"
+        >Debe tener exactamente 8 dígitos.</span
+      >
+
+      <label class="campo-label">CORREO</label>
+      <input class="campo-input" type="email" formControlName="email" />
+      <span class="campo-error" *ngIf="form.get('email')?.touched && form.get('email')?.hasError('required')"
+        >El email es obligatorio.</span
+      >
+      <span class="campo-error" *ngIf="form.get('email')?.touched && form.get('email')?.hasError('email')"
+        >Formato de email inválido.</span
+      >
+
+      <label class="campo-label">CONTRASEÑA</label>
+      <input class="campo-input" type="password" formControlName="password" />
+      <span class="campo-error" *ngIf="form.get('password')?.touched && form.get('password')?.hasError('required')"
+        >La contraseña es obligatoria.</span
+      >
+      <span class="campo-error" *ngIf="form.get('password')?.touched && form.get('password')?.hasError('minlength')"
+        >Mínimo 6 caracteres.</span
+      >
+
+      <label class="campo-label">CONFIRMAR CONTRASEÑA</label>
+      <input class="campo-input" type="password" formControlName="confirmPassword" />
+      <span
+        class="campo-error"
+        *ngIf="form.get('confirmPassword')?.touched && form.get('confirmPassword')?.hasError('required')"
+        >Confirma tu contraseña.</span
+      >
+      <span
+        class="campo-error"
+        *ngIf="form.hasError('passwordsNoCoinciden') && form.get('confirmPassword')?.touched"
+        >Las contraseñas no coinciden.</span
+      >
+
+      <label class="campo-checkbox">
+        <input type="checkbox" formControlName="aceptaTerminos" />
+        Aceptar términos de privacidad
+      </label>
+      <span
+        class="campo-error"
+        *ngIf="form.get('aceptaTerminos')?.touched && form.get('aceptaTerminos')?.hasError('required')"
+        >Debes aceptar los términos.</span
+      >
+
+      <button type="button" class="btn-registrarse" (click)="crearCuenta()">REGISTRARSE</button>
+    </form>
+  </div>
+</div>
