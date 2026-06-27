@@ -1,1 +1,80 @@
-<p>recyclingdetail-update works!</p>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>fact_check</mat-icon>
+      <h2>Actualizar Detalle de Reciclaje</h2>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>ID</mat-label>
+          <input matInput [value]="id" disabled />
+          <mat-icon matSuffix>tag</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Descripción</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            maxlength="200">
+          </textarea>
+          <mat-icon matSuffix>description</mat-icon>
+          <mat-error *ngIf="form.get('description')?.hasError('required')">
+            La descripción es obligatoria.
+          </mat-error>
+          <mat-error *ngIf="form.get('description')?.hasError('maxlength')">
+            Máximo 200 caracteres.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Fecha de registro</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="registrationDate">
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker">
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="form.get('registrationDate')?.hasError('required')">
+            La fecha es obligatoria.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Estado de trazabilidad</mat-label>
+          <mat-select formControlName="traceability">
+            <mat-option value="Pendiente">Pendiente</mat-option>
+            <mat-option value="En Proceso">En Proceso</mat-option>
+            <mat-option value="Finalizado">Finalizado</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>timeline</mat-icon>
+          <mat-error *ngIf="form.get('traceability')?.hasError('required')">
+            El estado de trazabilidad es obligatorio.
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+
+    <div class="card-actions">
+      <button
+        mat-button
+        class="btn-cancelar"
+        routerLink="/detalle-reciclajes/listar">
+        Cancelar
+      </button>
+
+      <button
+        mat-raised-button
+        class="btn-guardar"
+        (click)="actualizar()">
+        <mat-icon>update</mat-icon>
+        Actualizar
+      </button>
+    </div>
+  </div>
+</div>
