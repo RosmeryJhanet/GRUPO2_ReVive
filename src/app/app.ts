@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
 import { Menucomponent } from './components/menucomponent/menucomponent';
 
 
@@ -11,4 +12,11 @@ import { Menucomponent } from './components/menucomponent/menucomponent';
 })
 export class App {
   protected readonly title = signal('ReviveFront');
+  mostrarMenuAdmin = signal(true);
+
+  constructor(private router: Router) {
+    this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
+      this.mostrarMenuAdmin.set(this.router.url !== '/homes' && this.router.url !== '/');
+    });
+  }
 }
