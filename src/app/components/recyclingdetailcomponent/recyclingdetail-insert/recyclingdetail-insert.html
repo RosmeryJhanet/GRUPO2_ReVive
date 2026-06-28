@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="card">
+
+    <div class="card-header">
+      <mat-icon>fact_check</mat-icon>
+      <h2>Registrar Detalle de Reciclaje</h2>
+    </div>
+
+    <div class="card-body">
+
+      <form [formGroup]="form">
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Descripción</mat-label>
+
+          <textarea
+            matInput
+            formControlName="description"
+            maxlength="200">
+          </textarea>
+
+          <mat-icon matSuffix>description</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Fecha de registro</mat-label>
+
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="registrationDate">
+
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker">
+          </mat-datepicker-toggle>
+
+          <mat-datepicker #picker></mat-datepicker>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+
+          <mat-label>Estado de trazabilidad</mat-label>
+
+          <mat-select formControlName="traceability">
+
+            <mat-option value="Pendiente">
+              Pendiente
+            </mat-option>
+
+            <mat-option value="En Proceso">
+              En Proceso
+            </mat-option>
+
+            <mat-option value="Finalizado">
+              Finalizado
+            </mat-option>
+
+          </mat-select>
+
+          <mat-icon matSuffix>timeline</mat-icon>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+
+          <mat-label>Reciclaje</mat-label>
+
+          <mat-select formControlName="recycling">
+
+            <mat-option
+              *ngFor="let r of listaReciclajes"
+              [value]="r.recyclingId">
+
+              {{ r.recyclingName }}
+
+            </mat-option>
+
+          </mat-select>
+
+          <mat-icon matSuffix>recycling</mat-icon>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+
+          <mat-label>Punto de Acopio</mat-label>
+
+          <mat-select formControlName="collectionPoint">
+
+            <mat-option
+              *ngFor="let p of listaPuntos"
+              [value]="p.idCollectionPoint">
+
+              {{ p.collectionPointName }}
+
+            </mat-option>
+
+          </mat-select>
+
+          <mat-icon matSuffix>warehouse</mat-icon>
+
+        </mat-form-field>
+
+      </form>
+
+    </div>
+
+    <div class="card-actions">
+
+      <button
+        mat-button
+        class="btn-cancelar"
+        routerLink="/detalle-reciclajes/listar">
+
+        Cancelar
+
+      </button>
+
+      <button
+        mat-raised-button
+        class="btn-guardar"
+        (click)="aceptar()">
+
+        <mat-icon>save</mat-icon>
+        Registrar
+
+      </button>
+
+    </div>
+
+  </div>
+</div>

@@ -6,11 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 
-import { RecyclingDTO } from '../../../models/recyclingDTO';
-import { RecyclingService } from '../../../services/recyclingservice';
+import { RecyclingDetailDTO } from '../../../models/recyclingDetailDTO';
+import { RecyclingDetailService } from '../../../services/recyclingdetailservice';
 
 @Component({
-  selector: 'app-recycling-search',
+  selector: 'app-recyclingdetail-search',
   imports: [
     ReactiveFormsModule,
     MatInputModule,
@@ -19,29 +19,34 @@ import { RecyclingService } from '../../../services/recyclingservice';
     MatCardModule,
     CommonModule
   ],
-  templateUrl: './recycling-search.html',
-  styleUrl: './recycling-search.css',
+  templateUrl: './recyclingdetail-search.html',
+  styleUrl: './recyclingdetail-search.css',
 })
-export class RecyclingSearch {
+export class RecyclingdetailSearch {
+
   form: FormGroup;
-  resultado: RecyclingDTO | null = null;
+  resultado: RecyclingDetailDTO | null = null;
   noEncontrado: boolean = false;
 
   constructor(
-    private rS: RecyclingService,
+    private rdS: RecyclingDetailService,
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
   ) {
+
     this.form = this.formBuilder.group({
       id: ['', Validators.required],
     });
+
   }
 
   buscar(): void {
+
     if (this.form.valid) {
+
       const id = Number(this.form.value.id);
 
-      this.rS.listId(id).subscribe({
+      this.rdS.listId(id).subscribe({
         next: (data) => {
           this.resultado = data;
           this.noEncontrado = false;
@@ -53,6 +58,9 @@ export class RecyclingSearch {
           this.cdr.detectChanges();
         },
       });
+
     }
+
   }
+
 }

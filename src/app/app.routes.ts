@@ -36,6 +36,11 @@ import { UsuarioList } from './components/usuariocomponent/usuario-list/usuario-
 import { UsuarioUpdate } from './components/usuariocomponent/usuario-update/usuario-update';
 import { UsuarioSearch } from './components/usuariocomponent/usuario-search/usuario-search';
 import { UsuarioInsert } from './components/usuariocomponent/usuario-insert/usuario-insert';
+import { Recyclingdetailcomponent } from './components/recyclingdetailcomponent/recyclingdetailcomponent';
+import { RecyclingdetailList } from './components/recyclingdetailcomponent/recyclingdetail-list/recyclingdetail-list';
+import { RecyclingdetailInsert } from './components/recyclingdetailcomponent/recyclingdetail-insert/recyclingdetail-insert';
+import { RecyclingdetailUpdate } from './components/recyclingdetailcomponent/recyclingdetail-update/recyclingdetail-update';
+import { RecyclingdetailSearch } from './components/recyclingdetailcomponent/recyclingdetail-search/recyclingdetail-search';
 
 export const routes: Routes = [
   {
@@ -205,4 +210,27 @@ export const routes: Routes = [
       },
     ],
   },
+
+  {
+  path: 'detalles-reciclaje',
+  component: Recyclingdetailcomponent,
+  children: [
+    {
+      path: 'listar',
+      component: RecyclingdetailList,
+    },
+    {
+      path: 'insertar',
+      component: RecyclingdetailInsert,
+    },
+    {
+      path: 'edits/:id',
+      component: RecyclingdetailUpdate,
+    },
+    {
+      path: 'buscar-id',
+      component: RecyclingdetailSearch,
+    },
+  ],
+},
 ];

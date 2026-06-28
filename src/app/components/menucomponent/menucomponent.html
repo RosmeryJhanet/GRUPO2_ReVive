@@ -138,3 +138,49 @@
   </button>
 </mat-menu>
 </mat-toolbar>
+
+<!-- Menú Detalle Reciclaje -->
+<button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuDetalleReciclaje">
+  <mat-icon>fact_check</mat-icon>
+  Detalle Reciclaje
+</button>
+
+<mat-menu #menuDetalleReciclaje="matMenu">
+  <button mat-menu-item routerLink="/detalles-reciclaje/insertar">
+    <mat-icon>add</mat-icon>
+    Registrar
+  </button>
+
+  <button mat-menu-item routerLink="/detalles-reciclaje/listar">
+    <mat-icon>list</mat-icon>
+    Lista
+  </button>
+
+  <button mat-menu-item routerLink="/detalles-reciclaje/buscar-id">
+    <mat-icon>search</mat-icon>
+    Buscar por ID
+  </button>
+</mat-menu>
+
+<!-- Menú Reciclajes -->
+<button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuReciclajes">
+  <mat-icon>recycling</mat-icon>
+  Reciclajes
+</button>
+
+<mat-menu #menuReciclajes="matMenu">
+  <button mat-menu-item routerLink="/reciclajes/insertar">
+    <mat-icon>add</mat-icon>
+    Registrar
+  </button>
+
+  <button mat-menu-item routerLink="/reciclajes/listar">
+    <mat-icon>list</mat-icon>
+    Lista
+  </button>
+
+  <button mat-menu-item routerLink="/reciclajes/buscar-id">
+    <mat-icon>search</mat-icon>
+    Buscar por ID
+  </button>
+</mat-menu>
