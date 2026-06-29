@@ -18,25 +18,28 @@ export class Homecomponent {
   aliados = ['Ciudad Saludable', 'Dar es Dar', 'Municipalidad', 'Bomberos del Perú'];
 
   servicios = [
-    { nombre: 'Donaciones', icon: 'volunteer_activism' },
-    { nombre: 'Trueques', icon: 'swap_horiz' },
-    { nombre: 'Reciclaje', icon: 'recycling' },
-  ];
+  { nombre: 'Donaciones', imagen: 'donaciones.jpg' },
+  { nombre: 'Trueques', imagen: 'trueques.jpg' },
+  { nombre: 'Reciclaje', imagen: 'reciclaje.webp' },
+  
+];
 
   categorias = [
-    { nombre: 'Ropa', icon: 'checkroom' },
-    { nombre: 'Juguetes', icon: 'toys' },
-    { nombre: 'Víveres', icon: 'shopping_basket' },
-    { nombre: 'Útiles Escolares', icon: 'edit' },
-    { nombre: 'Libros', icon: 'menu_book' },
-    { nombre: 'Vidrio', icon: 'liquor' },
-    { nombre: 'Cartón', icon: 'inventory_2' },
-    { nombre: 'Papel', icon: 'description' },
-    { nombre: 'Instrumentos', icon: 'music_note' },
-    { nombre: 'Deportes', icon: 'sports_soccer' },
-    { nombre: 'Muebles', icon: 'chair' },
-    { nombre: 'Electrodomésticos', icon: 'kitchen' },
+    { nombre: 'Ropa', imagen: 'categorias/ropa.avif' },
+    { nombre: 'Juguetes', imagen: 'categorias/juguetes.jpg' },
+    { nombre: 'Víveres', imagen: 'categorias/viveres.jpg' },
+    { nombre: 'Útiles Escolares', imagen: 'categorias/utilesEscolares.jpg' },
+    { nombre: 'Libros', imagen: 'categorias/libros.jpg' },
+    { nombre: 'Vidrio', imagen: 'categorias/vidrio.jpg' },
+    { nombre: 'Cartón', imagen: 'categorias/carton.webp' },
+    { nombre: 'Papel', imagen: 'categorias/papel.webp' },
+    { nombre: 'Instrumentos', imagen: 'categorias/instrumentos.jpg' },
+    { nombre: 'Deportes', imagen: 'categorias/deportes.jpg' },
+    { nombre: 'Muebles', imagen: 'categorias/muebles.jpg' },
+    { nombre: 'Electrodomésticos', imagen: 'categorias/electrodomesticos.jpg' },
   ];
+
+  
 
   resenas = [
     {
