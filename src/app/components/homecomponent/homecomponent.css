@@ -16,6 +16,7 @@
 
 .nav-logo {
   height: 40px;
+  
 }
 
 .nav-brand {
@@ -140,6 +141,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 100%;
 }
 
 .hero-image mat-icon {
@@ -149,6 +151,11 @@
   color: #ddeec9;
 }
 
+.nav-principal {
+  width: 400px; /* Cambia este número al tamaño que desees */
+  height: auto; /* Mantiene la proporción original */
+  border-radius: 10px;
+}
 /* ===== Reutiliza, crea, revive ===== */
 .intro-section {
   display: flex;
@@ -177,7 +184,11 @@
   width: 96px;
   height: 96px;
 }
-
+.nav-cortado{
+  width: 300px;
+  height: auto;
+  
+}
 .intro-logo span {
   color: white;
   font-weight: 800;
