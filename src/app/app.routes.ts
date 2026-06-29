@@ -41,6 +41,9 @@ import { RecyclingdetailList } from './components/recyclingdetailcomponent/recyc
 import { RecyclingdetailInsert } from './components/recyclingdetailcomponent/recyclingdetail-insert/recyclingdetail-insert';
 import { RecyclingdetailUpdate } from './components/recyclingdetailcomponent/recyclingdetail-update/recyclingdetail-update';
 import { RecyclingdetailSearch } from './components/recyclingdetailcomponent/recyclingdetail-search/recyclingdetail-search';
+import { ReportItemCategory } from './components/report-item-category/report-item-category';
+import { ReportRecyclingUser } from './components/report-recycling-user/report-recycling-user';
+
 
 export const routes: Routes = [
   {
@@ -232,5 +235,16 @@ export const routes: Routes = [
       component: RecyclingdetailSearch,
     },
   ],
+},
+
+{
+  path: 'reportes/articulos-categoria',
+  component: ReportItemCategory,
+},
+
+
+{
+  path: 'reportes/reciclajes-usuario',
+  component: ReportRecyclingUser,
 },
 ];
