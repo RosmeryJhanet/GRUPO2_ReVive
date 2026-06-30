@@ -4,12 +4,15 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { Usuarioservice } from '../../../services/usuarioservice';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { Usuario } from '../../../models/usuario';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdialogcomponent';
 
 @Component({
   selector: 'app-usuario-list',
-  imports: [MatTableModule, MatIconModule, RouterLink, MatPaginatorModule],
+  imports: [MatTableModule, MatIconModule, RouterLink, MatPaginatorModule, CommonModule],
   templateUrl: './usuario-list.html',
   styleUrl: './usuario-list.css',
 })
@@ -22,6 +25,7 @@ export class UsuarioList implements OnInit, AfterViewInit {
   constructor(
     private uS: Usuarioservice,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -46,9 +50,18 @@ export class UsuarioList implements OnInit, AfterViewInit {
   }
 
   eliminar(id: number) {
-    this.uS.delete(id).subscribe(() => {
-      this.snackBar.open('Usuario eliminado correctamente', 'Cerrar', { duration: 3000 });
-      this.cargarUsuarios();
+    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+      width: '360px',
+      panelClass: 'confirm-dialog-panel',
+      data: { titulo: 'Eliminar usuario', mensaje: '¿Seguro que deseas eliminar este usuario?' },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado) => {
+      if (!confirmado) return;
+      this.uS.delete(id).subscribe(() => {
+        this.snackBar.open('Usuario eliminado correctamente', 'Cerrar', { duration: 3000 });
+        this.cargarUsuarios();
+      });
     });
   }
 }

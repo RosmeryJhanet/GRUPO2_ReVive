@@ -4,6 +4,7 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 import { RecyclingDTO } from '../../../models/recyclingDTO';
 import { Material } from '../../../models/material';
@@ -12,6 +13,7 @@ import { Usuario } from '../../../models/usuario';
 import { RecyclingService } from '../../../services/recyclingservice';
 import { Materialservice } from '../../../services/materialservice';
 import { Usuarioservice } from '../../../services/usuarioservice';
+import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdialogcomponent';
 
 @Component({
   selector: 'app-recycling-list',
@@ -33,6 +35,7 @@ export class RecyclingList implements OnInit, AfterViewInit {
     private mS: Materialservice,
     private uS: Usuarioservice,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -80,9 +83,18 @@ export class RecyclingList implements OnInit, AfterViewInit {
   }
 
   eliminar(id: number): void {
-    this.rS.delete(id).subscribe(() => {
-      this.snackBar.open('Reciclaje eliminado correctamente', 'Cerrar', { duration: 3000 });
-      this.cargarReciclajes();
+    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+      width: '360px',
+      panelClass: 'confirm-dialog-panel',
+      data: { titulo: 'Eliminar reciclaje', mensaje: '¿Seguro que deseas eliminar este reciclaje?' },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado) => {
+      if (!confirmado) return;
+      this.rS.delete(id).subscribe(() => {
+        this.snackBar.open('Reciclaje eliminado correctamente', 'Cerrar', { duration: 3000 });
+        this.cargarReciclajes();
+      });
     });
   }
 }
