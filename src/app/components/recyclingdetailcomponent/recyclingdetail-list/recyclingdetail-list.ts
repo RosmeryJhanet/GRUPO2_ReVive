@@ -4,6 +4,7 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 import { RecyclingDetailDTO } from '../../../models/recyclingDetailDTO';
 import { RecyclingDTO } from '../../../models/recyclingDTO';
@@ -12,6 +13,7 @@ import { CollectionPoint } from '../../../models/collectionpoint';
 import { RecyclingDetailService } from '../../../services/recyclingdetailservice';
 import { RecyclingService } from '../../../services/recyclingservice';
 import { Collectionpointservice } from '../../../services/collectionpointservice';
+import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdialogcomponent';
 
 @Component({
   selector: 'app-recyclingdetail-list',
@@ -35,6 +37,7 @@ export class RecyclingdetailList implements OnInit, AfterViewInit {
     private rS: RecyclingService,
     private cpS: Collectionpointservice,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -79,11 +82,23 @@ export class RecyclingdetailList implements OnInit, AfterViewInit {
   }
 
   eliminar(id: number): void {
-    this.rdS.delete(id).subscribe(() => {
-      this.snackBar.open('Detalle de reciclaje eliminado correctamente', 'Cerrar', {
-        duration: 3000,
+    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+      width: '360px',
+      panelClass: 'confirm-dialog-panel',
+      data: {
+        titulo: 'Eliminar detalle de reciclaje',
+        mensaje: '¿Seguro que deseas eliminar este detalle de reciclaje?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado) => {
+      if (!confirmado) return;
+      this.rdS.delete(id).subscribe(() => {
+        this.snackBar.open('Detalle de reciclaje eliminado correctamente', 'Cerrar', {
+          duration: 3000,
+        });
+        this.cargarDetalles();
       });
-      this.cargarDetalles();
     });
   }
 }

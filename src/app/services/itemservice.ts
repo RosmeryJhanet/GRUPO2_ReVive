@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { ItemDTO } from '../models/itemDTO';
+import { QueryNativeDTO } from '../models/queryNativeDTO';  
+import { Observable, Subject } from 'rxjs';
 
 const base_url = environment.base;
 
@@ -37,4 +39,8 @@ responseType: 'text'
 listId(id: number) {
 return this.http.get<ItemDTO>(`${this.url}/${id}`);
 }
+
+getQuantityByCategory(): Observable<QueryNativeDTO[]> {
+    return this.http.get<QueryNativeDTO[]>(`${this.url}/cantidad-Articulo-Categoria`);
+  }
 }

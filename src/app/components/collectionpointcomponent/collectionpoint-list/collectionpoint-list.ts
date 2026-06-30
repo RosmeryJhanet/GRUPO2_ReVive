@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { CollectionPoint } from '../../../models/collectionpoint';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdialogcomponent';
 
 @Component({
   selector: 'app-collectionpoint-list',
@@ -22,6 +24,7 @@ export class CollectionpointList implements OnInit, AfterViewInit {
   constructor(
     private cpS: Collectionpointservice,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -46,9 +49,21 @@ export class CollectionpointList implements OnInit, AfterViewInit {
   }
 
   eliminar(id: number) {
-    this.cpS.delete(id).subscribe(() => {
-      this.snackBar.open('Punto de acopio eliminado correctamente', 'Cerrar', { duration: 3000 });
-      this.cargarPuntos();
+    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+      width: '360px',
+      panelClass: 'confirm-dialog-panel',
+      data: {
+        titulo: 'Eliminar punto de acopio',
+        mensaje: '¿Seguro que deseas eliminar este punto de acopio?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado) => {
+      if (!confirmado) return;
+      this.cpS.delete(id).subscribe(() => {
+        this.snackBar.open('Punto de acopio eliminado correctamente', 'Cerrar', { duration: 3000 });
+        this.cargarPuntos();
+      });
     });
   }
 }

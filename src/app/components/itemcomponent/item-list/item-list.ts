@@ -4,11 +4,13 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ItemDTO } from '../../../models/itemDTO';
 import { Category } from '../../../models/category';
 import { ItemService } from '../../../services/itemservice';
 import { CategoryService } from '../../../services/categoryservice';
+import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdialogcomponent';
 
 @Component({
   selector: 'app-item-list',
@@ -28,6 +30,7 @@ export class ItemList implements OnInit, AfterViewInit {
     private iS: ItemService,
     private cS: CategoryService,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -61,9 +64,18 @@ export class ItemList implements OnInit, AfterViewInit {
   }
 
   eliminar(id: number): void {
-    this.iS.delete(id).subscribe(() => {
-      this.snackBar.open('Artículo eliminado correctamente', 'Cerrar', { duration: 3000 });
-      this.cargarItems();
+    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+      width: '360px',
+      panelClass: 'confirm-dialog-panel',
+      data: { titulo: 'Eliminar artículo', mensaje: '¿Seguro que deseas eliminar este artículo?' },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado) => {
+      if (!confirmado) return;
+      this.iS.delete(id).subscribe(() => {
+        this.snackBar.open('Artículo eliminado correctamente', 'Cerrar', { duration: 3000 });
+        this.cargarItems();
+      });
     });
   }
 }

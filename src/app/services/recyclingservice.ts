@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { RecyclingDTO } from '../models/recyclingDTO';
+import { QueryNative2DTO } from '../models/queryNative2DTO';
+import { Observable } from 'rxjs';
 
 const base_url = environment.base;
 
@@ -36,5 +38,11 @@ responseType: 'text'
 
 listId(id: number) {
 return this.http.get<RecyclingDTO>(`${this.url}/buscar/${id}`);
+}
+
+getQuantityByUser(): Observable<QueryNative2DTO[]> {
+  return this.http.get<QueryNative2DTO[]>(
+    `${this.url}/cantidad-Reciclajes-Usuario`
+  );
 }
 }

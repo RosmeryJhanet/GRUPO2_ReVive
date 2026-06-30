@@ -7,6 +7,8 @@ import { RouterLink } from '@angular/router';
 import { Barter } from '../../../models/barter';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdialogcomponent';
 
 @Component({
   selector: 'app-barter-list',
@@ -23,6 +25,7 @@ export class BarterList implements OnInit, AfterViewInit {
   constructor(
     private bS: Barterservice,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -47,9 +50,18 @@ export class BarterList implements OnInit, AfterViewInit {
   }
 
   eliminar(id: number) {
-    this.bS.delete(id).subscribe(() => {
-      this.snackBar.open('Trueque eliminado correctamente', 'Cerrar', { duration: 3000 });
-      this.cargarTrueques();
+    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+      width: '360px',
+      panelClass: 'confirm-dialog-panel',
+      data: { titulo: 'Eliminar trueque', mensaje: '¿Seguro que deseas eliminar este trueque?' },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado) => {
+      if (!confirmado) return;
+      this.bS.delete(id).subscribe(() => {
+        this.snackBar.open('Trueque eliminado correctamente', 'Cerrar', { duration: 3000 });
+        this.cargarTrueques();
+      });
     });
   }
 }
