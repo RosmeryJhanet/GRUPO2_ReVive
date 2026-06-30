@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>recycling</mat-icon>
+      <h2>Registrar Reciclaje</h2>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Nombre del reciclaje</mat-label>
+          <input matInput formControlName="name" placeholder="Ej: Reciclaje de plástico" maxlength="50">
+          <mat-icon matSuffix>label</mat-icon>
+          <mat-error *ngIf="form.get('name')?.hasError('required')">El nombre es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('name')?.hasError('maxlength')">Máximo 50 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Material</mat-label>
+          <mat-select formControlName="material">
+            <mat-option *ngFor="let m of listaMateriales" [value]="m.idMaterial">
+              {{ m.materialName }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>casino</mat-icon>
+          <mat-error *ngIf="form.get('material')?.hasError('required')">El material es obligatorio.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Usuario</mat-label>
+          <mat-select formControlName="usuario">
+            <mat-option *ngFor="let u of listaUsuarios" [value]="u.idUser">
+              {{ u.userName }} {{ u.userLastName }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="form.get('usuario')?.hasError('required')">El usuario es obligatorio.</mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+
+    <div class="card-actions">
+      <button mat-button class="btn-cancelar" routerLink="/reciclajes/listar">
+        Cancelar
+      </button>
+
+      <button mat-raised-button class="btn-guardar" (click)="aceptar()">
+        <mat-icon>save</mat-icon>
+        Registrar
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,2 +1,4 @@
-<app-menucomponent></app-menucomponent>
-<router-outlet> </router-outlet>
+@if (mostrarMenuAdmin()) {
+  <app-menucomponent></app-menucomponent>
+}
+<router-outlet></router-outlet>

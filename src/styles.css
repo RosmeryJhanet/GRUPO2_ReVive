@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* ===== Web Style Guidelines — ReVive ===== */
+
+body {
+  background-color: #f0f8e8;
+  color: #222222;
+}
+
+/* Inputs: esquinas redondeadas (8px), fondo blanco, borde verde suave */
+.mat-mdc-form-field {
+  --mdc-outlined-text-field-container-shape: 8px;
+  --mdc-outlined-text-field-outline-color: #a4d5a6;
+  --mdc-outlined-text-field-hover-outline-color: #80c684;
+  --mdc-outlined-text-field-focus-outline-color: #4cae4f;
+  --mdc-outlined-text-field-container-color: #ffffff;
+}
+
+/* Diálogo de confirmación: bordes redondeados en el contenedor exterior */
+.confirm-dialog-panel .mat-mdc-dialog-surface {
+  border-radius: 20px !important;
+  overflow: hidden;
+}

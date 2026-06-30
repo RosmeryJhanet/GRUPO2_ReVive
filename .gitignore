@@ -42,3 +42,13 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Local notes and editor config
+*.local.md
+notes.md
+CLAUDE.md
+.claude/
+
+# API keys (never commit real keys)
+src/environments/gemini-key.ts
+

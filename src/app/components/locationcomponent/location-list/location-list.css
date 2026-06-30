@@ -9,9 +9,25 @@ h2 {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--mat-sys-primary);
+  color: #4cae4f;
   margin-bottom: 24px;
   font-size: 1.5rem;
+}
+
+.paginator-footer {
+  padding: 0;
+  max-width: none;
+  margin: 8px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.total-registros {
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.9rem;
 }
 
 table {
@@ -44,7 +60,13 @@ tr.mat-row:hover {
   transition: background-color 0.2s ease;
 }
 .btn-eliminar {
-  color: #c62828;
+  color: #2e5c2f;
+  background: transparent;
+  border: none;
+}
+
+.btn-editar {
+  color: #4cae4f;
   background: transparent;
   border: none;
 }
