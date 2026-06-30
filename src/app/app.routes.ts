@@ -1,46 +1,4 @@
 import { Routes } from '@angular/router';
-import { Homecomponent } from './components/homecomponent/homecomponent';
-import { Materialcomponent } from './components/materialcomponent/materialcomponent';
-import { MaterialList } from './components/materialcomponent/material-list/material-list';
-import { MaterialInsert } from './components/materialcomponent/material-insert/material-insert';
-import { MaterialUpdate } from './components/materialcomponent/material-update/material-update';
-import { MaterialSearch } from './components/materialcomponent/material-search/material-search';
-import { Locationcomponent } from './components/locationcomponent/locationcomponent';
-import { LocationList } from './components/locationcomponent/location-list/location-list';
-import { LocationInsert } from './components/locationcomponent/location-insert/location-insert';
-import { LocationUpdate } from './components/locationcomponent/location-update/location-update';
-import { LocationSearch } from './components/locationcomponent/location-search/location-search';
-import { Categorycomponent } from './components/categorycomponent/categorycomponent';
-import { CategoryList } from './components/categorycomponent/category-list/category-list';
-import { CategoryInsert } from './components/categorycomponent/category-insert/category-insert';
-import { CategoryUpdate } from './components/categorycomponent/category-update/category-update';
-import { CategorySearch } from './components/categorycomponent/category-search/category-search';
-import { Rutascomponent } from './components/rutascomponent/rutascomponent';
-import { Collectionpointcomponent } from './components/collectionpointcomponent/collectionpointcomponent';
-import { CollectionpointList } from './components/collectionpointcomponent/collectionpoint-list/collectionpoint-list';
-import { CollectionpointInsert } from './components/collectionpointcomponent/collectionpoint-insert/collectionpoint-insert';
-import { CollectionpointUpdate } from './components/collectionpointcomponent/collectionpoint-update/collectionpoint-update';
-import { CollectionpointSearch } from './components/collectionpointcomponent/collectionpoint-search/collectionpoint-search';
-import { Itemcomponent } from './components/itemcomponent/itemcomponent';
-import { ItemList } from './components/itemcomponent/item-list/item-list';
-import { ItemInsert } from './components/itemcomponent/item-insert/item-insert';
-import { ItemUpdate } from './components/itemcomponent/item-update/item-update';
-import { ItemSearch } from './components/itemcomponent/item-search/item-search';
-import { Recyclingcomponent } from './components/recyclingcomponent/recyclingcomponent';
-import { RecyclingList } from './components/recyclingcomponent/recycling-list/recycling-list';
-import { RecyclingInsert } from './components/recyclingcomponent/recycling-insert/recycling-insert';
-import { RecyclingUpdate } from './components/recyclingcomponent/recycling-update/recycling-update';
-import { RecyclingSearch } from './components/recyclingcomponent/recycling-search/recycling-search';
-import { Usuariocomponent } from './components/usuariocomponent/usuariocomponent';
-import { UsuarioList } from './components/usuariocomponent/usuario-list/usuario-list';
-import { UsuarioUpdate } from './components/usuariocomponent/usuario-update/usuario-update';
-import { UsuarioSearch } from './components/usuariocomponent/usuario-search/usuario-search';
-import { UsuarioInsert } from './components/usuariocomponent/usuario-insert/usuario-insert';
-import { Recyclingdetailcomponent } from './components/recyclingdetailcomponent/recyclingdetailcomponent';
-import { RecyclingdetailList } from './components/recyclingdetailcomponent/recyclingdetail-list/recyclingdetail-list';
-import { RecyclingdetailInsert } from './components/recyclingdetailcomponent/recyclingdetail-insert/recyclingdetail-insert';
-import { RecyclingdetailUpdate } from './components/recyclingdetailcomponent/recyclingdetail-update/recyclingdetail-update';
-import { RecyclingdetailSearch } from './components/recyclingdetailcomponent/recyclingdetail-search/recyclingdetail-search';
 
 export const routes: Routes = [
   {
@@ -48,189 +6,296 @@ export const routes: Routes = [
     redirectTo: 'homes',
     pathMatch: 'full',
   },
+  
   {
     path: 'homes',
-    component: Homecomponent,
+    loadComponent: () => import('./components/homecomponent/homecomponent').then((m) => m.Homecomponent),
   },
   {
     path: 'ruta-cercana',
-    component: Rutascomponent,
+    loadComponent: () => import('./components/rutascomponent/rutascomponent').then((m) => m.Rutascomponent),
   },
   {
     path: 'registro',
-    component: UsuarioInsert,
+    loadComponent: () =>
+      import('./components/usuariocomponent/usuario-insert/usuario-insert').then((m) => m.UsuarioInsert),
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./components/authenticate/authenticate').then((m) => m.Authenticate),
   },
   {
     path: 'ubicaciones',
-    component: Locationcomponent,
+    loadComponent: () =>
+      import('./components/locationcomponent/locationcomponent').then((m) => m.Locationcomponent),
     children: [
       {
         path: 'listar',
-        component: LocationList,
+        loadComponent: () =>
+          import('./components/locationcomponent/location-list/location-list').then((m) => m.LocationList),
       },
       {
         path: 'insertar',
-        component: LocationInsert,
+        loadComponent: () =>
+          import('./components/locationcomponent/location-insert/location-insert').then((m) => m.LocationInsert),
       },
       {
         path: 'edits/:id',
-        component: LocationUpdate,
+        loadComponent: () =>
+          import('./components/locationcomponent/location-update/location-update').then((m) => m.LocationUpdate),
       },
       {
         path: 'buscar-id',
-        component:LocationSearch,
+        loadComponent: () =>
+          import('./components/locationcomponent/location-search/location-search').then((m) => m.LocationSearch),
       },
     ],
   },
   {
     path: 'materiales',
-    component: Materialcomponent,
+    loadComponent: () =>
+      import('./components/materialcomponent/materialcomponent').then((m) => m.Materialcomponent),
     children: [
       {
         path: 'listar',
-        component: MaterialList,
+        loadComponent: () =>
+          import('./components/materialcomponent/material-list/material-list').then((m) => m.MaterialList),
       },
       {
         path: 'insertar',
-        component: MaterialInsert,
+        loadComponent: () =>
+          import('./components/materialcomponent/material-insert/material-insert').then((m) => m.MaterialInsert),
       },
       {
         path: 'edits/:id',
-        component: MaterialUpdate,
+        loadComponent: () =>
+          import('./components/materialcomponent/material-update/material-update').then((m) => m.MaterialUpdate),
       },
       {
         path: 'buscar-tipo',
-        component: MaterialSearch,
+        loadComponent: () =>
+          import('./components/materialcomponent/material-search/material-search').then((m) => m.MaterialSearch),
       },
     ],
   },
   {
     path: 'categorias',
-    component: Categorycomponent,
+    loadComponent: () =>
+      import('./components/categorycomponent/categorycomponent').then((m) => m.Categorycomponent),
     children: [
       {
         path: 'listar',
-        component: CategoryList,
+        loadComponent: () =>
+          import('./components/categorycomponent/category-list/category-list').then((m) => m.CategoryList),
       },
       {
         path: 'insertar',
-        component: CategoryInsert,
+        loadComponent: () =>
+          import('./components/categorycomponent/category-insert/category-insert').then((m) => m.CategoryInsert),
       },
       {
         path: 'edits/:id',
-        component: CategoryUpdate,
+        loadComponent: () =>
+          import('./components/categorycomponent/category-update/category-update').then((m) => m.CategoryUpdate),
       },
       {
         path: 'buscar-id',
-        component: CategorySearch,
+        loadComponent: () =>
+          import('./components/categorycomponent/category-search/category-search').then((m) => m.CategorySearch),
       },
     ],
   },
   {
     path: 'puntos-acopio',
-    component: Collectionpointcomponent,
+    loadComponent: () =>
+      import('./components/collectionpointcomponent/collectionpointcomponent').then(
+        (m) => m.Collectionpointcomponent,
+      ),
     children: [
       {
         path: 'listar',
-        component: CollectionpointList,
+        loadComponent: () =>
+          import('./components/collectionpointcomponent/collectionpoint-list/collectionpoint-list').then(
+            (m) => m.CollectionpointList,
+          ),
       },
       {
         path: 'insertar',
-        component: CollectionpointInsert,
+        loadComponent: () =>
+          import('./components/collectionpointcomponent/collectionpoint-insert/collectionpoint-insert').then(
+            (m) => m.CollectionpointInsert,
+          ),
       },
       {
         path: 'edits/:id',
-        component: CollectionpointUpdate,
+        loadComponent: () =>
+          import('./components/collectionpointcomponent/collectionpoint-update/collectionpoint-update').then(
+            (m) => m.CollectionpointUpdate,
+          ),
       },
       {
         path: 'buscar-id',
-        component: CollectionpointSearch,
+        loadComponent: () =>
+          import('./components/collectionpointcomponent/collectionpoint-search/collectionpoint-search').then(
+            (m) => m.CollectionpointSearch,
+          ),
       },
     ],
   },
   {
-  path: 'items',
-  component: Itemcomponent,
-  children: [
-    {
-      path: 'listar',
-      component: ItemList,
-    },
-    {
-      path: 'insertar',
-      component: ItemInsert,
-    },
-    {
-      path: 'edits/:id',
-      component: ItemUpdate,
-    },
-    {
-      path: 'buscar-id',
-      component: ItemSearch,
-    },
-  ],
-},
-{
-  path: 'reciclajes',
-  component: Recyclingcomponent,
-  children: [
-    {
-      path: 'listar',
-      component: RecyclingList,
-    },
-    {
-      path: 'insertar',
-      component: RecyclingInsert,
-    },
-    {
-      path: 'edits/:id',
-      component: RecyclingUpdate,
-    },
-    {
-      path: 'buscar-id',
-      component: RecyclingSearch,
-    },
-  ],
-},
-  {
-    path: 'usuarios',
-    component: Usuariocomponent,
+    path: 'items',
+    loadComponent: () => import('./components/itemcomponent/itemcomponent').then((m) => m.Itemcomponent),
     children: [
       {
         path: 'listar',
-        component: UsuarioList,
+        loadComponent: () => import('./components/itemcomponent/item-list/item-list').then((m) => m.ItemList),
+      },
+      {
+        path: 'insertar',
+        loadComponent: () =>
+          import('./components/itemcomponent/item-insert/item-insert').then((m) => m.ItemInsert),
       },
       {
         path: 'edits/:id',
-        component: UsuarioUpdate,
+        loadComponent: () =>
+          import('./components/itemcomponent/item-update/item-update').then((m) => m.ItemUpdate),
       },
       {
         path: 'buscar-id',
-        component: UsuarioSearch,
+        loadComponent: () =>
+          import('./components/itemcomponent/item-search/item-search').then((m) => m.ItemSearch),
       },
     ],
   },
-
   {
-  path: 'detalles-reciclaje',
-  component: Recyclingdetailcomponent,
-  children: [
-    {
-      path: 'listar',
-      component: RecyclingdetailList,
-    },
-    {
-      path: 'insertar',
-      component: RecyclingdetailInsert,
-    },
-    {
-      path: 'edits/:id',
-      component: RecyclingdetailUpdate,
-    },
-    {
-      path: 'buscar-id',
-      component: RecyclingdetailSearch,
-    },
-  ],
-},
+    path: 'reciclajes',
+    loadComponent: () =>
+      import('./components/recyclingcomponent/recyclingcomponent').then((m) => m.Recyclingcomponent),
+    children: [
+      {
+        path: 'listar',
+        loadComponent: () =>
+          import('./components/recyclingcomponent/recycling-list/recycling-list').then((m) => m.RecyclingList),
+      },
+      {
+        path: 'insertar',
+        loadComponent: () =>
+          import('./components/recyclingcomponent/recycling-insert/recycling-insert').then(
+            (m) => m.RecyclingInsert,
+          ),
+      },
+      {
+        path: 'edits/:id',
+        loadComponent: () =>
+          import('./components/recyclingcomponent/recycling-update/recycling-update').then(
+            (m) => m.RecyclingUpdate,
+          ),
+      },
+      {
+        path: 'buscar-id',
+        loadComponent: () =>
+          import('./components/recyclingcomponent/recycling-search/recycling-search').then(
+            (m) => m.RecyclingSearch,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'usuarios',
+    loadComponent: () => import('./components/usuariocomponent/usuariocomponent').then((m) => m.Usuariocomponent),
+    children: [
+      {
+        path: 'listar',
+        loadComponent: () =>
+          import('./components/usuariocomponent/usuario-list/usuario-list').then((m) => m.UsuarioList),
+      },
+      {
+        path: 'edits/:id',
+        loadComponent: () =>
+          import('./components/usuariocomponent/usuario-update/usuario-update').then((m) => m.UsuarioUpdate),
+      },
+      {
+        path: 'buscar-id',
+        loadComponent: () =>
+          import('./components/usuariocomponent/usuario-search/usuario-search').then((m) => m.UsuarioSearch),
+      },
+    ],
+  },
+  {
+    path: 'detalles-reciclaje',
+    loadComponent: () =>
+      import('./components/recyclingdetailcomponent/recyclingdetailcomponent').then(
+        (m) => m.Recyclingdetailcomponent,
+      ),
+    children: [
+      {
+        path: 'listar',
+        loadComponent: () =>
+          import('./components/recyclingdetailcomponent/recyclingdetail-list/recyclingdetail-list').then(
+            (m) => m.RecyclingdetailList,
+          ),
+      },
+      {
+        path: 'insertar',
+        loadComponent: () =>
+          import('./components/recyclingdetailcomponent/recyclingdetail-insert/recyclingdetail-insert').then(
+            (m) => m.RecyclingdetailInsert,
+          ),
+      },
+      {
+        path: 'edits/:id',
+        loadComponent: () =>
+          import('./components/recyclingdetailcomponent/recyclingdetail-update/recyclingdetail-update').then(
+            (m) => m.RecyclingdetailUpdate,
+          ),
+      },
+      {
+        path: 'buscar-id',
+        loadComponent: () =>
+          import('./components/recyclingdetailcomponent/recyclingdetail-search/recyclingdetail-search').then(
+            (m) => m.RecyclingdetailSearch,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'reports',
+    children: [
+      {
+        path: 'report1',
+        loadComponent: () => import('./components/reports/report1/report1').then((m) => m.Report1),
+      },
+      {
+        path: 'report2',
+        loadComponent: () => import('./components/reports/report2/report2').then((m) => m.Report2),
+      },
+    ],
+  },
+  {
+    path: 'trueques',
+    loadComponent: () => import('./components/bartercomponent/bartercomponent').then((m) => m.Bartercomponent),
+    children: [
+      {
+        path: 'listar',
+        loadComponent: () =>
+          import('./components/bartercomponent/barter-list/barter-list').then((m) => m.BarterList),
+      },
+      {
+        path: 'insertar',
+        loadComponent: () =>
+          import('./components/bartercomponent/barter-insert/barter-insert').then((m) => m.BarterInsert),
+      },
+      {
+        path: 'edits/:id',
+        loadComponent: () =>
+          import('./components/bartercomponent/barter-update/barter-update').then((m) => m.BarterUpdate),
+      },
+      {
+        path: 'buscar-id',
+        loadComponent: () =>
+          import('./components/bartercomponent/barter-search/barter-search').then((m) => m.BarterSearch),
+      },
+    ],
+  },
 ];

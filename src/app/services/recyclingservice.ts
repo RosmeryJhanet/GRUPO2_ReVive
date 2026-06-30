@@ -10,12 +10,12 @@ providedIn: 'root'
 })
 export class RecyclingService {
 
-private url = `${base_url}/api/Recycling`;
+private url = `${base_url}/api/Reciclaje`;
 
 constructor(private http: HttpClient) {}
 
 list() {
-return this.http.get<RecyclingDTO[]>(`${this.url}/listar/reciclajes`);
+return this.http.get<RecyclingDTO[]>(`${this.url}/Reciclajes`);
 }
 
 insert(r: RecyclingDTO) {
@@ -23,7 +23,7 @@ return this.http.post<RecyclingDTO>(`${this.url}/registrar`, r);
 }
 
 delete(id: number) {
-return this.http.delete(`${this.url}/eliminar/${id}`, {
+return this.http.delete(`${this.url}/${id}`, {
 responseType: 'text'
 });
 }

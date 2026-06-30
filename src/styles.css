@@ -15,3 +15,9 @@ body {
   --mdc-outlined-text-field-focus-outline-color: #4cae4f;
   --mdc-outlined-text-field-container-color: #ffffff;
 }
+
+/* Diálogo de confirmación: bordes redondeados en el contenedor exterior */
+.confirm-dialog-panel .mat-mdc-dialog-surface {
+  border-radius: 20px !important;
+  overflow: hidden;
+}

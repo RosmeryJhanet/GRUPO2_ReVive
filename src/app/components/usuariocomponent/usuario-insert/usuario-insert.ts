@@ -47,10 +47,34 @@ export class UsuarioInsert {
       this.form.markAllAsTouched();
       return;
     }
+    const document = this.form.value.document;
+    const email = this.form.value.email;
+
+    this.uS.list().subscribe({
+      next: (usuarios) => this.validarYRegistrar(usuarios, document, email),
+      error: () => this.validarYRegistrar([], document, email),
+    });
+  }
+
+  private validarYRegistrar(usuarios: Usuario[], document: string, email: string) {
+    const dniDuplicado = usuarios.some((u) => u.userIdentityDocument === document);
+    if (dniDuplicado) {
+      this.snackBar.open('Ya existe una cuenta registrada con ese DNI.', 'Cerrar', { duration: 3000 });
+      return;
+    }
+
+    const emailDuplicado = usuarios.some(
+      (u) => u.userEmail.toLowerCase() === email.toLowerCase(),
+    );
+    if (emailDuplicado) {
+      this.snackBar.open('Ya existe una cuenta registrada con ese correo.', 'Cerrar', { duration: 3000 });
+      return;
+    }
+
     this.u.userName = this.form.value.name;
     this.u.userLastName = this.form.value.lastName;
-    this.u.userIdentityDocument = this.form.value.document;
-    this.u.userEmail = this.form.value.email;
+    this.u.userIdentityDocument = document;
+    this.u.userEmail = email;
     this.u.userPassword = this.form.value.password;
 
     this.uS.insert(this.u).subscribe({
