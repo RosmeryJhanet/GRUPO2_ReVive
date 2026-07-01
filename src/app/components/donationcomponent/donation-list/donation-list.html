@@ -41,6 +41,15 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="c6">
+      <th mat-header-cell *matHeaderCellDef>Actualizar</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button class="btn-editar" [routerLink]="['/donacion/edits', element.idDonation]">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
