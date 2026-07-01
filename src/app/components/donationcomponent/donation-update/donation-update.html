@@ -11,8 +11,6 @@
           <input matInput [value]="id" disabled />
           <mat-icon matSuffix>tag</mat-icon>
         </mat-form-field>
-
-      <form [formGroup]="form">
         <mat-form-field appearance="outline" class="campo">
           <mat-label>Descripcion de la donación</mat-label>
           <input matInput formControlName="namedonation" placeholder="Ej: Casaca" maxlength="50">
@@ -22,7 +20,7 @@
         </mat-form-field>
       </form>
     </div>
-    
+
     <div class="card-actions">
       <button mat-button class="btn-cancelar" routerLink="/items/listar">
         Cancelar
