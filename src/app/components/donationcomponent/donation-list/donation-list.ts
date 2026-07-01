@@ -9,6 +9,9 @@ import { Usuarioservice } from '../../../services/usuarioservice';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdialogcomponent';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-donation-list',
@@ -19,7 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class DonationList implements OnInit {
 
   dataSource: MatTableDataSource<Donation> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
   items: ItemDTO[] = [];
   usuario: Usuario[] = [];
 
@@ -29,6 +32,8 @@ export class DonationList implements OnInit {
     private dS: Donationservice,
     private iS: ItemService,
     private uS: Usuarioservice,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -67,5 +72,20 @@ export class DonationList implements OnInit {
       return 'Sin usuario';
     }
     return `${usuario.userName} ${usuario.userLastName}`;
+  }
+
+  eliminar(id: number): void {
+    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+      width: '360px',
+      panelClass: 'confirm-dialog-panel',
+      data: { titulo: 'Eliminar artículo', mensaje: '¿Seguro que deseas eliminar este artículo?' },
+    });
+    dialogRef.afterClosed().subscribe((confirmado) => {
+      if (!confirmado) return;
+      this.dS.delete(id).subscribe(() => {
+        this.snackBar.open('Artículo eliminado correctamente', 'Cerrar', { duration: 3000 });
+        this.cargarDonaciones();
+      });
+    });
   }
 }
