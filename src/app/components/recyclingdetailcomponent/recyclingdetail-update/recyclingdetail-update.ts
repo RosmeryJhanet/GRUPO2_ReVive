@@ -80,7 +80,7 @@ export class RecyclingdetailUpdate implements OnInit {
         this.snackBar.open('Detalle de reciclaje actualizado correctamente', 'Cerrar', {
           duration: 3000,
         });
-        this.router.navigate(['/detalle-reciclajes/listar']);
+        this.router.navigate(['/detalles-reciclaje/listar']);
       },
     });
   }

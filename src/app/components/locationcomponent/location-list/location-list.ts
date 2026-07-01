@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from "@angular/router";
 import { Location } from '../../../models/location';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdialogcomponent';
 
 
 @Component({
@@ -24,6 +26,7 @@ export class LocationList implements OnInit, AfterViewInit {
   constructor(
     private lS: Locationservice,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -48,9 +51,18 @@ export class LocationList implements OnInit, AfterViewInit {
     });
   }
   eliminar(id: number) {
-    this.lS.delete(id).subscribe(() => {
-      this.snackBar.open('Ubicación eliminada correctamente', 'Cerrar', { duration: 3000 });
-      this.cargarUbicaciones();
+    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+      width: '360px',
+      panelClass: 'confirm-dialog-panel',
+      data: { titulo: 'Eliminar ubicación', mensaje: '¿Seguro que deseas eliminar esta ubicación?' },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado) => {
+      if (!confirmado) return;
+      this.lS.delete(id).subscribe(() => {
+        this.snackBar.open('Ubicación eliminada correctamente', 'Cerrar', { duration: 3000 });
+        this.cargarUbicaciones();
+      });
     });
   }
 }

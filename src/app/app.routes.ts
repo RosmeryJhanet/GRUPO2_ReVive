@@ -1,41 +1,51 @@
 import { Routes } from '@angular/router';
+
 import { Homecomponent } from './components/homecomponent/homecomponent';
-import { Materialcomponent } from './components/materialcomponent/materialcomponent';
-import { MaterialList } from './components/materialcomponent/material-list/material-list';
-import { MaterialInsert } from './components/materialcomponent/material-insert/material-insert';
-import { MaterialUpdate } from './components/materialcomponent/material-update/material-update';
-import { MaterialSearch } from './components/materialcomponent/material-search/material-search';
+import { Rutascomponent } from './components/rutascomponent/rutascomponent';
+import { UsuarioInsert } from './components/usuariocomponent/usuario-insert/usuario-insert';
+import { Authenticate } from './components/authenticate/authenticate';
+
 import { Locationcomponent } from './components/locationcomponent/locationcomponent';
 import { LocationList } from './components/locationcomponent/location-list/location-list';
 import { LocationInsert } from './components/locationcomponent/location-insert/location-insert';
 import { LocationUpdate } from './components/locationcomponent/location-update/location-update';
 import { LocationSearch } from './components/locationcomponent/location-search/location-search';
+
+import { Materialcomponent } from './components/materialcomponent/materialcomponent';
+import { MaterialList } from './components/materialcomponent/material-list/material-list';
+import { MaterialInsert } from './components/materialcomponent/material-insert/material-insert';
+import { MaterialUpdate } from './components/materialcomponent/material-update/material-update';
+import { MaterialSearch } from './components/materialcomponent/material-search/material-search';
+
 import { Categorycomponent } from './components/categorycomponent/categorycomponent';
 import { CategoryList } from './components/categorycomponent/category-list/category-list';
 import { CategoryInsert } from './components/categorycomponent/category-insert/category-insert';
 import { CategoryUpdate } from './components/categorycomponent/category-update/category-update';
 import { CategorySearch } from './components/categorycomponent/category-search/category-search';
-import { Rutascomponent } from './components/rutascomponent/rutascomponent';
+
 import { Collectionpointcomponent } from './components/collectionpointcomponent/collectionpointcomponent';
 import { CollectionpointList } from './components/collectionpointcomponent/collectionpoint-list/collectionpoint-list';
 import { CollectionpointInsert } from './components/collectionpointcomponent/collectionpoint-insert/collectionpoint-insert';
 import { CollectionpointUpdate } from './components/collectionpointcomponent/collectionpoint-update/collectionpoint-update';
 import { CollectionpointSearch } from './components/collectionpointcomponent/collectionpoint-search/collectionpoint-search';
+
 import { Itemcomponent } from './components/itemcomponent/itemcomponent';
 import { ItemList } from './components/itemcomponent/item-list/item-list';
 import { ItemInsert } from './components/itemcomponent/item-insert/item-insert';
 import { ItemUpdate } from './components/itemcomponent/item-update/item-update';
 import { ItemSearch } from './components/itemcomponent/item-search/item-search';
+
 import { Recyclingcomponent } from './components/recyclingcomponent/recyclingcomponent';
 import { RecyclingList } from './components/recyclingcomponent/recycling-list/recycling-list';
 import { RecyclingInsert } from './components/recyclingcomponent/recycling-insert/recycling-insert';
 import { RecyclingUpdate } from './components/recyclingcomponent/recycling-update/recycling-update';
 import { RecyclingSearch } from './components/recyclingcomponent/recycling-search/recycling-search';
+
 import { Usuariocomponent } from './components/usuariocomponent/usuariocomponent';
 import { UsuarioList } from './components/usuariocomponent/usuario-list/usuario-list';
 import { UsuarioUpdate } from './components/usuariocomponent/usuario-update/usuario-update';
 import { UsuarioSearch } from './components/usuariocomponent/usuario-search/usuario-search';
-import { UsuarioInsert } from './components/usuariocomponent/usuario-insert/usuario-insert';
+
 import { Recyclingdetailcomponent } from './components/recyclingdetailcomponent/recyclingdetailcomponent';
 import { RecyclingdetailList } from './components/recyclingdetailcomponent/recyclingdetail-list/recyclingdetail-list';
 import { RecyclingdetailInsert } from './components/recyclingdetailcomponent/recyclingdetail-insert/recyclingdetail-insert';
@@ -44,6 +54,19 @@ import { RecyclingdetailSearch } from './components/recyclingdetailcomponent/rec
 import { ReportItemCategory } from './components/report-item-category/report-item-category';
 import { ReportRecyclingUser } from './components/report-recycling-user/report-recycling-user';
 
+import { Report1 } from './components/reports/report1/report1';
+import { Report2 } from './components/reports/report2/report2';
+
+import { Bartercomponent } from './components/bartercomponent/bartercomponent';
+import { BarterList } from './components/bartercomponent/barter-list/barter-list';
+import { BarterInsert } from './components/bartercomponent/barter-insert/barter-insert';
+import { BarterUpdate } from './components/bartercomponent/barter-update/barter-update';
+import { BarterSearch } from './components/bartercomponent/barter-search/barter-search';
+import { Donationcomponent } from './components/donationcomponent/donationcomponent';
+import { DonationInsert } from './components/donationcomponent/donation-insert/donation-insert';
+import { DonationList } from './components/donationcomponent/donation-list/donation-list';
+import { DonationUpdate } from './components/donationcomponent/donation-update/donation-update';
+import { DonationSearch } from './components/donationcomponent/donation-search/donation-search';
 
 export const routes: Routes = [
   {
@@ -51,6 +74,7 @@ export const routes: Routes = [
     redirectTo: 'homes',
     pathMatch: 'full',
   },
+
   {
     path: 'homes',
     component: Homecomponent,
@@ -62,6 +86,10 @@ export const routes: Routes = [
   {
     path: 'registro',
     component: UsuarioInsert,
+  },
+  {
+    path: 'login',
+    component: Authenticate,
   },
   {
     path: 'ubicaciones',
@@ -81,7 +109,7 @@ export const routes: Routes = [
       },
       {
         path: 'buscar-id',
-        component:LocationSearch,
+        component: LocationSearch,
       },
     ],
   },
@@ -152,49 +180,49 @@ export const routes: Routes = [
     ],
   },
   {
-  path: 'items',
-  component: Itemcomponent,
-  children: [
-    {
-      path: 'listar',
-      component: ItemList,
-    },
-    {
-      path: 'insertar',
-      component: ItemInsert,
-    },
-    {
-      path: 'edits/:id',
-      component: ItemUpdate,
-    },
-    {
-      path: 'buscar-id',
-      component: ItemSearch,
-    },
-  ],
-},
-{
-  path: 'reciclajes',
-  component: Recyclingcomponent,
-  children: [
-    {
-      path: 'listar',
-      component: RecyclingList,
-    },
-    {
-      path: 'insertar',
-      component: RecyclingInsert,
-    },
-    {
-      path: 'edits/:id',
-      component: RecyclingUpdate,
-    },
-    {
-      path: 'buscar-id',
-      component: RecyclingSearch,
-    },
-  ],
-},
+    path: 'items',
+    component: Itemcomponent,
+    children: [
+      {
+        path: 'listar',
+        component: ItemList,
+      },
+      {
+        path: 'insertar',
+        component: ItemInsert,
+      },
+      {
+        path: 'edits/:id',
+        component: ItemUpdate,
+      },
+      {
+        path: 'buscar-id',
+        component: ItemSearch,
+      },
+    ],
+  },
+  {
+    path: 'reciclajes',
+    component: Recyclingcomponent,
+    children: [
+      {
+        path: 'listar',
+        component: RecyclingList,
+      },
+      {
+        path: 'insertar',
+        component: RecyclingInsert,
+      },
+      {
+        path: 'edits/:id',
+        component: RecyclingUpdate,
+      },
+      {
+        path: 'buscar-id',
+        component: RecyclingSearch,
+      },
+    ],
+  },
   {
     path: 'usuarios',
     component: Usuariocomponent,
@@ -213,38 +241,94 @@ export const routes: Routes = [
       },
     ],
   },
-
   {
-  path: 'detalles-reciclaje',
-  component: Recyclingdetailcomponent,
-  children: [
-    {
-      path: 'listar',
-      component: RecyclingdetailList,
-    },
-    {
-      path: 'insertar',
-      component: RecyclingdetailInsert,
-    },
-    {
-      path: 'edits/:id',
-      component: RecyclingdetailUpdate,
-    },
-    {
-      path: 'buscar-id',
-      component: RecyclingdetailSearch,
-    },
-  ],
-},
+    path: 'detalles-reciclaje',
+    component: Recyclingdetailcomponent,
+    children: [
+      {
+        path: 'listar',
+        component: RecyclingdetailList,
+      },
+      {
+        path: 'insertar',
+        component: RecyclingdetailInsert,
+      },
+      {
+        path: 'edits/:id',
+        component: RecyclingdetailUpdate,
+      },
+      {
+        path: 'buscar-id',
+        component: RecyclingdetailSearch,
+      },
+    ],
+  },
+  {
+    path: 'reports',
+    children: [
+      {
+        path: 'report1',
+        component: Report1,
+      },
+      {
+        path: 'report2',
+        component: Report2,
+      },
+    ],
+  },
+  {
+    path: 'trueques',
+    component: Bartercomponent,
+    children: [
+      {
+        path: 'listar',
+        component: BarterList,
+      },
+      {
+        path: 'insertar',
+        component: BarterInsert,
+      },
+      {
+        path: 'edits/:id',
+        component: BarterUpdate,
+      },
+      {
+        path: 'buscar-id',
+        component: BarterSearch,
+      },
+    ],
+  },
+  {
+    path: 'donacion',
+    component: Donationcomponent,
+    children: [
 
-{
-  path: 'reportes/articulos-categoria',
-  component: ReportItemCategory,
-},
+      {
+        path: 'listar',
+        component: DonationList
 
+      },
+      {
+        path:'insertar',
+        component: DonationInsert
+      },
+      {
+        path: 'edits/:id',
+        component:DonationUpdate
+      },
+      {
+        path: 'buscar-id',
+        component:DonationSearch
+      }
 
-{
-  path: 'reportes/reciclajes-usuario',
-  component: ReportRecyclingUser,
-},
+    ]
+  },
+  {
+    path: 'reportes/articulos-categoria',
+    component: ReportItemCategory,
+  },
+  {
+    path: 'reportes/reciclajes-usuario',
+    component: ReportRecyclingUser,
+  },
 ];

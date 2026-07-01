@@ -60,14 +60,26 @@ export class RecyclingInsert implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.mS.list().subscribe((data) => {
-      this.listaMateriales = data;
-      this.cdr.detectChanges();
+    this.mS.list().subscribe({
+      next: (data) => {
+        this.listaMateriales = data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error al cargar materiales:', err);
+        this.snackBar.open('No se pudo cargar la lista de materiales', 'Cerrar', { duration: 3000 });
+      },
     });
 
-    this.uS.list().subscribe((data) => {
-      this.listaUsuarios = data;
-      this.cdr.detectChanges();
+    this.uS.list().subscribe({
+      next: (data) => {
+        this.listaUsuarios = data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error al cargar usuarios:', err);
+        this.snackBar.open('No se pudo cargar la lista de usuarios', 'Cerrar', { duration: 3000 });
+      },
     });
   }
 

@@ -100,7 +100,7 @@ export class RecyclingdetailInsert implements OnInit, AfterViewInit {
           'Cerrar',
           { duration: 3000 }
         );
-        this.router.navigate(['/detalle-reciclajes/listar']);
+        this.router.navigate(['/detalles-reciclaje/listar']);
       }
     });
 

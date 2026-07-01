@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>swap_horiz</mat-icon>
+      <h2>Registrar Trueque</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Descripción</mat-label>
+          <input matInput formControlName="description" placeholder="Ej: Cambio libros por ropa" maxlength="200" />
+          <mat-icon matSuffix>description</mat-icon>
+          <mat-error *ngIf="form.get('description')?.hasError('required')">La descripción es obligatoria.</mat-error>
+          <mat-error *ngIf="form.get('description')?.hasError('maxlength')">Máximo 200 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Fecha</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="date" />
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="form.get('date')?.hasError('required')">La fecha es obligatoria.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Usuario</mat-label>
+          <mat-select formControlName="usuario">
+            <mat-option *ngFor="let u of listaUsuarios" [value]="u.idUser">
+              {{ u.userName }} {{ u.userLastName }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="form.get('usuario')?.hasError('required')">El usuario es obligatorio.</mat-error>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="status" class="campo-checkbox">Activo</mat-checkbox>
+
+        <div class="card-actions">
+          <button mat-button class="btn-cancelar" routerLink="/trueques/listar">Cancelar</button>
+          <button mat-raised-button class="btn-guardar" (click)="aceptar()">
+            <mat-icon>save</mat-icon>
+            Registrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdialogcomponent';
 
 @Component({
   selector: 'app-material-list',
@@ -29,6 +31,7 @@ export class MaterialList implements OnInit, AfterViewInit {
   constructor(
     private mS: Materialservice,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
 ngOnInit(): void {
@@ -47,9 +50,18 @@ ngOnInit(): void {
     });
   }
   eliminar(id: number) {
-    this.mS.delete(id).subscribe(() => {
-      this.snackBar.open('Material eliminado correctamente', 'Cerrar', { duration: 3000 });
-      this.cargarMateriales();
+    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+      width: '360px',
+      panelClass: 'confirm-dialog-panel',
+      data: { titulo: 'Eliminar material', mensaje: '¿Seguro que deseas eliminar este material?' },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado) => {
+      if (!confirmado) return;
+      this.mS.delete(id).subscribe(() => {
+        this.snackBar.open('Material eliminado correctamente', 'Cerrar', { duration: 3000 });
+        this.cargarMateriales();
+      });
     });
   }
 }

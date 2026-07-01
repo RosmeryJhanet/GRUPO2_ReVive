@@ -12,8 +12,8 @@
   </nav>
   <div class="nav-right">
     <input type="text" placeholder="Buscar" class="nav-search" />
-    <button class="btn-login" (click)="proximamente()">Iniciar sesión</button>
-    <button class="btn-empieza" routerLink="/registro">Empieza ya</button>
+    <button class="btn-login" routerLink="/login">Iniciar sesión</button>
+    <button class="btn-empieza" routerLink="/registro">Registrarse</button>
   </div>
 </header>
 
@@ -25,14 +25,14 @@
     <button class="btn-empieza-grande" routerLink="/registro">Empieza YA</button>
   </div>
   <div class="hero-image">
-    <mat-icon>eco</mat-icon>
+    <img src="principal.png" alt="ReVive" class="nav-principal" />
   </div>
 </section>
 
 <!-- Reutiliza, crea, revive -->
 <section class="intro-section">
   <div class="intro-logo">
-    <img src="logo_rev.png" alt="ReVive" />
+    <img src="LOGO REVIVE CORTADO.png" alt="ReVive" class="nav-cortado"/>
     <span>ReVive</span>
   </div>
   <div class="intro-text">
@@ -48,25 +48,52 @@
 </section>
 
 <!-- Nuestros aliados -->
-<section class="aliados-section">
-  <h2>Nuestros aliados</h2>
+<div class="aliados-section">
+  <h2 class="aliados-title">Nuestros aliados</h2>
   <div class="aliados-grid">
-    <div class="aliado-card" *ngFor="let a of aliados">{{ a }}</div>
-  </div>
-</section>
-
-<!-- Nuestros servicios -->
-<section class="servicios-section" id="servicios">
-  <h2>Nuestros servicios</h2>
-  <div class="servicios-grid">
-    <div class="servicio-card" *ngFor="let s of servicios" (click)="proximamente()">
-      <div class="servicio-img">
-        <mat-icon>{{ s.icon }}</mat-icon>
-      </div>
-      <span>{{ s.nombre }}</span>
+    <div class="aliado-card">
+      <img src="ciudadSaludable.jpg" alt="Ciudad Saludable" class="aliado-img" />
+    </div>
+    <div class="aliado-card">
+      <img src="DarEsDar.png" alt="Dar es Dar" class="aliado-img" />
+    </div>
+    <div class="aliado-card">
+      <img src="iglesiaLima.jpg" alt="Aliado institucional" class="aliado-img" />
+    </div>
+    <div class="aliado-card">
+      <img src="upc.png" alt="Aliado" class="aliado-img" />
     </div>
   </div>
-</section>
+</div>
+<!-- Nuestros servicios -->
+<section id="servicios" class="services">
+    <div class="container">
+      <h2>Nuestros servicios</h2>
+      <div class="services_group">
+        <div class="service-card">
+          <img src="donaciones.jpg" alt="Donaciones">
+          <div class="service-info">
+            Dona artículos en buen estado para que lleguen a personas y organizaciones que los necesitan.
+          </div>
+          <h3>Donaciones</h3>
+        </div>
+        <div class="service-card">
+          <img src="trueques.jpg" alt="Trueques">
+          <div class="service-info">
+            Intercambia objetos que ya no usas por otros que puedan darte una nueva experiencia de uso.
+          </div>
+          <h3>Trueques</h3>
+        </div>
+        <div class="service-card">
+          <img src="reciclaje.webp" alt="Reciclaje">
+          <div class="service-info">
+            Identifica y aprovecha puntos de reciclaje para darle una segunda vida a materiales reutilizables.
+          </div>
+          <h3>Reciclaje</h3>
+        </div>
+      </div>
+    </div>
+  </section>
 
 <!-- Categorías principales -->
 <section class="categorias-section">
@@ -74,13 +101,12 @@
   <div class="categorias-grid">
     <div class="categoria-card" *ngFor="let c of categorias">
       <div class="categoria-img">
-        <mat-icon>{{ c.icon }}</mat-icon>
+        <img [src]="c.imagen" [alt]="c.nombre" class="img-fluid" />
       </div>
       <span>{{ c.nombre }}</span>
     </div>
   </div>
 </section>
-
 <!-- Reseñas de usuarios -->
 <section class="resenas-section">
   <h2>Reseñas de nuestros usuarios</h2>

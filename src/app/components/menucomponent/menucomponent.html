@@ -1,25 +1,28 @@
 <mat-toolbar style="background-color: #ffffff; color: #4cae4f">
-  <img src="logo_rev.png" alt="ReVive" style="height: 32px; cursor: pointer" routerLink="/homes" />
+  <img src="logo_rev.png" alt="ReVive" style="height: 32px" />
   <span
-    style="margin-left: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer"
-    routerLink="/homes"
+    style="margin-left: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px"
   >
     ReVive
   </span>
 
   <span style="flex: 1"></span>
 
-  <!-- Ruta más cercana -->
-  <button mat-button style="color: #4cae4f" routerLink="/ruta-cercana">
-    <mat-icon>near_me</mat-icon>
-    Ruta más cercana
-  </button>
+  @if (isRecolector()) {
+    <!-- Ruta más cercana -->
+    <button mat-button style="color: #4cae4f" routerLink="/ruta-cercana">
+      <mat-icon>near_me</mat-icon>
+      Ruta más cercana
+    </button>
+  }
 
-  <!-- Menú Ubicaciones -->
-  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuUbicaciones">
-    <mat-icon>location_on</mat-icon>
-    Ubicaciones
-  </button>
+  @if (isRecolector()) {
+    <!-- Menú Ubicaciones -->
+    <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuUbicaciones">
+      <mat-icon>location_on</mat-icon>
+      Ubicaciones
+    </button>
+  }
 
   <mat-menu #menuUbicaciones="matMenu">
     <button mat-menu-item routerLink="/ubicaciones/insertar">
@@ -36,11 +39,13 @@
     </button>
   </mat-menu>
 
-  <!-- Menú Material -->
-  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuMaterial">
-    <mat-icon>casino</mat-icon>
-    Material
-  </button>
+  @if (isAdmin()) {
+    <!-- Menú Material -->
+    <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuMaterial">
+      <mat-icon>casino</mat-icon>
+      Material
+    </button>
+  }
 
   <mat-menu #menuMaterial="matMenu">
     <button mat-menu-item routerLink="/materiales/insertar">
@@ -56,11 +61,13 @@
       Buscar por Tipo
     </button>
   </mat-menu>
-<!-- Menú Categorías -->
-<button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuCategoria">
-  <mat-icon>category</mat-icon>
-  Categorías
-</button>
+@if (isAdmin()) {
+  <!-- Menú Categorías -->
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuCategoria">
+    <mat-icon>category</mat-icon>
+    Categorías
+  </button>
+}
 
 <mat-menu #menuCategoria="matMenu">
   <button mat-menu-item routerLink="/categorias/insertar">
@@ -77,11 +84,13 @@
   </button>
 </mat-menu>
 
-<!-- Menú Puntos de Acopio -->
-<button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuPuntoAcopio">
-  <mat-icon>warehouse</mat-icon>
-  Puntos de Acopio
-</button>
+@if (isAdmin()) {
+  <!-- Menú Puntos de Acopio -->
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuPuntoAcopio">
+    <mat-icon>warehouse</mat-icon>
+    Puntos de Acopio
+  </button>
+}
 
 <mat-menu #menuPuntoAcopio="matMenu">
   <button mat-menu-item routerLink="/puntos-acopio/insertar">
@@ -98,11 +107,13 @@
   </button>
 </mat-menu>
 
-<!-- Menú Artículos -->
-<button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuItem">
-  <mat-icon>inventory_2</mat-icon>
-  Artículos
-</button>
+@if (isAdmin()) {
+  <!-- Menú Artículos -->
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuItem">
+    <mat-icon>inventory_2</mat-icon>
+    Artículos
+  </button>
+}
 
 <mat-menu #menuItem="matMenu">
   <button mat-menu-item routerLink="/items/insertar">
@@ -121,11 +132,35 @@
   </button>
 </mat-menu>
 
-<!-- Menú Usuarios -->
-<button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuUsuario">
-  <mat-icon>group</mat-icon>
-  Usuarios
-</button>
+@if (isAdmin()) {
+  <!-- Menú Donaciones -->
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menudonacion">
+      <mat-icon>loyalty</mat-icon>
+      Donar
+    </button>
+}
+  <mat-menu #menudonacion="matMenu">
+    <button mat-menu-item routerLink="/donacion/insertar">
+      <mat-icon>add</mat-icon>
+      Registrar
+    </button>
+    <button mat-menu-item routerLink="/donacion/listar">
+      <mat-icon>list</mat-icon>
+      Lista
+    </button>
+    <button mat-menu-item routerLink="/donacion/buscar-id">
+      <mat-icon>search</mat-icon>
+      Buscar por ID
+    </button>
+  </mat-menu>
+
+@if (isAdmin()) {
+  <!-- Menú Usuarios -->
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuUsuario">
+    <mat-icon>group</mat-icon>
+    Usuarios
+  </button>
+}
 
 <mat-menu #menuUsuario="matMenu">
   <button mat-menu-item routerLink="/usuarios/listar">
@@ -137,13 +172,81 @@
     Buscar por ID
   </button>
 </mat-menu>
-</mat-toolbar>
 
-<!-- Menú Detalle Reciclaje -->
-<button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuDetalleReciclaje">
-  <mat-icon>fact_check</mat-icon>
-  Detalle Reciclaje
-</button>
+@if (isAdmin()) {
+  <!-- Menú Detalle Reciclaje -->
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuDetalleReciclaje">
+    <mat-icon>fact_check</mat-icon>
+    Detalle Reciclaje
+  </button>
+}
+
+@if (isAdmin()) {
+  <!-- Menú Reciclajes -->
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuReciclajes">
+    <mat-icon>recycling</mat-icon>
+    Reciclajes
+  </button>
+}
+
+@if (isTruequero()) {
+  <!-- Menú Trueques -->
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuTrueques">
+    <mat-icon>swap_horiz</mat-icon>
+    Trueques
+  </button>
+}
+
+@if (isAdmin()) {
+  <!-- Menú Reportes -->
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuReportes">
+    <mat-icon>bar_chart</mat-icon>
+    Reportes
+  </button>
+}
+
+<mat-menu #menuReportes="matMenu">
+  <button mat-menu-item routerLink="/reports/report1">
+    <mat-icon>group_off</mat-icon>
+    Usuarios sin trueque
+  </button>
+  <button mat-menu-item routerLink="/reports/report2">
+    <mat-icon>bar_chart</mat-icon>
+    Trueques por usuario y mes
+  </button>
+  <button mat-menu-item routerLink="/reportes/articulos-categoria">
+    <mat-icon>category</mat-icon>
+    Artículos por categoría
+  </button>
+  <button mat-menu-item routerLink="/reportes/reciclajes-usuario">
+    <mat-icon>recycling</mat-icon>
+    Reciclajes por usuario
+  </button>
+</mat-menu>
+
+@if (estaLogueado()) {
+  <!-- Menú Perfil -->
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuPerfil">
+    <mat-icon>person</mat-icon>
+    {{ role }}
+  </button>
+  <mat-menu #menuPerfil="matMenu">
+    <button mat-menu-item disabled>
+      <mat-icon>badge</mat-icon>
+      Rol: {{ role }}
+    </button>
+    <button mat-menu-item (click)="cerrarSesion()">
+      <mat-icon>logout</mat-icon>
+      Cerrar sesión
+    </button>
+  </mat-menu>
+} @else {
+  <button mat-button style="color: #4cae4f" routerLink="/login">
+    <mat-icon>login</mat-icon>
+    Iniciar sesión
+  </button>
+}
+</mat-toolbar>
 
 <mat-menu #menuDetalleReciclaje="matMenu">
   <button mat-menu-item routerLink="/detalles-reciclaje/insertar">
@@ -162,12 +265,6 @@
   </button>
 </mat-menu>
 
-<!-- Menú Reciclajes -->
-<button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuReciclajes">
-  <mat-icon>recycling</mat-icon>
-  Reciclajes
-</button>
-
 <mat-menu #menuReciclajes="matMenu">
   <button mat-menu-item routerLink="/reciclajes/insertar">
     <mat-icon>add</mat-icon>
@@ -180,6 +277,23 @@
   </button>
 
   <button mat-menu-item routerLink="/reciclajes/buscar-id">
+    <mat-icon>search</mat-icon>
+    Buscar por ID
+  </button>
+</mat-menu>
+
+<mat-menu #menuTrueques="matMenu">
+  <button mat-menu-item routerLink="/trueques/insertar">
+    <mat-icon>add</mat-icon>
+    Registrar
+  </button>
+
+  <button mat-menu-item routerLink="/trueques/listar">
+    <mat-icon>list</mat-icon>
+    Lista
+  </button>
+
+  <button mat-menu-item routerLink="/trueques/buscar-id">
     <mat-icon>search</mat-icon>
     Buscar por ID
   </button>
