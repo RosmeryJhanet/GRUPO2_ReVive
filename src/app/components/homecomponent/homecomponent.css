@@ -227,96 +227,117 @@
 }
 
 /* ===== Nuestros aliados ===== */
+
 .aliados-section {
   background: #a4d5a6;
-  padding: 48px 32px;
+  border-radius: 20px;
+  padding: 40px 32px;
+  margin-bottom: 48px;
   text-align: center;
 }
 
-.aliados-section h2 {
-  color: #2e5c2f;
-  margin: 0 0 32px;
+.aliados-title {
+  color: #3d8b40;
+  font-size: 1.5rem;
+  margin: 0 0 24px;
 }
 
 .aliados-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 20px;
-  max-width: 1100px;
-  margin: 0 auto;
 }
 
 .aliado-card {
-  background: white;
-  border-radius: 12px;
-  padding: 32px 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-weight: 600;
-  color: #4cae4f;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100px;
-  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.aliado-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 /* ===== Nuestros servicios ===== */
-.servicios-section {
-  background: #a4d5a6;
-  padding: 48px 32px;
+.services {
+  padding: 2.5rem 0;
+  background-color: #e0f2e5;
+}
+
+.services h2 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
   text-align: center;
+  margin-bottom: 1.5rem;
+  color: #3B8955;
 }
 
-.servicios-section h2 {
-  color: #2e5c2f;
-  margin: 0 0 32px;
-}
-
-.servicios-grid {
+.services_group {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  max-width: 1100px;
-  margin: 0 auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
 }
 
-.servicio-card {
-  background: white;
-  border-radius: 16px;
-  padding: 32px 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+.service-card {
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  position: relative;
+  overflow: hidden;
 }
 
-.servicio-card:hover {
-  transform: translateY(-4px);
+.service-card img {
+  margin-top: 0.5rem;
+  border-radius: 1rem;
+  height: 220px;
+  width: 100%;
+  object-fit: cover;
+  transition: 0.3s ease-in-out;
 }
 
-.servicio-img {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: #ddeec9;
+.service-card h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-top: 0.75rem;
+  color: #000000;
+}
+
+.service-info {
+  position: absolute;
+  inset: 0;
+  background: rgba(59, 137, 85, 0.95);
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  transition: 0.3s;
+  border-radius: 1.5rem;
 }
 
-.servicio-img mat-icon {
-  color: #4cae4f;
-  font-size: 2rem;
-  width: 2rem;
-  height: 2rem;
+.service-card:hover img {
+  transform: scale(1.1);
+  filter: brightness(0.4);
 }
 
-.servicio-card span {
-  font-weight: 700;
-  color: #222;
+.service-card:hover .service-info {
+  opacity: 1;
 }
 
 /* ===== Categorías principales ===== */
@@ -348,26 +369,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Transición suave por si quieres agregar efectos hover luego */
+  transition: transform 0.3s ease; 
+}
+
+/* Opcional: Hace que la tarjeta se eleve un poco al pasar el mouse */
+.categoria-card:hover {
+  transform: translateY(-5px);
 }
 
 .categoria-img {
   width: 100%;
-  height: 100px;
+  height: 120px; /* Le subí un poquito la altura para que las fotos luzcan mejor */
   background: #ddeec9;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden; /* Esto evita que la imagen se salga de las esquinas redondeadas */
 }
 
-.categoria-img mat-icon {
-  color: #4cae4f;
-  font-size: 2.2rem;
-  width: 2.2rem;
-  height: 2.2rem;
+/* 🆕 AGREGAMOS ESTA REGLA PARA LA IMAGEN REAL */
+.categoria-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Clave: hace que la foto llene el espacio sin deformarse (estirarse) */
 }
-
 .categoria-card span {
-  padding: 10px 8px;
+  padding: 14px 8px; /* Un poquito más de espacio vertical */
   font-weight: 600;
   color: #222;
   text-align: center;
