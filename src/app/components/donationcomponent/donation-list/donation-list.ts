@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class DonationList implements OnInit {
 
   dataSource: MatTableDataSource<Donation> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
   items: ItemDTO[] = [];
   usuario: Usuario[] = [];
 

@@ -1,1 +1,4 @@
-<p>donationcomponent works!</p>
+<router-outlet></router-outlet>
+<div [hidden]="route.children.length !== 0">
+  <app-donation-list></app-donation-list>
+</div>

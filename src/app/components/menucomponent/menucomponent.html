@@ -133,6 +133,28 @@
 </mat-menu>
 
 @if (isAdmin()) {
+  <!-- Menú Donaciones -->
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menudonacion">
+      <mat-icon>loyalty</mat-icon>
+      Donar
+    </button>
+}
+  <mat-menu #menudonacion="matMenu">
+    <button mat-menu-item routerLink="/donacion/insertar">
+      <mat-icon>add</mat-icon>
+      Registrar
+    </button>
+    <button mat-menu-item routerLink="/donacion/listar">
+      <mat-icon>list</mat-icon>
+      Lista
+    </button>
+    <button mat-menu-item routerLink="/donacion/buscar-id">
+      <mat-icon>search</mat-icon>
+      Buscar por ID
+    </button>
+  </mat-menu>
+
+@if (isAdmin()) {
   <!-- Menú Usuarios -->
   <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuUsuario">
     <mat-icon>group</mat-icon>
