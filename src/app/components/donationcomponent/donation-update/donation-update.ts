@@ -26,7 +26,7 @@ import { Donationservice } from '../../../services/donationservice';
   templateUrl: './donation-update.html',
   styleUrl: './donation-update.css',
 })
-export class DonationUpdate implements OnInit{
+export class DonationUpdate implements OnInit {
 
   form: FormGroup = new FormGroup({});
   donations: Donation = new Donation();
@@ -38,17 +38,43 @@ export class DonationUpdate implements OnInit{
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-  ){}
+  ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      namedonation: ['',[Validators.required, Validators.maxLength(50)]],
-      itemid: ['',Validators.required],
-      userid: ['',Validators.required],
+      namedonation: ['', [Validators.required, Validators.maxLength(50)]],
+      itemid: ['', Validators.required],
+      userid: ['', Validators.required],
     });
 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
 
+    this.dS.listId(this.id).subscribe({
+      next: (data) => {
+        this.form.patchValue({
+          namedonation: data.nameDonation,
+          itemid: data.itemId,
+          userid: data.idUser,
+        });
+      },
+    });
   }
 
+  actualizar(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    this.donations.idDonation = this.id;
+    this.donations.nameDonation = this.form.value.namedonation;
+    this.donations.itemId = this.form.value.itemid;
+    this.donations.idUser = this.form.value.userid;
+
+    this.dS.update(this.donations).subscribe({
+      next: (data) => {
+        this.snackBar.open('Donación actualizada correctamente', '', { duration: 2000 });
+        this.router.navigate(['/donation/list']);
+      }
+    });
+  }
 }

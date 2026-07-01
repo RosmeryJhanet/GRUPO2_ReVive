@@ -25,8 +25,12 @@ export class Donationservice {
       responseType: 'text'
     });
   }
-  update(id: number, d: Donation){
-    return this.http.put<Donation>(`${this.url}/actualizar/${id}`, d);
+  update(d: Donation){
+    return this.http.put(`${this.url}/actualizar`, d ,{responseType: 'text'});
+  }
+
+  listId(id: number){
+    return this.http.get<Donation>(`${this.url}/${id}`);
   }
 
 }
