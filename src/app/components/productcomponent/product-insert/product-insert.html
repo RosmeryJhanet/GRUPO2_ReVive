@@ -1,1 +1,67 @@
-<p>product-insert works!</p>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>shopping_bag</mat-icon>
+      <h2>Registrar Producto</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Nombre del Producto</mat-label>
+          <input matInput formControlName="name" placeholder="Ej: Laptop Lenovo" />
+          <mat-icon matSuffix>inventory</mat-icon>
+          <mat-error *ngIf="form.get('name')?.hasError('required')">El nombre es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('name')?.hasError('minlength')">El nombre debe tener al menos 3 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="description" placeholder="Ej: Laptop de 8GB RAM en buen estado" rows="3"></textarea>
+          <mat-icon matSuffix>description</mat-icon>
+          <mat-error *ngIf="form.get('description')?.hasError('required')">La descripción es obligatoria.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Estado de Conservación</mat-label>
+          <mat-select formControlName="conservationStatus">
+            <mat-option *ngFor="let estado of estadosConservacion" [value]="estado">
+              {{ estado }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>healing</mat-icon>
+          <mat-error *ngIf="form.get('conservationStatus')?.hasError('required')">El estado de conservación es obligatorio.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Trueque Asociado</mat-label>
+          <mat-select formControlName="barter">
+            <mat-option *ngFor="let b of listaTrueques" [value]="b.idBarter">
+              {{ b.descriptionBarter }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>swap_horiz</mat-icon>
+          <mat-error *ngIf="form.get('barter')?.hasError('required')">El trueque es obligatorio.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Categoría</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let c of listaCategorias" [value]="c.idCategory">
+              {{ c.nameCategory }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>category</mat-icon>
+          <mat-error *ngIf="form.get('category')?.hasError('required')">La categoría es obligatoria.</mat-error>
+        </mat-form-field>
+
+        <div class="card-actions">
+          <button mat-button class="btn-cancelar" routerLink="/productos/listar">Cancelar</button>
+          <button mat-raised-button class="btn-guardar" (click)="aceptar()">
+            <mat-icon>save</mat-icon>
+            Registrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

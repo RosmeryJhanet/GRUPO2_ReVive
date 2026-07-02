@@ -32,8 +32,10 @@ export class BarterList implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.uS.list().subscribe((data) => (this.usuarios = data));
-    this.cargarTrueques();
+    this.uS.list().subscribe((data) => {
+      this.usuarios = data;
+      this.cargarTrueques();
+    });
   }
 
   getUsuario(id: number): string {

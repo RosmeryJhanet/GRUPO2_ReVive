@@ -72,6 +72,12 @@ import { DonationInsert } from './components/donationcomponent/donation-insert/d
 import { DonationSearch } from './components/donationcomponent/donation-search/donation-search';
 import { DonationUpdate } from './components/donationcomponent/donation-update/donation-update';
 
+import { Productcomponent } from './components/productcomponent/productcomponent';
+import { ProductList } from './components/productcomponent/product-list/product-list';
+import { ProductInsert } from './components/productcomponent/product-insert/product-insert';
+import { ProductUpdate } from './components/productcomponent/product-update/product-update';
+import { ProductSearch } from './components/productcomponent/product-search/product-search';
+
 export const routes: Routes = [
   {
     path: '',
@@ -226,6 +232,19 @@ export const routes: Routes = [
       { path: 'insertar', component: DonationInsert },
       { path: 'buscar', component: DonationSearch },
       { path: 'edits/:id', component: DonationUpdate },
+    ],
+  },
+
+  {
+    path: 'productos',
+    component: Productcomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'listar', component: ProductList },
+      { path: 'insertar', component: ProductInsert },
+      { path: 'edits/:id', component: ProductUpdate },
+      { path: 'buscar-id', component: ProductSearch },
     ],
   },
 
