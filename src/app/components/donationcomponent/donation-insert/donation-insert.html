@@ -18,8 +18,8 @@
         <mat-form-field appearance="outline" class="campo">
           <mat-label>Item</mat-label>
           <mat-select formControlName="itemid">
-            <mat-option *ngFor="let item of listaitems" [value]="item.idItem">
-              {{ item.nameItem }}
+            <mat-option *ngFor="let item of listaitems" [value]="item.itemId">
+              {{ item.itemName }}
             </mat-option>
           </mat-select>
           <mat-icon matSuffix>work</mat-icon>
@@ -30,7 +30,7 @@
           <mat-label>usuario</mat-label>
           <mat-select formControlName="userid">
             <mat-option *ngFor="let usuario of listausuarios" [value]="usuario.idUser">
-              {{ usuario.nameUser }}
+              {{ usuario.userName }}
             </mat-option>
           </mat-select>
           <mat-icon matSuffix>face</mat-icon>
