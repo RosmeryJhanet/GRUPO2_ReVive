@@ -1,3 +1,9 @@
+:host {
+  display: block;
+  background: linear-gradient(160deg, #ddeec9 0%, #a4d5a6 50%, #f0f8e8 100%);
+  min-height: 100vh;
+}
+
 .reporte-container {
   padding: 24px;
   max-width: 1200px;
@@ -20,11 +26,14 @@
   margin: 0;
 }
 
-.btn-todos {
-  background-color: #4cae4f !important;
+.fab-todos {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #2e5c2f !important;
   color: white !important;
-  border-radius: 20px !important;
-  font-weight: 600;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
 .total-registros {

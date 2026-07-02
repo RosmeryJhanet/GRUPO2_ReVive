@@ -4,4 +4,5 @@ export class Barter {
   statusBarter: boolean = true;
   dateBarter: string = '';
   idUser: number = 0;
+  imageBarter: string = '';
 }

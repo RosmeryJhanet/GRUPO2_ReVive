@@ -39,6 +39,8 @@ export class BarterUpdate implements OnInit, AfterViewInit {
   b: Barter = new Barter();
   id: number = 0;
   listaUsuarios: Usuario[] = [];
+  imagenPreview: string = '';
+  imagenBase64: string = '';
 
   constructor(
     private bS: Barterservice,
@@ -68,6 +70,10 @@ export class BarterUpdate implements OnInit, AfterViewInit {
           date: data.dateBarter ? new Date(data.dateBarter) : '',
           usuario: data.idUser,
         });
+        if (data.imageBarter) {
+          this.imagenPreview = data.imageBarter;
+          this.imagenBase64 = data.imageBarter;
+        }
       },
     });
   }
@@ -86,6 +92,24 @@ export class BarterUpdate implements OnInit, AfterViewInit {
     return `${año}-${mes}-${dia}`;
   }
 
+  onImagenSeleccionada(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const resultado = reader.result as string;
+      this.imagenPreview = resultado;
+      this.imagenBase64 = resultado;
+      this.cdr.detectChanges();
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+
+  quitarImagen(): void {
+    this.imagenPreview = '';
+    this.imagenBase64 = '';
+  }
+
   actualizar() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -96,6 +120,7 @@ export class BarterUpdate implements OnInit, AfterViewInit {
     this.b.statusBarter = this.form.value.status;
     this.b.dateBarter = this.formatearFecha(this.form.value.date);
     this.b.idUser = this.form.value.usuario;
+    this.b.imageBarter = this.imagenBase64;
 
     this.bS.update(this.b).subscribe({
       next: () => {

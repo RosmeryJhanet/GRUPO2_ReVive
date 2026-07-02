@@ -26,6 +26,11 @@
               },
               {
                 "glob": "**/*",
+                "input": "public/materiales",
+                "output": "assets/materiales"
+              },
+              {
+                "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
                 "output": "leaflet/images"
               }

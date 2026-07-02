@@ -1,8 +1,10 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -17,18 +19,14 @@ import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdial
 
 @Component({
   selector: 'app-recycling-list',
-  imports: [MatTableModule, MatIconModule, RouterLink, MatPaginatorModule],
+  imports: [MatIconModule, MatCardModule, MatButtonModule, MatDividerModule, RouterLink, CommonModule],
   templateUrl: './recycling-list.html',
   styleUrl: './recycling-list.css',
 })
-export class RecyclingList implements OnInit, AfterViewInit {
-  dataSource: MatTableDataSource<RecyclingDTO> = new MatTableDataSource<RecyclingDTO>();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
-
+export class RecyclingList implements OnInit {
+  reciclajes: RecyclingDTO[] = [];
   materiales: Material[] = [];
   usuarios: Usuario[] = [];
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private rS: RecyclingService,
@@ -36,50 +34,51 @@ export class RecyclingList implements OnInit, AfterViewInit {
     private uS: Usuarioservice,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
     this.mS.list().subscribe((data) => {
       this.materiales = data;
     });
-
     this.uS.list().subscribe((data) => {
       this.usuarios = data;
     });
-
     this.cargarReciclajes();
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
   }
 
   cargarReciclajes(): void {
     this.rS.list().subscribe({
-      next: (data: RecyclingDTO[]) => {
-        this.dataSource.data = data;
+      next: (data) => {
+        this.reciclajes = data;
+        this.cdr.detectChanges();
       },
       error: () => {
-        this.dataSource.data = [];
+        this.reciclajes = [];
       },
     });
   }
 
-  getMaterial(id: number): string {
-    return (
-      this.materiales.find(m => m.idMaterial === id)
-        ?.materialName || 'Sin material'
-    );
+  getMaterial(id: number): Material | undefined {
+    return this.materiales.find((m) => m.idMaterial === id);
   }
 
   getUsuario(id: number): string {
-    const usuario = this.usuarios.find(u => u.idUser === id);
+    const u = this.usuarios.find((u) => u.idUser === id);
+    return u ? `${u.userName} ${u.userLastName}` : 'Sin usuario';
+  }
 
-    if (!usuario) {
-      return 'Sin usuario';
-    }
-
-    return `${usuario.userName} ${usuario.userLastName}`;
+  getImagen(tipo: string): string {
+    const mapa: { [key: string]: string } = {
+      carton: '/assets/materiales/carton.png',
+      cartón: '/assets/materiales/carton.png',
+      metal: '/assets/materiales/metal.png',
+      papel: '/assets/materiales/papel.png',
+      plastico: '/assets/materiales/plastico.png',
+      plástico: '/assets/materiales/plastico.png',
+      vidrio: '/assets/materiales/vidrio.png',
+    };
+    return mapa[tipo?.toLowerCase()] ?? '/assets/materiales/plastico.png';
   }
 
   eliminar(id: number): void {
