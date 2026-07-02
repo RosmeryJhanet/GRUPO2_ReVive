@@ -39,18 +39,18 @@ export class RecyclingdetailList implements OnInit, AfterViewInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) {}
+  
+ngOnInit(): void {
+  this.rS.list().subscribe((reciclajes) => {
+    this.listaReciclajes = reciclajes;
 
-  ngOnInit(): void {
-    this.rS.list().subscribe((data) => {
-      this.listaReciclajes = data;
+    this.cpS.list().subscribe((puntos) => {
+      this.listaPuntos = puntos;
+
+      this.cargarDetalles();
     });
-
-    this.cpS.list().subscribe((data) => {
-      this.listaPuntos = data;
-    });
-
-    this.cargarDetalles();
-  }
+  });
+}
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
