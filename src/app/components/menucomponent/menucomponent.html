@@ -46,7 +46,7 @@
   }
 
   @if (estaLogueado()) {
-    <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuPerfil">
+    <button mat-button style="color: #4cae4f" (click)="togglePerfil()">
       <mat-icon>person</mat-icon>
       {{ role }}
     </button>
@@ -289,14 +289,34 @@
   </button>
 </mat-menu>
 
-<!-- PERFIL -->
-<mat-menu #menuPerfil="matMenu">
-  <button mat-menu-item disabled>
-    <mat-icon>badge</mat-icon>
-    Rol: {{ role }}
-  </button>
-  <button mat-menu-item (click)="cerrarSesion()">
-    <mat-icon>logout</mat-icon>
-    Cerrar sesión
-  </button>
-</mat-menu>
+<!-- BACKDROP para cerrar al hacer click fuera -->
+@if (mostrarPerfil) {
+  <div class="perfil-backdrop" (click)="cerrarDropdown()"></div>
+  <div class="perfil-dropdown">
+    <div class="perfil-cover">
+      <div class="perfil-avatar-circle">
+        <mat-icon class="perfil-avatar-icon">person</mat-icon>
+      </div>
+    </div>
+    <div class="perfil-nombre">{{ perfil?.userName }} {{ perfil?.userLastName }}</div>
+    <div class="perfil-info-list">
+      <div class="perfil-info-row">
+        <span class="perfil-label">Correo:</span>
+        <span class="perfil-valor">{{ perfil?.userEmail }}</span>
+      </div>
+      <div class="perfil-info-row">
+        <span class="perfil-label">DNI:</span>
+        <span class="perfil-valor">{{ perfil?.userIdentityDocument }}</span>
+      </div>
+      <div class="perfil-info-row">
+        <span class="perfil-label">ROL:</span>
+        <span class="perfil-valor">{{ role }}</span>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <button class="perfil-btn-cerrar" (click)="cerrarSesion()">
+      <mat-icon>logout</mat-icon>
+      Cerrar sesión
+    </button>
+  </div>
+}
