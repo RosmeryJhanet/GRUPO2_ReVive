@@ -1,73 +1,85 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
-import { MatRadioModule } from '@angular/material/radio';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import { Donation } from '../../../models/donation';
-import { Usuario } from '../../../models/usuario';
+import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { Usuarioservice } from '../../../services/usuarioservice';
+
+import { DonationDTO } from '../../../models/donationDTO';
+import { ItemDTO } from '../../../models/itemDTO';
+import { Usuario } from '../../../models/usuario';
+
 import { Donationservice } from '../../../services/donationservice';
 import { ItemService } from '../../../services/itemservice';
-import { ItemDTO } from '../../../models/itemDTO';
-import { CommonModule } from '@angular/common';
+import { Usuarioservice } from '../../../services/usuarioservice';
 
 @Component({
   selector: 'app-donation-insert',
   imports: [
-    CommonModule,MatInputModule,
-    MatButtonModule,
     ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
     MatIconModule,
-    MatDatepickerModule,
-    MatRadioModule,
-    MatSelectModule
+    MatCardModule,
+    MatSelectModule,
+    RouterLink,
+    CommonModule,
   ],
   templateUrl: './donation-insert.html',
-  providers: [provideNativeDateAdapter()],
   styleUrl: './donation-insert.css',
 })
 export class DonationInsert implements OnInit {
-
   form: FormGroup = new FormGroup({});
-  donacion: Donation = new Donation();
-  listaitems: ItemDTO[] = [];
-  listausuarios: Usuario[] = [];
+  donation: DonationDTO = new DonationDTO();
+
+  listaItems: ItemDTO[] = [];
+  listaUsuarios: Usuario[] = [];
 
   constructor(
-
     private dS: Donationservice,
     private iS: ItemService,
     private uS: Usuarioservice,
     private router: Router,
     private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar,
-    private cdr: ChangeDetectorRef,
-  ) { }
-
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      namedonation: ['',[Validators.required, Validators.maxLength(50)]],
-      itemid: ['',Validators.required],
-      userid: ['',Validators.required],
+      nameDonation: ['', [Validators.required, Validators.maxLength(50)]],
+      itemId: ['', Validators.required],
+      idUser: ['', Validators.required],
     });
-  }
 
-  ngAfterViewInit(): void {
-    this.iS.list().subscribe(data => {
-      this.listaitems = data;
-      this.cdr.detectChanges();
+   this.iS.list().subscribe({
+  next: (data) => {
+    this.listaItems = data;
+  },
+  error: (err) => {
+    console.error('Error al listar artículos', err);
+    this.listaItems = [];
+    this.snackBar.open('No se pudieron cargar los artículos', 'Cerrar', {
+      duration: 3000,
     });
-    this.uS.list().subscribe(data => {
-      this.listausuarios = data;
-      this.cdr.detectChanges();
+  },
+});
+
+this.uS.list().subscribe({
+  next: (data) => {
+    this.listaUsuarios = data;
+  },
+  error: (err) => {
+    console.error('Error al listar usuarios', err);
+    this.listaUsuarios = [];
+    this.snackBar.open('No se pudieron cargar los usuarios', 'Cerrar', {
+      duration: 3000,
     });
+  },
+});
   }
 
   aceptar(): void {
@@ -76,14 +88,16 @@ export class DonationInsert implements OnInit {
       return;
     }
 
-    this.donacion.nameDonation = this.form.value.namedonation;
-    this.donacion.itemId = this.form.value.itemid;
-    this.donacion.idUser = this.form.value.userid;
+    this.donation.nameDonation = this.form.value.nameDonation;
+    this.donation.itemId = this.form.value.itemId;
+    this.donation.idUser = this.form.value.idUser;
 
-    this.dS.insert(this.donacion).subscribe({
+    this.dS.insert(this.donation).subscribe({
       next: () => {
-        this.snackBar.open('Donación registrada con éxito', 'cerrar', {duration: 2000});
-        this.router.navigate(['/donations/listar']);
+        this.snackBar.open('Donación registrada correctamente', 'Cerrar', {
+          duration: 3000,
+        });
+        this.router.navigate(['/donaciones/listar']);
       },
     });
   }

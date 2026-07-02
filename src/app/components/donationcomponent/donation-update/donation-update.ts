@@ -1,15 +1,21 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Donation } from '../../../models/donation';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { DonationDTO } from '../../../models/donationDTO';
+import { ItemDTO } from '../../../models/itemDTO';
+import { Usuario } from '../../../models/usuario';
+
 import { Donationservice } from '../../../services/donationservice';
+import { ItemService } from '../../../services/itemservice';
+import { Usuarioservice } from '../../../services/usuarioservice';
 
 @Component({
   selector: 'app-donation-update',
@@ -27,34 +33,46 @@ import { Donationservice } from '../../../services/donationservice';
   styleUrl: './donation-update.css',
 })
 export class DonationUpdate implements OnInit {
-
   form: FormGroup = new FormGroup({});
-  donations: Donation = new Donation();
+  donation: DonationDTO = new DonationDTO();
   id: number = 0;
+
+  listaItems: ItemDTO[] = [];
+  listaUsuarios: Usuario[] = [];
 
   constructor(
     private dS: Donationservice,
+    private iS: ItemService,
+    private uS: Usuarioservice,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-  ) { }
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      namedonation: ['', [Validators.required, Validators.maxLength(50)]],
-      itemid: ['', Validators.required],
-      userid: ['', Validators.required],
+      nameDonation: ['', [Validators.required, Validators.maxLength(50)]],
+      itemId: ['', Validators.required],
+      idUser: ['', Validators.required],
     });
 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
 
+    this.iS.list().subscribe((data) => {
+      this.listaItems = data;
+    });
+
+    this.uS.list().subscribe((data) => {
+      this.listaUsuarios = data;
+    });
+
     this.dS.listId(this.id).subscribe({
       next: (data) => {
         this.form.patchValue({
-          namedonation: data.nameDonation,
-          itemid: data.itemId,
-          userid: data.idUser,
+          nameDonation: data.nameDonation,
+          itemId: data.itemId,
+          idUser: data.idUser,
         });
       },
     });
@@ -65,16 +83,19 @@ export class DonationUpdate implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-    this.donations.idDonation = this.id;
-    this.donations.nameDonation = this.form.value.namedonation;
-    this.donations.itemId = this.form.value.itemid;
-    this.donations.idUser = this.form.value.userid;
 
-    this.dS.update(this.donations).subscribe({
-      next: (data) => {
-        this.snackBar.open('Donación actualizada correctamente', '', { duration: 2000 });
-        this.router.navigate(['/donation/list']);
-      }
+    this.donation.donationId = this.id;
+    this.donation.nameDonation = this.form.value.nameDonation;
+    this.donation.itemId = this.form.value.itemId;
+    this.donation.idUser = this.form.value.idUser;
+
+    this.dS.update(this.donation).subscribe({
+      next: () => {
+        this.snackBar.open('Donación actualizada correctamente', 'Cerrar', {
+          duration: 3000,
+        });
+        this.router.navigate(['/donaciones/listar']);
+      },
     });
   }
 }

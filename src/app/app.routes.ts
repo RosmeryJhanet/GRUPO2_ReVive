@@ -62,11 +62,12 @@ import { BarterList } from './components/bartercomponent/barter-list/barter-list
 import { BarterInsert } from './components/bartercomponent/barter-insert/barter-insert';
 import { BarterUpdate } from './components/bartercomponent/barter-update/barter-update';
 import { BarterSearch } from './components/bartercomponent/barter-search/barter-search';
+
 import { Donationcomponent } from './components/donationcomponent/donationcomponent';
-import { DonationInsert } from './components/donationcomponent/donation-insert/donation-insert';
 import { DonationList } from './components/donationcomponent/donation-list/donation-list';
-import { DonationUpdate } from './components/donationcomponent/donation-update/donation-update';
+import { DonationInsert } from './components/donationcomponent/donation-insert/donation-insert';
 import { DonationSearch } from './components/donationcomponent/donation-search/donation-search';
+import { DonationUpdate } from './components/donationcomponent/donation-update/donation-update';
 
 export const routes: Routes = [
   {
@@ -298,31 +299,30 @@ export const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'donacion',
-    component: Donationcomponent,
-    children: [
 
-      {
+{
+  path: 'donaciones',
+  component: Donationcomponent,
+  children: [
+     {
         path: 'listar',
-        component: DonationList
+        component: DonationList,
+      },
+    {
+      path: 'insertar',
+      component: DonationInsert,
+    },
+    {
+      path: 'buscar',
+      component: DonationSearch,
+    },
+    {
+      path: 'edits/:id',
+      component: DonationUpdate,
+    },
+  ],
+},
 
-      },
-      {
-        path:'insertar',
-        component: DonationInsert
-      },
-      {
-        path: 'edits/:id',
-        component:DonationUpdate
-      },
-      {
-        path: 'buscar-id',
-        component:DonationSearch
-      }
-
-    ]
-  },
   {
     path: 'reportes/articulos-categoria',
     component: ReportItemCategory,

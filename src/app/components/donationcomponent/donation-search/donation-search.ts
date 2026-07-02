@@ -1,11 +1,12 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Donation } from '../../../models/donation';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
+
+import { DonationDTO } from '../../../models/donationDTO';
 import { Donationservice } from '../../../services/donationservice';
 
 @Component({
@@ -21,16 +22,15 @@ import { Donationservice } from '../../../services/donationservice';
   templateUrl: './donation-search.html',
   styleUrl: './donation-search.css',
 })
-export class DonationSearch { 
-
+export class DonationSearch {
   form: FormGroup;
-  resulta: Donation | null = null;
+  resultado: DonationDTO | null = null;
   noEncontrado: boolean = false;
 
   constructor(
     private dS: Donationservice,
     private formBuilder: FormBuilder,
-    private cdr: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef
   ) {
     this.form = this.formBuilder.group({
       id: ['', Validators.required],
@@ -43,18 +43,16 @@ export class DonationSearch {
 
       this.dS.listId(id).subscribe({
         next: (data) => {
-          this.resulta = data;
+          this.resultado = data;
           this.noEncontrado = false;
           this.cdr.detectChanges();
         },
         error: () => {
-          this.resulta = null;
+          this.resultado = null;
           this.noEncontrado = true;
           this.cdr.detectChanges();
         },
       });
     }
   }
-
-
 }

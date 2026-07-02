@@ -48,22 +48,39 @@ export class CollectionpointList implements OnInit, AfterViewInit {
     });
   }
 
-  eliminar(id: number) {
-    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
-      width: '360px',
-      panelClass: 'confirm-dialog-panel',
-      data: {
-        titulo: 'Eliminar punto de acopio',
-        mensaje: '¿Seguro que deseas eliminar este punto de acopio?',
+eliminar(id: number) {
+  const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+    width: '360px',
+    panelClass: 'confirm-dialog-panel',
+    data: {
+      titulo: 'Eliminar punto de acopio',
+      mensaje: '¿Seguro que deseas eliminar este punto de acopio?',
+    },
+  });
+
+  dialogRef.afterClosed().subscribe((confirmado) => {
+    if (!confirmado) return;
+
+    this.cpS.delete(id).subscribe({
+      next: () => {
+        this.snackBar.open(
+          'Punto de acopio eliminado correctamente',
+          'Cerrar',
+          { duration: 3000 }
+        );
+        this.cargarPuntos();
+      },
+      error: (err) => {
+        const mensaje =
+          typeof err.error === 'string'
+            ? err.error
+            : 'Ocurrió un error al eliminar el punto de acopio.';
+
+        this.snackBar.open(mensaje, 'Cerrar', {
+          duration: 4000,
+        });
       },
     });
-
-    dialogRef.afterClosed().subscribe((confirmado) => {
-      if (!confirmado) return;
-      this.cpS.delete(id).subscribe(() => {
-        this.snackBar.open('Punto de acopio eliminado correctamente', 'Cerrar', { duration: 3000 });
-        this.cargarPuntos();
-      });
-    });
-  }
+  });
+}
 }

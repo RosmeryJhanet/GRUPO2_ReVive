@@ -2,15 +2,15 @@
   <div class="card">
     <div class="card-header">
       <mat-icon>search</mat-icon>
-      <h2>Buscar Donacion</h2>
+      <h2>Buscar Donación</h2>
     </div>
 
     <div class="card-body">
       <form [formGroup]="form">
         <mat-form-field appearance="outline" class="campo">
-          <mat-label>ID de la Donacion</mat-label>
+          <mat-label>ID de la donación</mat-label>
           <input matInput formControlName="id" type="number" placeholder="Ej: 1" />
-          <mat-icon matSuffix>loyalty</mat-icon>
+          <mat-icon matSuffix>tag</mat-icon>
         </mat-form-field>
 
         <button mat-raised-button class="btn-buscar" type="button" (click)="buscar()">
@@ -19,24 +19,28 @@
         </button>
       </form>
 
-      <div class="resultado" *ngIf="resulta">
+      <div class="resultado" *ngIf="resultado">
         <h3>Resultado</h3>
+
         <table>
           <tr>
             <td class="label">ID</td>
-            <td>{{ resulta.idDonation }}</td>
+            <td>{{ resultado.donationId }}</td>
           </tr>
+
           <tr>
-            <td class="label">Descripcion de donacion</td>
-            <td>{{ resulta.nameDonation }}</td>
+            <td class="label">Nombre</td>
+            <td>{{ resultado.nameDonation }}</td>
           </tr>
+
           <tr>
-            <td class="label">Id item</td>
-            <td>{{ resulta.itemId }}</td>
+            <td class="label">ID Artículo</td>
+            <td>{{ resultado.itemId }}</td>
           </tr>
+
           <tr>
-            <td class="label">Id user</td>
-            <td>{{ resulta.idUser }}</td>
+            <td class="label">ID Usuario</td>
+            <td>{{ resultado.idUser }}</td>
           </tr>
         </table>
       </div>
