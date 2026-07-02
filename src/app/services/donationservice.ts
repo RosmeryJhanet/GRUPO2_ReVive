@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Donation } from '../models/donation';
+import { QuantityDonateDTO } from '../models/quantityDonationUserDTO';
+import { Observable } from 'rxjs';
+import { DonationconditDTO } from '../models/donationConditionDTO';
 
 const base_url = environment.base;
 
@@ -31,6 +34,12 @@ export class Donationservice {
 
   listId(id: number){
     return this.http.get<Donation>(`${this.url}/${id}`);
+  }
+  getQuantityByUser(): Observable<QuantityDonateDTO[]>  {
+    return this.http.get<QuantityDonateDTO[]>(`${this.url}/cantidad-donaciones-usuario`);
+  }
+  getDonationbycondition():Observable<DonationconditDTO[]>{
+    return this.http.get<DonationconditDTO[]>(`${this.url}/cantidad-donaciones-condicion`);
   }
 
 }

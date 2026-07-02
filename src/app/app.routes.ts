@@ -67,6 +67,8 @@ import { DonationInsert } from './components/donationcomponent/donation-insert/d
 import { DonationList } from './components/donationcomponent/donation-list/donation-list';
 import { DonationUpdate } from './components/donationcomponent/donation-update/donation-update';
 import { DonationSearch } from './components/donationcomponent/donation-search/donation-search';
+import { ReportequantitydonationbyUser } from './components/reports/reportequantitydonationby-user/reportequantitydonationby-user';
+import { ReporteDonationbyCondition } from './components/reports/reporte-donationby-condition/reporte-donationby-condition';
 
 export const routes: Routes = [
   {
@@ -331,4 +333,12 @@ export const routes: Routes = [
     path: 'reportes/reciclajes-usuario',
     component: ReportRecyclingUser,
   },
+  {
+    path:'reportes/donaciones-usuario',
+    component:ReportequantitydonationbyUser
+  },
+  {
+    path:'reportes/donaciones-condicion',
+    component:ReporteDonationbyCondition
+  }
 ];

@@ -1,0 +1,25 @@
+<div class="chart-container">
+  <h2 class="chart-title">Reporte de cantidad de Donaciones por Condición</h2>
+
+  <div class="chart-wrapper">
+    @if (hasData) {
+      <div class="chart-wrapper chart-bar">
+        <canvas
+          baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [type]="barChartType">
+        </canvas>
+      </div>
+    }
+
+    @if (!hasData) {
+      <div class="no-data">
+        <mat-icon class="no-data-icon">info_outline</mat-icon>
+        <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+      </div>
+    }
+  </div>
+</div>
