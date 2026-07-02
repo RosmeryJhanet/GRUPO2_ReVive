@@ -36,27 +36,33 @@ export class Report2 implements OnInit {
   ) {}
   //npm install chart.js ng2-charts
   ngOnInit(): void {
-    this.cdr.detectChanges();
-    this.rS.cantidadTruequesPorUsuario().subscribe((data) => {
-      if (data.length > 0) {
-        this.hasData = true;
-        this.barChartLabels = data.map((item) => `${item.full_Name} (${item.month})`);
-        this.barChartData = [
-          {
-            data: data.map((item) => item.quantity),
-            label: 'Cantidad de trueques',
-            backgroundColor: [
-              '#4cae4f', // Fruit Salad
-              '#80c684', // De York
-              '#a4d5a6', // Moss Green
-              '#ddeec9', // Chrome
-              '#2e5c2f', // Verde oscuro
-            ],
-          },
-        ];
-      } else {
+    this.rS.cantidadTruequesPorUsuario().subscribe({
+      next: (data) => {
+        if (data.length > 0) {
+          this.hasData = true;
+          this.barChartLabels = data.map((item) => `${item.full_Name} (${item.month})`);
+          this.barChartData = [
+            {
+              data: data.map((item) => item.quantity),
+              label: 'Cantidad de trueques',
+              backgroundColor: [
+                '#4cae4f', // Fruit Salad
+                '#80c684', // De York
+                '#a4d5a6', // Moss Green
+                '#ddeec9', // Chrome
+                '#2e5c2f', // Verde oscuro
+              ],
+            },
+          ];
+        } else {
+          this.hasData = false;
+        }
+        this.cdr.detectChanges();
+      },
+      error: () => {
         this.hasData = false;
-      }
+        this.cdr.detectChanges();
+      },
     });
   }
 }
