@@ -23,3 +23,23 @@ body {
 }
 
 /* Panel del menú de perfil de usuario */
+
+/* Iconos y texto de los mat-menu en verde */
+.mat-mdc-menu-item .mat-icon {
+  color: #4cae4f !important;
+}
+
+.mat-mdc-menu-item span {
+  color: #2e5c2f !important;
+}
+
+/* Al hacer hover/click en un item del menú */
+.mat-mdc-menu-item:hover .mat-icon,
+.mat-mdc-menu-item:focus .mat-icon {
+  color: #2e5c2f !important;
+}
+
+.mat-mdc-menu-item:hover,
+.mat-mdc-menu-item:focus {
+  background-color: #f0f8e8 !important;
+}

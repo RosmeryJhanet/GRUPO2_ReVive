@@ -1,83 +1,50 @@
-<div style="padding: 24px">
-  <h2 style="color: var(--mat-sys-primary); margin-bottom: 16px">
+<div class="lista-container">
+  <h2 class="lista-titulo">
     <mat-icon>group</mat-icon>
     Lista de Usuarios
   </h2>
 
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    style="width: 100%; border-radius: 8px; overflow: hidden"
-  >
-    <!-- ID -->
-    <ng-container matColumnDef="c1">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.idUser }}</td>
-    </ng-container>
+  <p class="total-registros">Total de usuarios: {{ usuarios.length }}</p>
 
-    <!-- Nombres -->
-    <ng-container matColumnDef="c2">
-      <th mat-header-cell *matHeaderCellDef>Nombres</th>
-      <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
-    </ng-container>
+  <div class="cards-grid">
+    @for (u of usuarios; track u.idUser) {
+      <mat-card class="usuario-card">
 
-    <!-- Apellidos -->
-    <ng-container matColumnDef="c3">
-      <th mat-header-cell *matHeaderCellDef>Apellidos</th>
-      <td mat-cell *matCellDef="let element">{{ element.userLastName }}</td>
-    </ng-container>
+        <div class="card-avatar">{{ (u.userName || '').charAt(0).toUpperCase() }}</div>
+        <div class="card-nombre">{{ u.userName }} {{ u.userLastName }}</div>
 
-    <!-- DNI -->
-    <ng-container matColumnDef="c4">
-      <th mat-header-cell *matHeaderCellDef>DNI</th>
-      <td mat-cell *matCellDef="let element">{{ element.userIdentityDocument }}</td>
-    </ng-container>
+        <mat-divider></mat-divider>
 
-    <!-- Email -->
-    <ng-container matColumnDef="c5">
-      <th mat-header-cell *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let element">{{ element.userEmail }}</td>
-    </ng-container>
+        <div class="card-info">
+          <div class="card-fila">
+            <mat-icon class="card-icon">badge</mat-icon>
+            <span class="card-label">DNI:</span>
+            <span class="card-valor">{{ u.userIdentityDocument }}</span>
+          </div>
+          <div class="card-fila">
+            <mat-icon class="card-icon">email</mat-icon>
+            <span class="card-label">Correo:</span>
+            <span class="card-valor">{{ u.userEmail }}</span>
+          </div>
+          <div class="card-fila">
+            <mat-icon class="card-icon">calendar_today</mat-icon>
+            <span class="card-label">Registro:</span>
+            <span class="card-valor">{{ u.userRegistrationDate | date:'dd/MM/yyyy' }}</span>
+          </div>
+        </div>
 
-    <!-- Fecha de registro -->
-    <ng-container matColumnDef="c6">
-      <th mat-header-cell *matHeaderCellDef>Fecha de registro</th>
-      <td mat-cell *matCellDef="let element">{{ element.userRegistrationDate | date:'dd/MM/yyyy' }}</td>
-    </ng-container>
+        <mat-divider></mat-divider>
 
-    <ng-container matColumnDef="c7">
-      <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button (click)="eliminar(element.idUser)" class="btn-eliminar">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+        <div class="card-acciones">
+          <button mat-button class="btn-editar" [routerLink]="['/usuarios/edits', u.idUser]">Editar</button>
+          <button mat-button class="btn-eliminar" (click)="eliminar(u.idUser)">Eliminar</button>
+        </div>
 
-    <ng-container matColumnDef="c8">
-      <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-      <td mat-cell *matCellDef="let element">
-        <button
-          mat-icon-button
-          class="btn-editar"
-          [routerLink]="['/usuarios/edits', element.idUser]"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-
-  <div class="paginator-footer">
-    <span class="total-registros">Total de usuarios: {{ dataSource.data.length }}</span>
-    <mat-paginator
-      [pageSizeOptions]="[5, 10, 25]"
-      [pageSize]="5"
-      showFirstLastButtons
-      aria-label="Seleccionar página de usuarios"
-    ></mat-paginator>
+      </mat-card>
+    }
   </div>
+
+  @if (usuarios.length === 0) {
+    <p class="sin-datos">No hay usuarios registrados.</p>
+  }
 </div>

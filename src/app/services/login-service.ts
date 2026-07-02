@@ -39,7 +39,6 @@ export class LoginService {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
 
-    console.log(decodedToken);
     return decodedToken?.roles || null;
   }
 
