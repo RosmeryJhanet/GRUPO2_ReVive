@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { seguridadGuard } from './guard/seguridad-guard';
 
 import { Homecomponent } from './components/homecomponent/homecomponent';
 import { Rutascomponent } from './components/rutascomponent/rutascomponent';
@@ -51,6 +52,7 @@ import { RecyclingdetailList } from './components/recyclingdetailcomponent/recyc
 import { RecyclingdetailInsert } from './components/recyclingdetailcomponent/recyclingdetail-insert/recyclingdetail-insert';
 import { RecyclingdetailUpdate } from './components/recyclingdetailcomponent/recyclingdetail-update/recyclingdetail-update';
 import { RecyclingdetailSearch } from './components/recyclingdetailcomponent/recyclingdetail-search/recyclingdetail-search';
+
 import { ReportItemCategory } from './components/report-item-category/report-item-category';
 import { ReportRecyclingUser } from './components/report-recycling-user/report-recycling-user';
 
@@ -72,263 +74,180 @@ import { DonationUpdate } from './components/donationcomponent/donation-update/d
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'homes',
+    redirectTo: 'login',
     pathMatch: 'full',
+  },
+
+  {
+    path: 'login',
+    component: Authenticate,
+  },
+
+  {
+    path: 'registro',
+    component: UsuarioInsert,
   },
 
   {
     path: 'homes',
     component: Homecomponent,
+    canActivate: [seguridadGuard],
   },
+
   {
     path: 'ruta-cercana',
     component: Rutascomponent,
+    canActivate: [seguridadGuard],
   },
-  {
-    path: 'registro',
-    component: UsuarioInsert,
-  },
-  {
-    path: 'login',
-    component: Authenticate,
-  },
+
   {
     path: 'ubicaciones',
     component: Locationcomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
-      {
-        path: 'listar',
-        component: LocationList,
-      },
-      {
-        path: 'insertar',
-        component: LocationInsert,
-      },
-      {
-        path: 'edits/:id',
-        component: LocationUpdate,
-      },
-      {
-        path: 'buscar-id',
-        component: LocationSearch,
-      },
-    ],
-  },
-  {
-    path: 'materiales',
-    component: Materialcomponent,
-    children: [
-      {
-        path: 'listar',
-        component: MaterialList,
-      },
-      {
-        path: 'insertar',
-        component: MaterialInsert,
-      },
-      {
-        path: 'edits/:id',
-        component: MaterialUpdate,
-      },
-      {
-        path: 'buscar-tipo',
-        component: MaterialSearch,
-      },
-    ],
-  },
-  {
-    path: 'categorias',
-    component: Categorycomponent,
-    children: [
-      {
-        path: 'listar',
-        component: CategoryList,
-      },
-      {
-        path: 'insertar',
-        component: CategoryInsert,
-      },
-      {
-        path: 'edits/:id',
-        component: CategoryUpdate,
-      },
-      {
-        path: 'buscar-id',
-        component: CategorySearch,
-      },
-    ],
-  },
-  {
-    path: 'puntos-acopio',
-    component: Collectionpointcomponent,
-    children: [
-      {
-        path: 'listar',
-        component: CollectionpointList,
-      },
-      {
-        path: 'insertar',
-        component: CollectionpointInsert,
-      },
-      {
-        path: 'edits/:id',
-        component: CollectionpointUpdate,
-      },
-      {
-        path: 'buscar-id',
-        component: CollectionpointSearch,
-      },
-    ],
-  },
-  {
-    path: 'items',
-    component: Itemcomponent,
-    children: [
-      {
-        path: 'listar',
-        component: ItemList,
-      },
-      {
-        path: 'insertar',
-        component: ItemInsert,
-      },
-      {
-        path: 'edits/:id',
-        component: ItemUpdate,
-      },
-      {
-        path: 'buscar-id',
-        component: ItemSearch,
-      },
-    ],
-  },
-  {
-    path: 'reciclajes',
-    component: Recyclingcomponent,
-    children: [
-      {
-        path: 'listar',
-        component: RecyclingList,
-      },
-      {
-        path: 'insertar',
-        component: RecyclingInsert,
-      },
-      {
-        path: 'edits/:id',
-        component: RecyclingUpdate,
-      },
-      {
-        path: 'buscar-id',
-        component: RecyclingSearch,
-      },
-    ],
-  },
-  {
-    path: 'usuarios',
-    component: Usuariocomponent,
-    children: [
-      {
-        path: 'listar',
-        component: UsuarioList,
-      },
-      {
-        path: 'edits/:id',
-        component: UsuarioUpdate,
-      },
-      {
-        path: 'buscar-id',
-        component: UsuarioSearch,
-      },
-    ],
-  },
-  {
-    path: 'detalles-reciclaje',
-    component: Recyclingdetailcomponent,
-    children: [
-      {
-        path: 'listar',
-        component: RecyclingdetailList,
-      },
-      {
-        path: 'insertar',
-        component: RecyclingdetailInsert,
-      },
-      {
-        path: 'edits/:id',
-        component: RecyclingdetailUpdate,
-      },
-      {
-        path: 'buscar-id',
-        component: RecyclingdetailSearch,
-      },
-    ],
-  },
-  {
-    path: 'reports',
-    children: [
-      {
-        path: 'report1',
-        component: Report1,
-      },
-      {
-        path: 'report2',
-        component: Report2,
-      },
-    ],
-  },
-  {
-    path: 'trueques',
-    component: Bartercomponent,
-    children: [
-      {
-        path: 'listar',
-        component: BarterList,
-      },
-      {
-        path: 'insertar',
-        component: BarterInsert,
-      },
-      {
-        path: 'edits/:id',
-        component: BarterUpdate,
-      },
-      {
-        path: 'buscar-id',
-        component: BarterSearch,
-      },
+      { path: 'listar', component: LocationList },
+      { path: 'insertar', component: LocationInsert },
+      { path: 'edits/:id', component: LocationUpdate },
+      { path: 'buscar-id', component: LocationSearch },
     ],
   },
 
-{
-  path: 'donaciones',
-  component: Donationcomponent,
-  children: [
-     {
-        path: 'listar',
-        component: DonationList,
-      },
-    {
-      path: 'insertar',
-      component: DonationInsert,
-    },
-    {
-      path: 'buscar',
-      component: DonationSearch,
-    },
-    {
-      path: 'edits/:id',
-      component: DonationUpdate,
-    },
-  ],
-},
+  {
+    path: 'materiales',
+    component: Materialcomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'listar', component: MaterialList },
+      { path: 'insertar', component: MaterialInsert },
+      { path: 'edits/:id', component: MaterialUpdate },
+      { path: 'buscar-tipo', component: MaterialSearch },
+    ],
+  },
+
+  {
+    path: 'categorias',
+    component: Categorycomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'listar', component: CategoryList },
+      { path: 'insertar', component: CategoryInsert },
+      { path: 'edits/:id', component: CategoryUpdate },
+      { path: 'buscar-id', component: CategorySearch },
+    ],
+  },
+
+  {
+    path: 'puntos-acopio',
+    component: Collectionpointcomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'listar', component: CollectionpointList },
+      { path: 'insertar', component: CollectionpointInsert },
+      { path: 'edits/:id', component: CollectionpointUpdate },
+      { path: 'buscar-id', component: CollectionpointSearch },
+    ],
+  },
+
+  {
+    path: 'items',
+    component: Itemcomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'listar', component: ItemList },
+      { path: 'insertar', component: ItemInsert },
+      { path: 'edits/:id', component: ItemUpdate },
+      { path: 'buscar-id', component: ItemSearch },
+    ],
+  },
+
+  {
+    path: 'reciclajes',
+    component: Recyclingcomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'listar', component: RecyclingList },
+      { path: 'insertar', component: RecyclingInsert },
+      { path: 'edits/:id', component: RecyclingUpdate },
+      { path: 'buscar-id', component: RecyclingSearch },
+    ],
+  },
+
+  {
+    path: 'usuarios',
+    component: Usuariocomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'listar', component: UsuarioList },
+      { path: 'edits/:id', component: UsuarioUpdate },
+      { path: 'buscar-id', component: UsuarioSearch },
+    ],
+  },
+
+  {
+    path: 'detalles-reciclaje',
+    component: Recyclingdetailcomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'listar', component: RecyclingdetailList },
+      { path: 'insertar', component: RecyclingdetailInsert },
+      { path: 'edits/:id', component: RecyclingdetailUpdate },
+      { path: 'buscar-id', component: RecyclingdetailSearch },
+    ],
+  },
+
+  {
+    path: 'trueques',
+    component: Bartercomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'listar', component: BarterList },
+      { path: 'insertar', component: BarterInsert },
+      { path: 'edits/:id', component: BarterUpdate },
+      { path: 'buscar-id', component: BarterSearch },
+    ],
+  },
+
+  {
+    path: 'donaciones',
+    component: Donationcomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'listar', component: DonationList },
+      { path: 'insertar', component: DonationInsert },
+      { path: 'buscar', component: DonationSearch },
+      { path: 'edits/:id', component: DonationUpdate },
+    ],
+  },
+
+  {
+    path: 'reports',
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'report1', component: Report1 },
+      { path: 'report2', component: Report2 },
+    ],
+  },
 
   {
     path: 'reportes/articulos-categoria',
     component: ReportItemCategory,
+    canActivate: [seguridadGuard],
   },
+
   {
     path: 'reportes/reciclajes-usuario',
     component: ReportRecyclingUser,
+    canActivate: [seguridadGuard],
   },
 ];
