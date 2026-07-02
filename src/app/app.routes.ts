@@ -74,7 +74,7 @@ import { DonationUpdate } from './components/donationcomponent/donation-update/d
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'homes',
     pathMatch: 'full',
   },
 
@@ -91,7 +91,6 @@ export const routes: Routes = [
   {
     path: 'homes',
     component: Homecomponent,
-    canActivate: [seguridadGuard],
   },
 
   {
