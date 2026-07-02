@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>volunteer_activism</mat-icon>
+      <h2>Registrar Donación</h2>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Nombre de la donación</mat-label>
+          <input matInput formControlName="nameDonation" maxlength="50" />
+          <mat-icon matSuffix>label</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Artículo</mat-label>
+          <mat-select formControlName="itemId">
+            <mat-option *ngFor="let item of listaItems" [value]="item.itemId">
+              {{ item.itemName }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>inventory_2</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Usuario</mat-label>
+          <mat-select formControlName="idUser">
+            <mat-option *ngFor="let usuario of listaUsuarios" [value]="usuario.idUser">
+              {{ usuario.userName }} {{ usuario.userLastName }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+      </form>
+    </div>
+
+    <div class="card-actions">
+      <button mat-button class="btn-cancelar" routerLink="/donaciones/listar">
+        Cancelar
+      </button>
+
+      <button mat-raised-button class="btn-guardar" (click)="aceptar()">
+        <mat-icon>save</mat-icon>
+        Registrar
+      </button>
+    </div>
+  </div>
+</div>

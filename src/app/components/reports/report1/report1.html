@@ -1,0 +1,59 @@
+<div class="reporte-container">
+  <div class="reporte-header">
+    <h2 class="reporte-titulo">
+      <mat-icon>group_off</mat-icon>
+      Usuarios sin trueque
+    </h2>
+  </div>
+
+  <p class="total-registros">Total: {{ usuarios.length }} usuario(s) sin trueques</p>
+
+  <div class="cards-grid">
+    @for (u of usuarios; track u.idUser) {
+      <mat-card class="usuario-card">
+
+        <div class="card-avatar">{{ (u.UserName || '').charAt(0).toUpperCase() }}</div>
+        <div class="card-nombre">{{ u.UserName }}</div>
+
+        <span class="badge-sin-trueque">
+          <mat-icon class="badge-icon">swap_horiz</mat-icon>
+          No realizó ningún trueque
+        </span>
+
+        <mat-divider></mat-divider>
+
+        <div class="card-info">
+          <div class="card-fila">
+            <mat-icon class="card-icon">email</mat-icon>
+            <span class="card-label">Correo:</span>
+            <span class="card-valor">{{ u.UserEmail }}</span>
+          </div>
+          <div class="card-fila">
+            <mat-icon class="card-icon">calendar_today</mat-icon>
+            <span class="card-label">Registro:</span>
+            <span class="card-valor">{{ u.UserRegistrationDate | date:'dd/MM/yyyy' }}</span>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="card-acciones">
+          <button mat-button class="btn-contactar" (click)="enviarMensaje(u.UserEmail)">
+            <mat-icon>mail</mat-icon>
+            Contactar
+          </button>
+        </div>
+
+      </mat-card>
+    }
+  </div>
+
+  @if (usuarios.length === 0) {
+    <p class="sin-datos">Todos los usuarios han realizado al menos un trueque.</p>
+  }
+</div>
+
+<button mat-fab class="fab-todos" (click)="enviarATodos()" [disabled]="usuarios.length === 0"
+  matTooltip="Contactar a todos" matTooltipPosition="left" matTooltipClass="tooltip-verde">
+  <mat-icon>mail</mat-icon>
+</button>

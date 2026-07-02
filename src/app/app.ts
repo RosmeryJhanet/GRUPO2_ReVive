@@ -14,9 +14,11 @@ export class App {
   protected readonly title = signal('ReviveFront');
   mostrarMenuAdmin = signal(true);
 
+  private readonly rutasPublicas = ['/', '/homes', '/login', '/registro'];
+
   constructor(private router: Router) {
     this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
-      this.mostrarMenuAdmin.set(this.router.url !== '/homes' && this.router.url !== '/');
+      this.mostrarMenuAdmin.set(!this.rutasPublicas.includes(this.router.url));
     });
   }
 }

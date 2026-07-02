@@ -1,20 +1,50 @@
 .registro-fondo {
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f0f8e8;
+  background: linear-gradient(135deg, #4cae4f 0%, #80c684 55%, #f0f8e8 100%);
   padding: 40px 16px;
+  overflow: hidden;
+}
+
+.registro-fondo::before,
+.registro-fondo::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+.registro-fondo::before {
+  width: 420px;
+  height: 420px;
+  background: #a4d5a6;
+  opacity: 0.55;
+  top: -120px;
+  left: -120px;
+}
+
+.registro-fondo::after {
+  width: 360px;
+  height: 360px;
+  background: #ddeec9;
+  opacity: 0.5;
+  bottom: -100px;
+  right: -100px;
 }
 
 .registro-card {
   position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 360px;
-  background: #80c684;
+  background: linear-gradient(160deg, #80c684 0%, #4cae4f 100%);
   border-radius: 32px;
   padding: 56px 28px 32px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 0 0 10px #f0f8e8, 0 24px 60px rgba(26, 61, 27, 0.45);
   display: flex;
   flex-direction: column;
   align-items: center;

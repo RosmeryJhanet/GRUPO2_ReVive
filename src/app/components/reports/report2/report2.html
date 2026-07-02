@@ -1,0 +1,24 @@
+<div class="reporte-fondo">
+  <h2>
+    <mat-icon>bar_chart</mat-icon>
+    Trueques por usuario y mes
+  </h2>
+
+  @if (!hasData) {
+    <div class="sin-datos">
+      <mat-icon>info</mat-icon>
+      <p>No hay datos de trueques registrados todavía.</p>
+    </div>
+  } @else {
+    <div class="grafico-card">
+      <canvas
+        baseChart
+        [labels]="barChartLabels"
+        [datasets]="barChartData"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [type]="barChartType"
+      ></canvas>
+    </div>
+  }
+</div>

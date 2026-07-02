@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>search</mat-icon>
+      <h2>Buscar Donación</h2>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>ID de la donación</mat-label>
+          <input matInput formControlName="id" type="number" placeholder="Ej: 1" />
+          <mat-icon matSuffix>tag</mat-icon>
+        </mat-form-field>
+
+        <button mat-raised-button class="btn-buscar" type="button" (click)="buscar()">
+          <mat-icon>search</mat-icon>
+          Buscar
+        </button>
+      </form>
+
+      <div class="resultado" *ngIf="resultado">
+        <h3>Resultado</h3>
+
+        <table>
+          <tr>
+            <td class="label">ID</td>
+            <td>{{ resultado.donationId }}</td>
+          </tr>
+
+          <tr>
+            <td class="label">Nombre</td>
+            <td>{{ resultado.nameDonation }}</td>
+          </tr>
+
+          <tr>
+            <td class="label">ID Artículo</td>
+            <td>{{ resultado.itemId }}</td>
+          </tr>
+
+          <tr>
+            <td class="label">ID Usuario</td>
+            <td>{{ resultado.idUser }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="no-encontrado" *ngIf="noEncontrado">
+        <mat-icon>search_off</mat-icon>
+        <p>No se encontró ninguna donación con ese ID.</p>
+      </div>
+    </div>
+  </div>
+</div>

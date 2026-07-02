@@ -1,0 +1,59 @@
+<div class="lista-container">
+  <h2 class="lista-titulo">
+    <mat-icon>swap_horiz</mat-icon>
+    Lista de Trueques
+  </h2>
+
+  <p class="total-registros">Total de trueques: {{ trueques.length }}</p>
+
+  <div class="cards-grid">
+    @for (b of trueques; track b.idBarter) {
+      <mat-card class="barter-card">
+
+        <div class="card-imagen-wrap">
+          @if (b.imageBarter) {
+            <img [src]="b.imageBarter" alt="Imagen del trueque" class="card-imagen" />
+          } @else {
+            <div class="card-imagen-placeholder">
+              <mat-icon>swap_horiz</mat-icon>
+              <span>Sin imagen</span>
+            </div>
+          }
+        </div>
+
+        <span class="card-estado" [class.activo]="b.statusBarter" [class.inactivo]="!b.statusBarter">
+          {{ b.statusBarter ? 'Activo' : 'Inactivo' }}
+        </span>
+
+        <mat-divider></mat-divider>
+
+        <div class="card-info">
+          <div class="card-fila">
+            <span class="card-label">Descripción:</span>
+            <span class="card-valor">{{ b.descriptionBarter }}</span>
+          </div>
+          <div class="card-fila">
+            <span class="card-label">Fecha:</span>
+            <span class="card-valor">{{ b.dateBarter | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="card-fila">
+            <span class="card-label">Usuario:</span>
+            <span class="card-valor">{{ getUsuario(b.idUser) }}</span>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="card-acciones">
+          <button mat-button class="btn-editar" [routerLink]="['/trueques/edits', b.idBarter]">Editar</button>
+          <button mat-button class="btn-eliminar" (click)="eliminar(b.idBarter)">Eliminar</button>
+        </div>
+
+      </mat-card>
+    }
+  </div>
+
+  @if (trueques.length === 0) {
+    <p class="sin-datos">No hay trueques registrados.</p>
+  }
+</div>

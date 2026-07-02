@@ -1,1 +1,52 @@
-<p>recycling-list works!</p>
+<div class="lista-container">
+  <h2 class="lista-titulo">
+    <mat-icon>recycling</mat-icon>
+    Lista de Reciclajes
+  </h2>
+
+  <p class="total-registros">Total de reciclajes: {{ reciclajes.length }}</p>
+
+  <div class="cards-grid">
+    @for (r of reciclajes; track r.recyclingId) {
+      <mat-card class="recycling-card">
+
+        <div class="card-imagen-wrap">
+          <img
+            [src]="getImagen(getMaterial(r.idMaterial)?.materialType || '')"
+            [alt]="getMaterial(r.idMaterial)?.materialType"
+            class="card-imagen"
+          />
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="card-info">
+          <div class="card-fila">
+            <span class="card-label">Nombre del reciclaje:</span>
+            <span class="card-valor">{{ r.recyclingName }}</span>
+          </div>
+          <div class="card-fila">
+            <span class="card-label">Material:</span>
+            <span class="card-valor">{{ getMaterial(r.idMaterial)?.materialName || 'Sin material' }}</span>
+          </div>
+          <div class="card-fila">
+            <span class="card-label">Usuario:</span>
+            <span class="card-valor">{{ getUsuario(r.idUser) }}</span>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="card-acciones">
+          <button mat-button class="btn-editar" [routerLink]="['/reciclajes/edits', r.recyclingId]">Editar</button>
+          <button mat-button class="btn-eliminar" (click)="eliminar(r.recyclingId)">Eliminar</button>
+        </div>
+
+      </mat-card>
+    }
+  </div>
+
+  @if (reciclajes.length === 0) {
+    <p class="sin-datos">No hay reciclajes registrados.</p>
+  }
+</div>

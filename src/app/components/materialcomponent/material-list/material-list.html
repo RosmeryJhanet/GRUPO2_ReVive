@@ -1,59 +1,44 @@
-<div style="padding: 24px">
-  <h2>
+<div class="lista-container">
+  <h2 class="lista-titulo">
     <mat-icon>recycling</mat-icon>
     Lista de Materiales
   </h2>
 
-  <table mat-table [dataSource]="dataSource" style="width: 100%">
-    <ng-container matColumnDef="c1">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.idMaterial }}</td>
-    </ng-container>
+  <p class="total-registros">Total de materiales: {{ materiales.length }}</p>
 
-    <ng-container matColumnDef="c2">
-      <th mat-header-cell *matHeaderCellDef>Material</th>
-      <td mat-cell *matCellDef="let element">{{ element.materialName }}</td>
-    </ng-container>
+  <div class="cards-grid">
+    @for (m of materiales; track m.idMaterial) {
+      <mat-card class="material-card">
 
-    <ng-container matColumnDef="c3">
-      <th mat-header-cell *matHeaderCellDef>Descripción</th>
-      <td mat-cell *matCellDef="let element">{{ element.materialDescription }}</td>
-    </ng-container>
+        <div class="card-imagen-wrap">
+          <img [src]="getImagen(m.materialType)" [alt]="m.materialType" class="card-imagen" />
+        </div>
 
-    <ng-container matColumnDef="c4">
-      <th mat-header-cell *matHeaderCellDef>Tipo</th>
-      <td mat-cell *matCellDef="let element">{{ element.materialType }}</td>
-    </ng-container>
+        <div class="card-nombre">{{ m.materialName }}</div>
 
-    <ng-container matColumnDef="c5">
-      <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button (click)="eliminar(element.idMaterial)" class="btn-eliminar">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+        <span class="card-tipo">{{ m.materialType }}</span>
 
-    <ng-container matColumnDef="c6">
-      <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button class="btn-editar" [routerLink]="['/materiales/edits', element.idMaterial]">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+        <mat-divider></mat-divider>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+        <div class="card-info">
+          <div class="card-fila">
+            <span class="card-label">Descripción:</span>
+            <span class="card-valor">{{ m.materialDescription }}</span>
+          </div>
+        </div>
 
-  <div class="paginator-footer">
-    <span class="total-registros">Total de materiales: {{ dataSource.data.length }}</span>
-    <mat-paginator
-      [pageSizeOptions]="[5, 10, 25]"
-      [pageSize]="5"
-      showFirstLastButtons
-      aria-label="Seleccionar página de materiales"
-    ></mat-paginator>
+        <mat-divider></mat-divider>
+
+        <div class="card-acciones">
+          <button mat-button class="btn-editar" [routerLink]="['/materiales/edits', m.idMaterial]">Editar</button>
+          <button mat-button class="btn-eliminar" (click)="eliminar(m.idMaterial)">Eliminar</button>
+        </div>
+
+      </mat-card>
+    }
   </div>
+
+  @if (materiales.length === 0) {
+    <p class="sin-datos">No hay materiales registrados.</p>
+  }
 </div>

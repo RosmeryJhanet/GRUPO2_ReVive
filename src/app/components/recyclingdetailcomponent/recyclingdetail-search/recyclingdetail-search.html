@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="card">
+
+    <div class="card-header">
+      <mat-icon>search</mat-icon>
+      <h2>Buscar Detalle de Reciclaje</h2>
+    </div>
+
+    <div class="card-body">
+
+      <form [formGroup]="form">
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>ID del detalle</mat-label>
+
+          <input
+            matInput
+            formControlName="id"
+            type="number"
+            placeholder="Ej: 1" />
+
+          <mat-icon matSuffix>tag</mat-icon>
+
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          class="btn-buscar"
+          type="button"
+          (click)="buscar()">
+
+          <mat-icon>search</mat-icon>
+          Buscar
+
+        </button>
+
+      </form>
+
+      <div class="resultado" *ngIf="resultado">
+
+        <h3>Resultado</h3>
+
+        <table>
+
+          <tr>
+            <td class="label">ID</td>
+            <td>{{ resultado.recyclingDetailsId }}</td>
+          </tr>
+
+          <tr>
+            <td class="label">Descripción</td>
+            <td>{{ resultado.descriptionDetail }}</td>
+          </tr>
+
+          <tr>
+            <td class="label">Fecha</td>
+            <td>{{ resultado.registrationDate }}</td>
+          </tr>
+
+          <tr>
+            <td class="label">Estado</td>
+            <td>{{ resultado.traceabilityStatus }}</td>
+          </tr>
+
+          <tr>
+            <td class="label">ID Reciclaje</td>
+            <td>{{ resultado.recyclingId }}</td>
+          </tr>
+
+          <tr>
+            <td class="label">ID Punto de Acopio</td>
+            <td>{{ resultado.collectionPointId }}</td>
+          </tr>
+
+        </table>
+
+      </div>
+
+      <div class="no-encontrado" *ngIf="noEncontrado">
+
+        <mat-icon>search_off</mat-icon>
+
+        <p>No se encontró ningún detalle de reciclaje con ese ID.</p>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

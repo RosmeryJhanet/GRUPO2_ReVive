@@ -6,6 +6,8 @@ import { RouterLink } from '@angular/router';
 import { Category } from '../../../models/category';
 import { CategoryService } from '../../../services/categoryservice';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdialogcomponent';
 
 @Component({
   selector: 'app-category-list',
@@ -22,6 +24,7 @@ export class CategoryList implements OnInit, AfterViewInit {
   constructor(
     private cS: CategoryService,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -44,9 +47,18 @@ export class CategoryList implements OnInit, AfterViewInit {
   }
 
   eliminar(id: number): void {
-    this.cS.delete(id).subscribe(() => {
-      this.snackBar.open('Categoría eliminada correctamente', 'Cerrar', { duration: 3000 });
-      this.cargarCategorias();
+    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+      width: '360px',
+      panelClass: 'confirm-dialog-panel',
+      data: { titulo: 'Eliminar categoría', mensaje: '¿Seguro que deseas eliminar esta categoría?' },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado) => {
+      if (!confirmado) return;
+      this.cS.delete(id).subscribe(() => {
+        this.snackBar.open('Categoría eliminada correctamente', 'Cerrar', { duration: 3000 });
+        this.cargarCategorias();
+      });
     });
   }
 }

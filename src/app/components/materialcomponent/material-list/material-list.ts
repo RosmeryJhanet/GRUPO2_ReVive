@@ -1,55 +1,76 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Material } from '../../../models/material';
-import { MatTableDataSource } from '@angular/material/table';
 import { Materialservice } from '../../../services/materialservice';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdialogcomponent';
 
 @Component({
   selector: 'app-material-list',
-  imports: [MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    RouterLink,
-    MatPaginatorModule],
+  imports: [MatIconModule, MatCardModule, MatButtonModule, MatDividerModule, RouterLink, CommonModule],
   templateUrl: './material-list.html',
   styleUrl: './material-list.css',
 })
-export class MaterialList implements OnInit, AfterViewInit {
-
-  dataSource: MatTableDataSource<Material> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+export class MaterialList implements OnInit {
+  materiales: Material[] = [];
 
   constructor(
     private mS: Materialservice,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private cdr: ChangeDetectorRef,
   ) {}
 
-ngOnInit(): void {
+  ngOnInit(): void {
     this.cargarMateriales();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-  }
-
-   cargarMateriales() {
+  cargarMateriales() {
     this.mS.list().subscribe({
       next: (data) => {
-        this.dataSource.data = data;
+        this.materiales = data;
+        this.cdr.detectChanges();
       },
     });
   }
+
+  getImagen(tipo: string): string {
+    const mapa: { [key: string]: string } = {
+      carton: '/assets/materiales/carton.png',
+      cartón: '/assets/materiales/carton.png',
+      metal: '/assets/materiales/metal.png',
+      papel: '/assets/materiales/papel.png',
+      plastico: '/assets/materiales/plastico.png',
+      plástico: '/assets/materiales/plastico.png',
+      vidrio: '/assets/materiales/vidrio.png',
+    };
+    return mapa[tipo?.toLowerCase()] ?? '/assets/materiales/plastico.png';
+  }
+
   eliminar(id: number) {
-    this.mS.delete(id).subscribe(() => {
-      this.snackBar.open('Material eliminado correctamente', 'Cerrar', { duration: 3000 });
-      this.cargarMateriales();
+    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+      width: '360px',
+      panelClass: 'confirm-dialog-panel',
+      data: { titulo: 'Eliminar material', mensaje: '¿Seguro que deseas eliminar este material?' },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado) => {
+      if (!confirmado) return;
+      this.mS.delete(id).subscribe({
+        next: () => {
+          this.snackBar.open('Material eliminado correctamente', 'Cerrar', { duration: 3000 });
+          this.cargarMateriales();
+        },
+        error: (err) => {
+          this.snackBar.open(err.error, 'Cerrar', { duration: 4000 });
+        },
+      });
     });
   }
 }

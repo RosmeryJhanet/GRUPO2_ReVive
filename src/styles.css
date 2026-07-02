@@ -15,3 +15,40 @@ body {
   --mdc-outlined-text-field-focus-outline-color: #4cae4f;
   --mdc-outlined-text-field-container-color: #ffffff;
 }
+
+/* Diálogo de confirmación: bordes redondeados en el contenedor exterior */
+.confirm-dialog-panel .mat-mdc-dialog-surface {
+  border-radius: 20px !important;
+  overflow: hidden;
+}
+
+/* Panel del menú de perfil de usuario */
+
+/* Iconos y texto de los mat-menu en verde */
+.mat-mdc-menu-item .mat-icon {
+  color: #4cae4f !important;
+}
+
+.mat-mdc-menu-item span {
+  color: #2e5c2f !important;
+}
+
+/* Al hacer hover/click en un item del menú */
+.mat-mdc-menu-item:hover .mat-icon,
+.mat-mdc-menu-item:focus .mat-icon {
+  color: #2e5c2f !important;
+}
+
+.mat-mdc-menu-item:hover,
+.mat-mdc-menu-item:focus {
+  background-color: #f0f8e8 !important;
+}
+
+/* Tooltip verde ReVive */
+.tooltip-verde {
+  background-color: #2e5c2f !important;
+  color: #f0f8e8 !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+}
