@@ -1,21 +1,57 @@
-div {
+:host {
+  display: block;
+  background-color: #ddeec9;
+  min-height: 100vh;
+}
+
+.lista-container {
   padding: 24px;
   max-width: 1100px;
   margin: 0 auto;
 }
 
-h2 {
+.lista-titulo {
   display: flex;
   align-items: center;
   gap: 8px;
   color: #4cae4f;
-  margin-bottom: 24px;
   font-size: 1.5rem;
+  margin-bottom: 24px;
+}
+
+table {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #4cae4f;
+}
+
+th.mat-header-cell {
+  background-color: #4cae4f;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 14px 16px;
+}
+
+td.mat-cell {
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  color: #2e5c2f;
+  font-weight: 500;
+}
+
+tr.mat-row:nth-child(even) {
+  background-color: #f0f8e8;
+}
+
+tr.mat-row:hover {
+  background-color: #a4d5a6;
+  transition: background-color 0.2s ease;
 }
 
 .paginator-footer {
-  padding: 0;
-  max-width: none;
   margin: 8px 0 0;
   display: flex;
   align-items: center;
@@ -25,47 +61,38 @@ h2 {
 }
 
 .total-registros {
-  color: var(--mat-sys-on-surface-variant);
   font-size: 0.9rem;
+  color: #2e5c2f;
 }
 
-table {
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-th.mat-header-cell {
-  background-color: var(--mat-sys-primary);
-  color: var(--mat-sys-on-primary);
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 14px 16px;
-}
-
-td.mat-cell {
-  padding: 12px 16px;
-  color: var(--mat-sys-on-surface);
-  font-size: 0.9rem;
-}
-
-tr.mat-row:nth-child(even) {
-  background-color: var(--mat-sys-surface-variant);
-}
-
-tr.mat-row:hover {
-  background-color: var(--mat-sys-secondary-container);
-  transition: background-color 0.2s ease;
-}
 .btn-eliminar {
   color: #2e5c2f;
-  background: transparent;
-  border: none;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .btn-editar {
   color: #4cae4f;
-  background: transparent;
-  border: none;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.mapa-titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4cae4f;
+  font-size: 1.2rem;
+  margin: 32px 0 12px;
+}
+
+.mapa-container {
+  width: 100%;
+  height: 450px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(76, 174, 79, 0.2);
+  border: 2px solid #80c684;
 }

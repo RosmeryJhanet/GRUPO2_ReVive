@@ -20,6 +20,18 @@
 
       <div class="resultado" *ngIf="resultado">
         <h3>Resultado</h3>
+
+        @if (resultado.imageBarter) {
+          <div class="resultado-imagen-wrap">
+            <img [src]="resultado.imageBarter" alt="Imagen del trueque" class="resultado-imagen" />
+          </div>
+        } @else {
+          <div class="resultado-imagen-placeholder">
+            <mat-icon>swap_horiz</mat-icon>
+            <span>Sin imagen</span>
+          </div>
+        }
+
         <table class="resultado-table">
           <tr>
             <td class="label">ID</td>
@@ -31,14 +43,18 @@
           </tr>
           <tr>
             <td class="label">Estado</td>
-            <td>{{ resultado.statusBarter ? 'Activo' : 'Inactivo' }}</td>
+            <td>
+              <span class="badge" [class.activo]="resultado.statusBarter" [class.inactivo]="!resultado.statusBarter">
+                {{ resultado.statusBarter ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
           </tr>
           <tr>
             <td class="label">Fecha</td>
-            <td>{{ resultado.dateBarter }}</td>
+            <td>{{ resultado.dateBarter | date:'dd/MM/yyyy' }}</td>
           </tr>
           <tr>
-            <td class="label">ID Usuario</td>
+            <td class="label">Usuario ID</td>
             <td>{{ resultado.idUser }}</td>
           </tr>
         </table>

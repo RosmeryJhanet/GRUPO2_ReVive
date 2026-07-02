@@ -1,7 +1,9 @@
 .container {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   padding: 32px 16px;
+  background: linear-gradient(135deg, #4cae4f 0%, #a4d5a6 50%, #f0f8e8 100%);
 }
 
 .card {
@@ -55,13 +57,67 @@
 
 .resultado {
   margin-top: 24px;
-  border-top: 1px solid #e0e0e0;
+  border-top: 2px solid #ddeec9;
   padding-top: 16px;
 }
 
 .resultado h3 {
   color: #4cae4f;
   margin-bottom: 12px;
+}
+
+.resultado-imagen-wrap {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #4cae4f;
+  margin-bottom: 16px;
+}
+
+.resultado-imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.resultado-imagen-placeholder {
+  width: 100%;
+  height: 120px;
+  border-radius: 12px;
+  border: 2px dashed #a4d5a6;
+  background: #f0f8e8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #a4d5a6;
+  margin-bottom: 16px;
+}
+
+.resultado-imagen-placeholder mat-icon {
+  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.badge.activo {
+  background: #ddeec9;
+  color: #2e5c2f;
+}
+
+.badge.inactivo {
+  background: #fce8e8;
+  color: #c0392b;
 }
 
 table {

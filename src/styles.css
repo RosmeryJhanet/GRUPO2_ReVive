@@ -43,3 +43,12 @@ body {
 .mat-mdc-menu-item:focus {
   background-color: #f0f8e8 !important;
 }
+
+/* Tooltip verde ReVive */
+.tooltip-verde {
+  background-color: #2e5c2f !important;
+  color: #f0f8e8 !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+}

@@ -4,10 +4,6 @@
       <mat-icon>group_off</mat-icon>
       Usuarios sin trueque
     </h2>
-    <button mat-flat-button class="btn-todos" (click)="enviarATodos()" [disabled]="usuarios.length === 0">
-      <mat-icon>mail</mat-icon>
-      Contactar a todos
-    </button>
   </div>
 
   <p class="total-registros">Total: {{ usuarios.length }} usuario(s) sin trueques</p>
@@ -56,3 +52,8 @@
     <p class="sin-datos">Todos los usuarios han realizado al menos un trueque.</p>
   }
 </div>
+
+<button mat-fab class="fab-todos" (click)="enviarATodos()" [disabled]="usuarios.length === 0"
+  matTooltip="Contactar a todos" matTooltipPosition="left" matTooltipClass="tooltip-verde">
+  <mat-icon>mail</mat-icon>
+</button>
