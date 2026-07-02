@@ -12,19 +12,21 @@
           <mat-icon matSuffix>tag</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline" class="campo">
-          <mat-label>Descripcion de la donación</mat-label>
-          <input matInput formControlName="namedonation" placeholder="Ej: Casaca" maxlength="50">
-          <mat-icon matSuffix>label</mat-icon>
-          <mat-error *ngIf="form.get('namedonation')?.hasError('required')">La descripción es obligatoria.</mat-error>
-          <mat-error *ngIf="form.get('namedonation')?.hasError('maxlength')">Máximo 50 caracteres.</mat-error>
+          <mat-label>Descripción de la donación</mat-label>
+
+          <textarea matInput formControlName="namedonation" rows="4" maxlength="25"
+            placeholder="Ejemplo: Casaca de invierno en buen estado">
+          </textarea>
+          <mat-hint>Describe el artículo que estás donando</mat-hint>
+          <mat-icon matSuffix>edit_note</mat-icon>
+          <mat-error *ngIf="form.get('namedonation')?.hasError('required')"> La descripción es obligatoria.</mat-error>
+          <mat-error *ngIf="form.get('namedonation')?.hasError('maxlength')">Máximo 25 caracteres.</mat-error>
         </mat-form-field>
       </form>
     </div>
 
     <div class="card-actions">
-      <button mat-button class="btn-cancelar" routerLink="/donacion/listar">
-        Cancelar
-      </button>
+      <button mat-button class="btn-cancelar" routerLink="/donacion/listar">Cancelar</button>
       <button mat-raised-button class="btn-guardar" (click)="actualizar()">
         <mat-icon>update</mat-icon>
         Actualizar

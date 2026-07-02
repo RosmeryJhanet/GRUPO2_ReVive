@@ -54,7 +54,7 @@ export class DonationInsert implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      namedonation: ['',[Validators.required, Validators.maxLength(50)]],
+      namedonation: ['',[Validators.required, Validators.maxLength(25)]],
       itemid: ['',Validators.required],
       userid: ['',Validators.required],
     });
