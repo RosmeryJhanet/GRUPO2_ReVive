@@ -3,18 +3,21 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
 import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../services/login-service';
 
 
 @Component({
   selector: 'app-menucomponent',
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule, RouterLink],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule, MatDividerModule, RouterLink],
   templateUrl: './menucomponent.html',
   styleUrl: './menucomponent.css',
 })
 export class Menucomponent {
   role: any = '';
+  perfil: any = null;
+  mostrarPerfil = false;
 
   constructor(
     private loginService: LoginService,
@@ -23,7 +26,16 @@ export class Menucomponent {
 
   estaLogueado(): boolean {
     this.role = this.loginService.showRole();
+    this.perfil = this.loginService.getPerfilUsuario();
     return this.loginService.verificar();
+  }
+
+  togglePerfil() {
+    this.mostrarPerfil = !this.mostrarPerfil;
+  }
+
+  cerrarDropdown() {
+    this.mostrarPerfil = false;
   }
 
   isAdmin(): boolean {
