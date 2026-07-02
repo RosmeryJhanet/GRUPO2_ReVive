@@ -50,18 +50,35 @@ ngOnInit(): void {
     });
   }
   eliminar(id: number) {
-    const dialogRef = this.dialog.open(Confirmdialogcomponent, {
-      width: '360px',
-      panelClass: 'confirm-dialog-panel',
-      data: { titulo: 'Eliminar material', mensaje: '¿Seguro que deseas eliminar este material?' },
-    });
+  const dialogRef = this.dialog.open(Confirmdialogcomponent, {
+    width: '360px',
+    panelClass: 'confirm-dialog-panel',
+    data: {
+      titulo: 'Eliminar material',
+      mensaje: '¿Seguro que deseas eliminar este material?'
+    },
+  });
 
-    dialogRef.afterClosed().subscribe((confirmado) => {
-      if (!confirmado) return;
-      this.mS.delete(id).subscribe(() => {
-        this.snackBar.open('Material eliminado correctamente', 'Cerrar', { duration: 3000 });
+  dialogRef.afterClosed().subscribe((confirmado) => {
+    if (!confirmado) return;
+
+    this.mS.delete(id).subscribe({
+      next: () => {
+        this.snackBar.open(
+          'Material eliminado correctamente',
+          'Cerrar',
+          { duration: 3000 }
+        );
         this.cargarMateriales();
-      });
+      },
+      error: (err) => {
+        this.snackBar.open(
+          err.error,
+          'Cerrar',
+          { duration: 4000 }
+        );
+      }
     });
-  }
+  });
+}
 }
