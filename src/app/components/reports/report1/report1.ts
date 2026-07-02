@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -15,6 +15,8 @@ import { QueryNativeUserDTO } from '../../../models/QueryNativeUserDTO';
   styleUrl: './report1.css',
 })
 export class Report1 implements OnInit {
+  @Input() mostrarFabTodos = true;
+
   usuarios: QueryNativeUserDTO[] = [];
 
   constructor(

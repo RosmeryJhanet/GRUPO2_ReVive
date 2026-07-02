@@ -58,6 +58,7 @@ import { ReportRecyclingUser } from './components/report-recycling-user/report-r
 
 import { Report1 } from './components/reports/report1/report1';
 import { Report2 } from './components/reports/report2/report2';
+import { Dashboard } from './components/reports/dashboard/dashboard';
 
 import { Bartercomponent } from './components/bartercomponent/bartercomponent';
 import { BarterList } from './components/bartercomponent/barter-list/barter-list';
@@ -236,6 +237,12 @@ export const routes: Routes = [
       { path: 'report1', component: Report1 },
       { path: 'report2', component: Report2 },
     ],
+  },
+
+  {
+    path: 'dashboard',
+    component: Dashboard,
+    canActivate: [seguridadGuard],
   },
 
   {
