@@ -18,10 +18,10 @@ export class Donationservice {
     return this.http.get<Donation[]>(`${this.url}/listar`);
   }
   insert(d: Donation){
-    return this.http.post<Donation>(`${this.url}/registrar`, d);
+    return this.http.post<Donation>(`${this.url}/Registrar`, d);
   }
   delete(id: number){
-    return this.http.delete(`${this.url}/eliminar/${id}`, {
+    return this.http.delete(`${this.url}/${id}`, {
       responseType: 'text'
     });
   }

@@ -22,7 +22,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class DonationList implements OnInit {
 
   dataSource: MatTableDataSource<Donation> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5','c6'];
   items: ItemDTO[] = [];
   usuario: Usuario[] = [];
 
@@ -78,12 +78,12 @@ export class DonationList implements OnInit {
     const dialogRef = this.dialog.open(Confirmdialogcomponent, {
       width: '360px',
       panelClass: 'confirm-dialog-panel',
-      data: { titulo: 'Eliminar artículo', mensaje: '¿Seguro que deseas eliminar este artículo?' },
+      data: { titulo: 'Eliminar donación', mensaje: '¿Seguro que deseas eliminar esta donación?' },
     });
     dialogRef.afterClosed().subscribe((confirmado) => {
       if (!confirmado) return;
       this.dS.delete(id).subscribe(() => {
-        this.snackBar.open('Artículo eliminado correctamente', 'Cerrar', { duration: 3000 });
+        this.snackBar.open('Donación eliminada correctamente', 'Cerrar', { duration: 3000 });
         this.cargarDonaciones();
       });
     });

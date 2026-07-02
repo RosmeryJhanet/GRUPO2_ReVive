@@ -73,7 +73,7 @@ export class DonationUpdate implements OnInit {
     this.dS.update(this.donations).subscribe({
       next: (data) => {
         this.snackBar.open('Donación actualizada correctamente', '', { duration: 2000 });
-        this.router.navigate(['/donation/list']);
+        this.router.navigate(['/donacion/listar']);
       }
     });
   }

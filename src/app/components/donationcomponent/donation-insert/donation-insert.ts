@@ -15,10 +15,12 @@ import { Usuarioservice } from '../../../services/usuarioservice';
 import { Donationservice } from '../../../services/donationservice';
 import { ItemService } from '../../../services/itemservice';
 import { ItemDTO } from '../../../models/itemDTO';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-donation-insert',
   imports: [
+    CommonModule,
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
@@ -82,7 +84,7 @@ export class DonationInsert implements OnInit {
     this.dS.insert(this.donacion).subscribe({
       next: () => {
         this.snackBar.open('Donación registrada con éxito', 'cerrar', {duration: 2000});
-        this.router.navigate(['/donations/listar']);
+        this.router.navigate(['/donacion/listar']);
       },
     });
   }
