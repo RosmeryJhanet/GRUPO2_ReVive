@@ -1,1 +1,57 @@
-<p>product-search works!</p>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>search</mat-icon>
+      <h2>Buscar Producto</h2>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>ID del producto</mat-label>
+          <input matInput formControlName="id" type="number" placeholder="Ej: 1" />
+          <mat-icon matSuffix>tag</mat-icon>
+        </mat-form-field>
+        <button mat-raised-button class="btn-buscar" type="button" (click)="buscar()">
+          <mat-icon>search</mat-icon>
+          Buscar
+        </button>
+      </form>
+
+      <div class="resultado" *ngIf="resultado">
+        <h3>Resultado</h3>
+        <table>
+          <tr>
+            <td class="label">ID</td>
+            <td>{{ resultado.iddProduct }}</td>
+          </tr>
+          <tr>
+            <td class="label">Nombre</td>
+            <td>{{ resultado.nameProduct }}</td>
+          </tr>
+          <tr>
+            <td class="label">Descripción</td>
+            <td>{{ resultado.descriptionProduct }}</td>
+          </tr>
+          <tr>
+            <td class="label">Estado de Conservación</td>
+            <td>{{ resultado.conservationStatus }}</td>
+          </tr>
+          <tr>
+            <td class="label">Categoría</td>
+            <td>{{ getCategoryName(resultado.idCategory) }}</td>
+          </tr>
+          <tr>
+            <td class="label">Trueque</td>
+            <td>{{ getBarterDescription(resultado.idBarter) }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="no-encontrado" *ngIf="noEncontrado">
+        <mat-icon>search_off</mat-icon>
+        <p>No se encontró ningún producto con ese ID.</p>
+      </div>
+    </div>
+  </div>
+</div>

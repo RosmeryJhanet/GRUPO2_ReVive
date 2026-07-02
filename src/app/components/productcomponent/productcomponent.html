@@ -1,1 +1,6 @@
-<p>productcomponent works!</p>
+<router-outlet></router-outlet>
+<div [hidden]="route.children.length !== 0">
+    <app-product-list></app-product-list>
+</div>
+
+<app-chatiacomponent></app-chatiacomponent>

@@ -7,59 +7,63 @@
   <span style="flex: 1"></span>
 
   @if (isRecolector()) {
-    <button mat-button style="color: #4cae4f" routerLink="/ruta-cercana">
-      <mat-icon>near_me</mat-icon>
-      Ruta más cercana
-    </button>
+  <button mat-button style="color: #4cae4f" routerLink="/ruta-cercana">
+    <mat-icon>near_me</mat-icon>
+    Ruta más cercana
+  </button>
   }
 
   @if (isAdmin()) {
 
-    <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuTablas">
-      <mat-icon>table_chart</mat-icon>
-      Tablas
-    </button>
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuTablas">
+    <mat-icon>table_chart</mat-icon>
+    Tablas
+  </button>
 
-    <button mat-button style="color: #4cae4f" routerLink="/dashboard">
-      <mat-icon>dashboard</mat-icon>
-      Dashboard
-    </button>
+  <button mat-button style="color: #4cae4f" routerLink="/dashboard">
+    <mat-icon>dashboard</mat-icon>
+    Dashboard
+  </button>
 
-     <button mat-button style="color: #4cae4f" routerLink="/ruta-cercana">
-      <mat-icon>near_me</mat-icon>
-      Ruta más cercana
-    </button>
+  <button mat-button style="color: #4cae4f" routerLink="/ruta-cercana">
+    <mat-icon>near_me</mat-icon>
+    Ruta más cercana
+  </button>
 
-    <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuReportes">
-      <mat-icon>bar_chart</mat-icon>
-      Reportes
-    </button>
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuReportes">
+    <mat-icon>bar_chart</mat-icon>
+    Reportes
+  </button>
   }
 
   @if (isRecolector() && !isAdmin()) {
-    <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuUbicaciones">
-      <mat-icon>location_on</mat-icon>
-      Ubicaciones
-    </button>
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuUbicaciones">
+    <mat-icon>location_on</mat-icon>
+    Ubicaciones
+  </button>
   }
 
-  @if (isTruequero() && !isAdmin()) {
-    <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuTrueques">
-      <mat-icon>swap_horiz</mat-icon>
-      Trueques
-    </button>
+  @if (isTruequero() || isAdmin()) {
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuTrueques">
+    <mat-icon>swap_horiz</mat-icon>
+    Trueques
+  </button>
+  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuProductos">
+    <mat-icon>shopping_bag</mat-icon>
+    Productos
+  </button>
   }
 
   @if (estaLogueado()) {
-    <button mat-button style="color: #4cae4f" (click)="togglePerfil()">
-      <mat-icon>person</mat-icon>
-      {{ role }}
-    </button>
+  <button mat-button style="color: #4cae4f" (click)="togglePerfil()">
+    <mat-icon>person</mat-icon>
+    {{ role }}
+  </button>
   } @else {
-    <button mat-button style="color: #4cae4f" routerLink="/login">
-      <mat-icon>login</mat-icon>
-      Iniciar sesión
-    </button>
+  <button mat-button style="color: #4cae4f" routerLink="/login">
+    <mat-icon>login</mat-icon>
+    Iniciar sesión
+  </button>
   }
 </mat-toolbar>
 
@@ -113,6 +117,11 @@
   <button mat-menu-item [matMenuTriggerFor]="menuTrueques">
     <mat-icon>swap_horiz</mat-icon>
     Trueques
+  </button>
+
+  <button mat-menu-item [matMenuTriggerFor]="menuProductos">
+    <mat-icon>shopping_bag</mat-icon>
+    Productos
   </button>
 </mat-menu>
 
@@ -274,6 +283,22 @@
   </button>
 </mat-menu>
 
+<!-- PRODUCTOS -->
+<mat-menu #menuProductos="matMenu">
+  <button mat-menu-item routerLink="/productos/insertar">
+    <mat-icon>add</mat-icon>
+    Registrar
+  </button>
+  <button mat-menu-item routerLink="/productos/listar">
+    <mat-icon>list</mat-icon>
+    Lista
+  </button>
+  <button mat-menu-item routerLink="/productos/buscar-id">
+    <mat-icon>search</mat-icon>
+    Buscar por ID
+  </button>
+</mat-menu>
+
 <!-- REPORTES -->
 <mat-menu #menuReportes="matMenu">
   <button mat-menu-item routerLink="/reports/report1">
@@ -296,32 +321,32 @@
 
 <!-- BACKDROP para cerrar al hacer click fuera -->
 @if (mostrarPerfil) {
-  <div class="perfil-backdrop" (click)="cerrarDropdown()"></div>
-  <div class="perfil-dropdown">
-    <div class="perfil-cover">
-      <div class="perfil-avatar-circle">
-        <mat-icon class="perfil-avatar-icon">person</mat-icon>
-      </div>
+<div class="perfil-backdrop" (click)="cerrarDropdown()"></div>
+<div class="perfil-dropdown">
+  <div class="perfil-cover">
+    <div class="perfil-avatar-circle">
+      <mat-icon class="perfil-avatar-icon">person</mat-icon>
     </div>
-    <div class="perfil-nombre">{{ perfil?.userName }} {{ perfil?.userLastName }}</div>
-    <div class="perfil-info-list">
-      <div class="perfil-info-row">
-        <span class="perfil-label">Correo:</span>
-        <span class="perfil-valor">{{ perfil?.userEmail }}</span>
-      </div>
-      <div class="perfil-info-row">
-        <span class="perfil-label">DNI:</span>
-        <span class="perfil-valor">{{ perfil?.userIdentityDocument }}</span>
-      </div>
-      <div class="perfil-info-row">
-        <span class="perfil-label">ROL:</span>
-        <span class="perfil-valor">{{ role }}</span>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-    <button class="perfil-btn-cerrar" (click)="cerrarSesion()">
-      <mat-icon>logout</mat-icon>
-      Cerrar sesión
-    </button>
   </div>
+  <div class="perfil-nombre">{{ perfil?.userName }} {{ perfil?.userLastName }}</div>
+  <div class="perfil-info-list">
+    <div class="perfil-info-row">
+      <span class="perfil-label">Correo:</span>
+      <span class="perfil-valor">{{ perfil?.userEmail }}</span>
+    </div>
+    <div class="perfil-info-row">
+      <span class="perfil-label">DNI:</span>
+      <span class="perfil-valor">{{ perfil?.userIdentityDocument }}</span>
+    </div>
+    <div class="perfil-info-row">
+      <span class="perfil-label">ROL:</span>
+      <span class="perfil-valor">{{ role }}</span>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <button class="perfil-btn-cerrar" (click)="cerrarSesion()">
+    <mat-icon>logout</mat-icon>
+    Cerrar sesión
+  </button>
+</div>
 }
