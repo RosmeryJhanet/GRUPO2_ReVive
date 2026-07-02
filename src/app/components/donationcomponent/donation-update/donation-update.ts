@@ -84,7 +84,7 @@ export class DonationUpdate implements OnInit {
       return;
     }
 
-    this.donation.donationId = this.id;
+    this.donation.idDonation = this.id;
     this.donation.nameDonation = this.form.value.nameDonation;
     this.donation.itemId = this.form.value.itemId;
     this.donation.idUser = this.form.value.idUser;
