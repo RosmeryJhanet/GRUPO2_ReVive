@@ -7,7 +7,7 @@
   <table mat-table [dataSource]="dataSource" style="width: 100%">
     <ng-container matColumnDef="c1">
       <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.donationId }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.idDonation }}</td>
     </ng-container>
 
     <ng-container matColumnDef="c2">
@@ -35,7 +35,7 @@
         <button
           mat-icon-button
           class="btn-eliminar"
-          (click)="eliminar(element.donationId)"
+          (click)="eliminar(element.idDonation)"
         >
           <mat-icon>delete</mat-icon>
         </button>
@@ -48,7 +48,7 @@
         <button
           mat-icon-button
           class="btn-editar"
-          [routerLink]="['/donaciones/edits', element.donationId]"
+          [routerLink]="['/donaciones/edits', element.idDonation]"
         >
           <mat-icon>edit</mat-icon>
         </button>
