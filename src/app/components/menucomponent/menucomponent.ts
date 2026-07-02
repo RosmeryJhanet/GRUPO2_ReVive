@@ -5,11 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../services/login-service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-menucomponent',
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule, RouterLink],
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule, RouterLink],
   templateUrl: './menucomponent.html',
   styleUrl: './menucomponent.css',
 })

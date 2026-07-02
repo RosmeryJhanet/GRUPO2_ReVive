@@ -12,17 +12,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { Confirmdialogcomponent } from '../../confirmdialogcomponent/confirmdialogcomponent';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from '../../../services/login-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-donation-list',
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, RouterLink],
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatIconModule, RouterLink],
   templateUrl: './donation-list.html',
   styleUrl: './donation-list.css',
 })
 export class DonationList implements OnInit {
 
   dataSource: MatTableDataSource<Donation> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5','c6'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
   items: ItemDTO[] = [];
   usuario: Usuario[] = [];
 
@@ -32,6 +34,7 @@ export class DonationList implements OnInit {
     private dS: Donationservice,
     private iS: ItemService,
     private uS: Usuarioservice,
+    private loginService: LoginService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) { }
@@ -88,4 +91,9 @@ export class DonationList implements OnInit {
       });
     });
   }
+
+  isAdmin(): boolean {
+    return this.loginService.tieneRol('ADMIN');
+  }
+
 }
