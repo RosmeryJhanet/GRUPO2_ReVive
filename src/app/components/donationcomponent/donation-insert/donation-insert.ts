@@ -15,11 +15,12 @@ import { Usuarioservice } from '../../../services/usuarioservice';
 import { Donationservice } from '../../../services/donationservice';
 import { ItemService } from '../../../services/itemservice';
 import { ItemDTO } from '../../../models/itemDTO';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-donation-insert',
   imports: [
-    MatInputModule,
+    CommonModule,MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
     MatIconModule,
