@@ -1,0 +1,67 @@
+
+div {
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4cae4f;
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+}
+
+.paginator-footer {
+  padding: 0;
+  max-width: none;
+  margin: 8px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.total-registros {
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.9rem;
+}
+
+table {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+th.mat-header-cell {
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 14px 16px;
+}
+
+td.mat-cell {
+  padding: 12px 16px;
+  color: var(--mat-sys-on-surface);
+  font-size: 0.9rem;
+}
+
+tr.mat-row:nth-child(even) {
+  background-color: var(--mat-sys-surface-variant);
+}
+
+tr.mat-row:hover {
+  background-color: var(--mat-sys-secondary-container);
+  transition: background-color 0.2s ease;
+}
+
+.btn-eliminar {
+  color: #c62828;
+  background: transparent;
+  border: none;
+}

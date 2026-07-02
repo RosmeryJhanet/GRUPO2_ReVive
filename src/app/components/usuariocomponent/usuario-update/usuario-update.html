@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>group</mat-icon>
+      <h2>Actualizar Usuario</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>ID</mat-label>
+          <input matInput [value]="id" disabled />
+          <mat-icon matSuffix>tag</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="name" placeholder="Ej: Luis" maxlength="200" />
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="form.get('name')?.hasError('required')">El nombre es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('name')?.hasError('maxlength')">Máximo 200 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="lastName" placeholder="Ej: Ortiz Ramos" maxlength="200" />
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="form.get('lastName')?.hasError('required')">El apellido es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('lastName')?.hasError('maxlength')">Máximo 200 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>DNI</mat-label>
+          <input matInput formControlName="document" placeholder="Ej: 12345678" maxlength="8" />
+          <mat-icon matSuffix>badge</mat-icon>
+          <mat-error *ngIf="form.get('document')?.hasError('required')">El DNI es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('document')?.hasError('pattern')">Debe tener exactamente 8 dígitos.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Ej: correo@ejemplo.com" />
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="form.get('email')?.hasError('required')">El email es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('email')?.hasError('email')">Formato de email inválido.</mat-error>
+        </mat-form-field>
+
+        <div class="card-actions">
+          <button mat-button class="btn-cancelar" routerLink="/usuarios/listar">Cancelar</button>
+          <button mat-raised-button class="btn-guardar" (click)="actualizar()">
+            <mat-icon>update</mat-icon>
+            Actualizar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

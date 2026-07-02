@@ -1,0 +1,76 @@
+<div style="padding: 24px">
+  <h2 style="color: var(--mat-sys-primary); margin-bottom: 16px">
+    <mat-icon>recycling</mat-icon>
+    Lista de Ubicaciones
+  </h2>
+
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    style="width: 100%; border-radius: 8px; overflow: hidden"
+  >
+    <!-- ID -->
+    <ng-container matColumnDef="c1">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.idLocation }}</td>
+    </ng-container>
+
+    <!-- Dirección -->
+    <ng-container matColumnDef="c2">
+      <th mat-header-cell *matHeaderCellDef>Dirección</th>
+      <td mat-cell *matCellDef="let element">{{ element.addressLocation }}</td>
+    </ng-container>
+
+    <!-- Distrito -->
+    <ng-container matColumnDef="c3">
+      <th mat-header-cell *matHeaderCellDef>Distrito</th>
+      <td mat-cell *matCellDef="let element">{{ element.districtLocation }}</td>
+    </ng-container>
+
+    <!-- Latitud -->
+    <ng-container matColumnDef="c4">
+      <th mat-header-cell *matHeaderCellDef>Latitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.latitudeLocation }}</td>
+    </ng-container>
+    <!-- Longitud -->
+    <ng-container matColumnDef="c5">
+      <th mat-header-cell *matHeaderCellDef>Longitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.longitudeLocation }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="c6">
+      <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="eliminar(element.idLocation)" class="btn-eliminar">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="c7">
+      <th mat-header-cell *matHeaderCellDef>Actualizar</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          class="btn-editar"
+          [routerLink]="['/ubicaciones/edits', element.idLocation]"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <div class="paginator-footer">
+    <span class="total-registros">Total de ubicaciones: {{ dataSource.data.length }}</span>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25]"
+      [pageSize]="5"
+      showFirstLastButtons
+      aria-label="Seleccionar página de ubicaciones"
+    ></mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <mat-icon>recycling</mat-icon>
+      <h2>Registrar Ubicaciones</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <div class="form-layout">
+          <div class="form-fields">
+            <mat-form-field appearance="outline" class="campo">
+              <mat-label>Dirección</mat-label>
+              <input matInput formControlName="address" placeholder="Ej: Av. Javier Prado 123" maxlength="200">
+              <mat-icon matSuffix>location_on</mat-icon>
+              <mat-error *ngIf="form.get('address')?.hasError('required')">La dirección es obligatoria.</mat-error>
+              <mat-error *ngIf="form.get('address')?.hasError('maxlength')">Máximo 200 caracteres.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="campo">
+              <mat-label>Latitud</mat-label>
+              <input matInput formControlName="latitude" placeholder="Ej: -12.0464" readonly>
+              <mat-icon matSuffix>explore</mat-icon>
+              <mat-error *ngIf="form.get('latitude')?.hasError('required')">La latitud es obligatoria.</mat-error>
+              <mat-error *ngIf="form.get('latitude')?.hasError('pattern')">Formato inválido (máx. 2 dígitos enteros y 7 decimales).</mat-error>
+              <mat-error *ngIf="form.get('latitude')?.hasError('min') || form.get('latitude')?.hasError('max')">Debe estar entre -90 y 90.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="campo">
+              <mat-label>Longitud</mat-label>
+              <input matInput formControlName="longitude" placeholder="Ej: -77.0428" readonly>
+              <mat-icon matSuffix>explore</mat-icon>
+              <mat-error *ngIf="form.get('longitude')?.hasError('required')">La longitud es obligatoria.</mat-error>
+              <mat-error *ngIf="form.get('longitude')?.hasError('pattern')">Formato inválido (máx. 2 dígitos enteros y 7 decimales).</mat-error>
+              <mat-error *ngIf="form.get('longitude')?.hasError('min') || form.get('longitude')?.hasError('max')">Debe estar entre -180 y 180.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="campo">
+              <mat-label>Distrito</mat-label>
+              <input matInput formControlName="distric" placeholder="Ej: Miraflores" maxlength="100">
+              <mat-icon matSuffix>location_city</mat-icon>
+              <mat-error *ngIf="form.get('distric')?.hasError('required')">El distrito es obligatorio.</mat-error>
+              <mat-error *ngIf="form.get('distric')?.hasError('maxlength')">Máximo 100 caracteres.</mat-error>
+            </mat-form-field>
+
+            <div class="card-actions">
+              <button mat-button class="btn-cancelar" routerLink="/ubicaciones/listar">
+                Cancelar
+              </button>
+              <button mat-raised-button class="btn-guardar" (click)="aceptar()">
+                <mat-icon>save</mat-icon>
+                Registrar
+              </button>
+            </div>
+          </div>
+
+          <div class="form-map">
+            <app-mapscomponent
+              [lat]="form.value.latitude ? +form.value.latitude : null"
+              [lng]="form.value.longitude ? +form.value.longitude : null"
+              (coordsSelected)="onCoordsSelected($event)"
+              (districtFound)="onDistrictFound($event)"
+            ></app-mapscomponent>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
