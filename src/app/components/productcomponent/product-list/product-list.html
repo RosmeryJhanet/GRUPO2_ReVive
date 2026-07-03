@@ -1,0 +1,54 @@
+<div class="lista-container">
+  <h2 class="lista-titulo">
+    <mat-icon>shopping_bag</mat-icon>
+    Lista de Productos
+  </h2>
+
+  <p class="total-registros">Total de productos: {{ productos.length }}</p>
+
+  <div class="cards-grid">
+    @for (p of productos; track p.iddProduct) {
+      <mat-card class="product-card">
+
+        <div class="card-imagen-wrap">
+          <mat-icon class="card-placeholder-icon">inventory</mat-icon>
+        </div>
+
+        <div class="card-nombre">{{ p.nameProduct }}</div>
+
+        <span class="card-status-badge">
+          {{ p.conservationStatus }}
+        </span>
+
+        <mat-divider></mat-divider>
+
+        <div class="card-info">
+          <div class="card-fila">
+            <span class="card-label">Descripción:</span>
+            <span class="card-valor">{{ p.descriptionProduct }}</span>
+          </div>
+          <div class="card-fila">
+            <span class="card-label">Categoría:</span>
+            <span class="card-valor">{{ getCategoryName(p.idCategory) }}</span>
+          </div>
+          <div class="card-fila">
+            <span class="card-label">Trueque:</span>
+            <span class="card-valor">{{ getBarterDescription(p.idBarter) }}</span>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="card-acciones">
+          <button mat-button class="btn-editar" [routerLink]="['/productos/edits', p.iddProduct]">Editar</button>
+          <button mat-button class="btn-eliminar" (click)="eliminar(p.iddProduct)">Eliminar</button>
+        </div>
+
+      </mat-card>
+    }
+  </div>
+
+  @if (productos.length === 0) {
+    <p class="sin-datos">No hay productos registrados.</p>
+  }
+</div>

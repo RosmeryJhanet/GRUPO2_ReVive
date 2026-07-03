@@ -40,6 +40,8 @@ export class BarterInsert implements OnInit, AfterViewInit {
   form: FormGroup = new FormGroup({});
   b: Barter = new Barter();
   listaUsuarios: Usuario[] = [];
+  imagenPreview: string = '';
+  imagenBase64: string = '';
 
   constructor(
     private bS: Barterservice,
@@ -79,6 +81,25 @@ export class BarterInsert implements OnInit, AfterViewInit {
     return `${año}-${mes}-${dia}`;
   }
 
+  onImagenSeleccionada(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length) return;
+    const archivo = input.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      const resultado = reader.result as string;
+      this.imagenPreview = resultado;
+      this.imagenBase64 = resultado;
+      this.cdr.detectChanges();
+    };
+    reader.readAsDataURL(archivo);
+  }
+
+  quitarImagen(): void {
+    this.imagenPreview = '';
+    this.imagenBase64 = '';
+  }
+
   aceptar() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -88,6 +109,7 @@ export class BarterInsert implements OnInit, AfterViewInit {
     this.b.statusBarter = this.form.value.status;
     this.b.dateBarter = this.formatearFecha(this.form.value.date);
     this.b.idUser = this.form.value.usuario;
+    this.b.imageBarter = this.imagenBase64;
 
     this.bS.insert(this.b).subscribe({
       next: () => {

@@ -1,49 +1,61 @@
-<div style="padding: 24px">
-  <h2 style="color: var(--mat-sys-primary); margin-bottom: 16px">
-    <mat-icon>group_off</mat-icon>
-    Usuarios sin trueque
-  </h2>
-
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    style="width: 100%; border-radius: 8px; overflow: hidden"
-  >
-    <!-- ID -->
-    <ng-container matColumnDef="c1">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.idUser }}</td>
-    </ng-container>
-
-    <!-- Nombre -->
-    <ng-container matColumnDef="c2">
-      <th mat-header-cell *matHeaderCellDef>Nombre</th>
-      <td mat-cell *matCellDef="let element">{{ element.UserName }}</td>
-    </ng-container>
-
-    <!-- Email -->
-    <ng-container matColumnDef="c3">
-      <th mat-header-cell *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let element">{{ element.UserEmail }}</td>
-    </ng-container>
-
-    <!-- Fecha de registro -->
-    <ng-container matColumnDef="c4">
-      <th mat-header-cell *matHeaderCellDef>Fecha de registro</th>
-      <td mat-cell *matCellDef="let element">{{ element.UserRegistrationDate | date:'dd/MM/yyyy' }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-
-  <div class="paginator-footer">
-    <span class="total-registros">Total de usuarios: {{ dataSource.data.length }}</span>
-    <mat-paginator
-      [pageSizeOptions]="[5, 10, 25]"
-      [pageSize]="5"
-      showFirstLastButtons
-      aria-label="Seleccionar página de usuarios sin trueque"
-    ></mat-paginator>
+<div class="reporte-container">
+  <div class="reporte-header">
+    <h2 class="reporte-titulo">
+      <mat-icon>group_off</mat-icon>
+      Usuarios sin trueque
+    </h2>
   </div>
+
+  <p class="total-registros">Total: {{ usuarios.length }} usuario(s) sin trueques</p>
+
+  <div class="cards-grid">
+    @for (u of usuarios; track u.idUser) {
+      <mat-card class="usuario-card">
+
+        <div class="card-avatar">{{ (u.UserName || '').charAt(0).toUpperCase() }}</div>
+        <div class="card-nombre">{{ u.UserName }}</div>
+
+        <span class="badge-sin-trueque">
+          <mat-icon class="badge-icon">swap_horiz</mat-icon>
+          No realizó ningún trueque
+        </span>
+
+        <mat-divider></mat-divider>
+
+        <div class="card-info">
+          <div class="card-fila">
+            <mat-icon class="card-icon">email</mat-icon>
+            <span class="card-label">Correo:</span>
+            <span class="card-valor">{{ u.UserEmail }}</span>
+          </div>
+          <div class="card-fila">
+            <mat-icon class="card-icon">calendar_today</mat-icon>
+            <span class="card-label">Registro:</span>
+            <span class="card-valor">{{ u.UserRegistrationDate | date:'dd/MM/yyyy' }}</span>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="card-acciones">
+          <button mat-button class="btn-contactar" (click)="enviarMensaje(u.UserEmail)">
+            <mat-icon>mail</mat-icon>
+            Contactar
+          </button>
+        </div>
+
+      </mat-card>
+    }
+  </div>
+
+  @if (usuarios.length === 0) {
+    <p class="sin-datos">Todos los usuarios han realizado al menos un trueque.</p>
+  }
 </div>
+
+@if (mostrarFabTodos) {
+  <button mat-fab class="fab-todos" (click)="enviarATodos()" [disabled]="usuarios.length === 0"
+    matTooltip="Contactar a todos" matTooltipPosition="left" matTooltipClass="tooltip-verde">
+    <mat-icon>mail</mat-icon>
+  </button>
+}

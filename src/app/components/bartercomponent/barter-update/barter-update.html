@@ -41,6 +41,27 @@
 
         <mat-checkbox formControlName="status" class="campo-checkbox">Activo</mat-checkbox>
 
+        <div class="imagen-seccion">
+          <p class="imagen-label">Imagen del artículo (opcional)</p>
+
+          @if (!imagenPreview) {
+            <label class="imagen-upload-btn">
+              <mat-icon>add_photo_alternate</mat-icon>
+              <span>Seleccionar imagen</span>
+              <input type="file" accept="image/*" (change)="onImagenSeleccionada($event)" hidden />
+            </label>
+          }
+
+          @if (imagenPreview) {
+            <div class="imagen-preview-wrap">
+              <img [src]="imagenPreview" alt="Preview" class="imagen-preview" />
+              <button mat-icon-button class="btn-quitar-imagen" (click)="quitarImagen()" type="button">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          }
+        </div>
+
         <div class="card-actions">
           <button mat-button class="btn-cancelar" routerLink="/trueques/listar">Cancelar</button>
           <button mat-raised-button class="btn-guardar" (click)="actualizar()">

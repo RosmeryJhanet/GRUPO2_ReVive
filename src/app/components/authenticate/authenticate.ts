@@ -21,7 +21,17 @@ export class Authenticate implements OnInit {
   useremail: string = '';
   userpassword: string = '';
   mensaje: string = '';
+  mostrarPassword: boolean = false;
+
   ngOnInit(): void { }
+
+  togglePassword() {
+    this.mostrarPassword = !this.mostrarPassword;
+  }
+
+  irAHome() {
+    this.router.navigate(['/homes']);
+  }
 
   login() {
     let request = new JwtRequestDTO();
@@ -30,7 +40,15 @@ export class Authenticate implements OnInit {
     this.loginService.login(request).subscribe(
       (data: any) => {
         sessionStorage.setItem('token', data.jwttoken);
-        this.redirigirSegunRol();
+        const email = this.useremail;
+        this.loginService.cargarUsuarios().subscribe({
+          next: (usuarios) => {
+            const found = usuarios.find((u: any) => u.userEmail === email);
+            if (found) sessionStorage.setItem('usuario', JSON.stringify(found));
+            this.redirigirSegunRol();
+          },
+          error: () => this.redirigirSegunRol(),
+        });
       },
       (error) => {
         this.snackBar.open(error.error ?? 'Credenciales incorrectas', 'Cerrar', { duration: 3000 });

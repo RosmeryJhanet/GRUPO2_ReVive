@@ -39,7 +39,6 @@ export class LoginService {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
 
-    console.log(decodedToken);
     return decodedToken?.roles || null;
   }
 
@@ -47,6 +46,30 @@ export class LoginService {
     const role = this.showRole();
     if (Array.isArray(role)) return role.includes(nombre);
     return role === nombre;
+  }
+
+  getInfoUsuario(): { email: string; rol: string } | null {
+    if (!this.isBrowser()) return null;
+    const token = sessionStorage.getItem('token');
+    if (!token) return null;
+    const helper = new JwtHelperService();
+    const decoded = helper.decodeToken(token);
+    if (!decoded) return null;
+    const rol = Array.isArray(decoded.roles) ? decoded.roles[0] : decoded.roles;
+    return {
+      email: decoded.sub || decoded.email || '',
+      rol: rol || '',
+    };
+  }
+
+  cargarUsuarios() {
+    return this.http.get<any[]>(`${base_url}/api/usuario/usuarios/listar`);
+  }
+
+  getPerfilUsuario(): any | null {
+    if (!this.isBrowser()) return null;
+    const stored = sessionStorage.getItem('usuario');
+    return stored ? JSON.parse(stored) : null;
   }
 
 }

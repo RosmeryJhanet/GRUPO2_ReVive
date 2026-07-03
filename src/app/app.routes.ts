@@ -58,6 +58,7 @@ import { ReportRecyclingUser } from './components/report-recycling-user/report-r
 
 import { Report1 } from './components/reports/report1/report1';
 import { Report2 } from './components/reports/report2/report2';
+import { Dashboard } from './components/reports/dashboard/dashboard';
 
 import { Bartercomponent } from './components/bartercomponent/bartercomponent';
 import { BarterList } from './components/bartercomponent/barter-list/barter-list';
@@ -71,10 +72,16 @@ import { DonationInsert } from './components/donationcomponent/donation-insert/d
 import { DonationSearch } from './components/donationcomponent/donation-search/donation-search';
 import { DonationUpdate } from './components/donationcomponent/donation-update/donation-update';
 
+import { Productcomponent } from './components/productcomponent/productcomponent';
+import { ProductList } from './components/productcomponent/product-list/product-list';
+import { ProductInsert } from './components/productcomponent/product-insert/product-insert';
+import { ProductUpdate } from './components/productcomponent/product-update/product-update';
+import { ProductSearch } from './components/productcomponent/product-search/product-search';
+
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'homes',
     pathMatch: 'full',
   },
 
@@ -91,7 +98,6 @@ export const routes: Routes = [
   {
     path: 'homes',
     component: Homecomponent,
-    canActivate: [seguridadGuard],
   },
 
   {
@@ -230,6 +236,19 @@ export const routes: Routes = [
   },
 
   {
+    path: 'productos',
+    component: Productcomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'listar', component: ProductList },
+      { path: 'insertar', component: ProductInsert },
+      { path: 'edits/:id', component: ProductUpdate },
+      { path: 'buscar-id', component: ProductSearch },
+    ],
+  },
+
+  {
     path: 'reports',
     canActivate: [seguridadGuard],
     canActivateChild: [seguridadGuard],
@@ -237,6 +256,12 @@ export const routes: Routes = [
       { path: 'report1', component: Report1 },
       { path: 'report2', component: Report2 },
     ],
+  },
+
+  {
+    path: 'dashboard',
+    component: Dashboard,
+    canActivate: [seguridadGuard],
   },
 
   {

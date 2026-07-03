@@ -1,3 +1,9 @@
+:host {
+  display: block;
+  background: linear-gradient(160deg, #ddeec9 0%, #a4d5a6 50%, #f0f8e8 100%);
+  min-height: 100vh;
+}
+
 /* Tarjeta principal */
 .chart-container {
   width: 95%;
@@ -15,8 +21,9 @@
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 2rem;
+  color: #4cae4f;
+  margin: 0;
+  padding: 2rem 1rem 0;
 }
 
 /* Contenedor del gráfico */

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
-import { GEMINI_API_KEY } from '../../environments/gemini-key.example';
+import { GEMINI_API_KEY } from '../../environments/gemini-key';
 import { ChatMessage } from '../models/chat-message';
 
 const SYSTEM_PROMPT = `Eres el asistente virtual de ReVive, una aplicación de reciclaje y puntos de recolección en Lima, Perú.

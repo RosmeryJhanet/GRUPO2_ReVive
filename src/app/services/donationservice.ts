@@ -18,11 +18,11 @@ export class Donationservice {
   }
 
   insert(d: DonationDTO) {
-    return this.http.post<DonationDTO>(`${this.url}/registrar`, d);
+    return this.http.post<DonationDTO>(`${this.url}/Registrar`, d);
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/eliminar/${id}`, {
+    return this.http.delete(`${this.url}/${id}`, {
       responseType: 'text',
     });
   }
@@ -34,6 +34,6 @@ export class Donationservice {
   }
 
   listId(id: number) {
-    return this.http.get<DonationDTO>(`${this.url}/buscar/${id}`);
+    return this.http.get<DonationDTO>(`${this.url}/${id}`);
   }
 }
