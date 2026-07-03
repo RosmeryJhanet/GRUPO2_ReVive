@@ -43,7 +43,7 @@
   </button>
   }
 
-  @if (isTruequero() || isAdmin()) {
+  @if (isTruequero() && !isAdmin()) {
   <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuTrueques">
     <mat-icon>swap_horiz</mat-icon>
     Trueques

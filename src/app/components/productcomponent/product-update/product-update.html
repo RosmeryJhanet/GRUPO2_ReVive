@@ -7,6 +7,12 @@
     <div class="card-body">
       <form [formGroup]="form">
         <mat-form-field appearance="outline" class="campo">
+          <mat-label>ID</mat-label>
+          <input matInput [value]="id" disabled />
+          <mat-icon matSuffix>tag</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
           <mat-label>Nombre del Producto</mat-label>
           <input matInput formControlName="name" placeholder="Ej: Laptop Lenovo" />
           <mat-icon matSuffix>inventory</mat-icon>
