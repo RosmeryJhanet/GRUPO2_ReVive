@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { ProductDTO } from '../models/productDTO';
+import { QueryProductCategoryDTO } from '../models/QueryProductCategoryDTO';
 
 const base_url = environment.base;
 @Injectable({
@@ -13,6 +14,9 @@ export class Productservice {
 
   list() {
     return this.http.get<ProductDTO[]>(`${this.url}/listar`);
+  }
+  cantidadProductosPorCategoria() {
+    return this.http.get<QueryProductCategoryDTO[]>(`${this.url}/cantidad-productos-categoria`);
   }
   insert(p: ProductDTO) {
     return this.http.post<ProductDTO>(`${this.url}/registrar`, p);
