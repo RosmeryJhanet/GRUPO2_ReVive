@@ -43,14 +43,10 @@
   </button>
   }
 
-  @if (isTruequero() || isAdmin()) {
+  @if (isTruequero() && !isAdmin()) {
   <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuTrueques">
     <mat-icon>swap_horiz</mat-icon>
     Trueques
-  </button>
-  <button mat-button style="color: #4cae4f" [matMenuTriggerFor]="menuProductos">
-    <mat-icon>shopping_bag</mat-icon>
-    Productos
   </button>
   }
 
@@ -308,6 +304,10 @@
   <button mat-menu-item routerLink="/reports/report2">
     <mat-icon>bar_chart</mat-icon>
     Trueques por usuario y mes
+  </button>
+  <button mat-menu-item routerLink="/reports/report3">
+    <mat-icon>shopping_bag</mat-icon>
+    Productos por categoría
   </button>
   <button mat-menu-item routerLink="/reportes/articulos-categoria">
     <mat-icon>category</mat-icon>
