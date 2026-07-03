@@ -1,5 +1,5 @@
 export const environment={
     production:false,
-    base:'http://localhost:8080',
+    base:'https://grupo-2-1asi0705.onrender.com',
     geminiModel:'gemini-3.1-flash-lite'
 }
