@@ -6,23 +6,50 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
+import { environment } from './environments/environment.development';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
+const CHAT_SYSTEM_PROMPT = `Eres el asistente virtual de ReVive, una aplicación de reciclaje y puntos de recolección en Lima, Perú.
+Tu única función es responder preguntas sobre reciclaje, clasificación de materiales reciclables (plástico, vidrio, papel, metal, cartón), cuidado del medio ambiente y el uso de la app ReVive.
+Si te preguntan algo que no esté relacionado con reciclaje o medio ambiente, responde amablemente que solo puedes ayudar con temas de reciclaje.
+Responde siempre en español, de forma breve y clara.`;
+
+app.use(express.json());
+
 /**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
+ * Proxy hacia la API de Gemini: la API key vive solo en el servidor
+ * (variable de entorno GEMINI_API_KEY) y nunca llega al navegador.
  */
+app.post('/api/chat', async (req, res) => {
+  const apiKey = process.env['GEMINI_API_KEY'];
+  if (!apiKey) {
+    res.status(500).json({ error: 'GEMINI_API_KEY no configurada en el servidor.' });
+    return;
+  }
+
+  const historial: { role: string; text: string }[] = req.body?.historial ?? [];
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${environment.geminiModel}:generateContent?key=${apiKey}`;
+  const body = {
+    systemInstruction: { parts: [{ text: CHAT_SYSTEM_PROMPT }] },
+    contents: historial.map((m) => ({ role: m.role, parts: [{ text: m.text }] })),
+  };
+
+  try {
+    const geminiRes = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const data = await geminiRes.json();
+    res.status(geminiRes.status).json(data);
+  } catch {
+    res.status(502).json({ error: 'No se pudo conectar con el servicio de chat.' });
+  }
+});
 
 /**
  * Serve static files from /browser
