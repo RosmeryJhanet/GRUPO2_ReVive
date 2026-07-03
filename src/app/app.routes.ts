@@ -58,6 +58,7 @@ import { ReportRecyclingUser } from './components/report-recycling-user/report-r
 
 import { Report1 } from './components/reports/report1/report1';
 import { Report2 } from './components/reports/report2/report2';
+import { Report3 } from './components/reports/report3/report3';
 import { Dashboard } from './components/reports/dashboard/dashboard';
 
 import { Bartercomponent } from './components/bartercomponent/bartercomponent';
@@ -255,6 +256,7 @@ export const routes: Routes = [
     children: [
       { path: 'report1', component: Report1 },
       { path: 'report2', component: Report2 },
+      { path: 'report3', component: Report3 },
     ],
   },
 
