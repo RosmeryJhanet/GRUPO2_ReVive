@@ -25,7 +25,8 @@ app.use(express.json());
  * (variable de entorno GEMINI_API_KEY) y nunca llega al navegador.
  */
 app.post('/api/chat', async (req, res) => {
-  const apiKey = process.env['GEMINI_API_KEY'];
+  const apiKey = process.env['GEMINI_API_KEY'] ?? environment.genimiKey;
+
   if (!apiKey) {
     res.status(500).json({ error: 'GEMINI_API_KEY no configurada en el servidor.' });
     return;

@@ -35,7 +35,8 @@ export class Mapscomponent implements OnChanges, OnDestroy {
 
   constructor() {
     afterNextRender(async () => {
-      this.L = await import('leaflet');
+      const leafletModule: any = await import('leaflet');
+      this.L = leafletModule.default ?? leafletModule;
       this.initMap();
       this.observeResize();
     });
