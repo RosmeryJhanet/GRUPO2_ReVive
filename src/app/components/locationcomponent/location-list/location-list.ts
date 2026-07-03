@@ -55,8 +55,7 @@ export class LocationList implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private async iniciarMapa(): Promise<void> {
-    const leafletModule: any = await import('leaflet');
-    this.L = leafletModule.default ?? leafletModule;
+    this.L = await import('leaflet');
     const L = this.L;
 
     delete (L.Icon.Default.prototype as any)._getIconUrl;

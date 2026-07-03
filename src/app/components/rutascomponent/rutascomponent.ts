@@ -32,8 +32,7 @@ export class Rutascomponent implements OnDestroy {
   }
 
   private async iniciar(): Promise<void> {
-    const leafletModule: any = await import('leaflet');
-    this.L = leafletModule.default ?? leafletModule;
+    this.L = await import('leaflet');
 
     if (!navigator.geolocation) {
       this.mostrarError('Tu navegador no soporta geolocalización.');
